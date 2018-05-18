@@ -12,6 +12,8 @@ namespace GenericRepositoryLibrary.Entities
     [DataContract]
     public partial class Position : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -20,5 +22,7 @@ namespace GenericRepositoryLibrary.Entities
         [DataMember]
         [FieldDb]
         public string PositionName { get; set; }
+
+        public List<Worker> Workers => Dm.Worker.GetList().Where(x => x.PositionId == this.Id).ToList();
     }
 }

@@ -10,8 +10,10 @@ using ModelParametersLibrary.Interfaces;
 namespace GenericRepositoryLibrary.Entities
 {
     [DataContract]
-    public partial class Project: IKeyedModel
+    public partial class Project : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -48,5 +50,13 @@ namespace GenericRepositoryLibrary.Entities
         [DataMember]
         [FieldDb]
         public int TypePeriodId { get; set; }
+
+        public File File => Dm.File.GetList().FirstOrDefault(x => x.Id == this.FileId);
+
+        public Customer Customer => Dm.Customer.GetList().FirstOrDefault(x => x.Id == this.CustomerId);
+
+        public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
+
+        public List<Task> Tasks => Dm.Task.GetList().Where(x => x.ProjectId == this.Id).ToList();
     }
 }

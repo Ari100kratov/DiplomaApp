@@ -12,6 +12,8 @@ namespace GenericRepositoryLibrary.Entities
     [DataContract]
     public partial class Customer : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -33,6 +35,6 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public string Email { get; set; }
 
-        public List<Project> Projects;
+        public List<Project> Projects => DataManager.Instance.Project.GetList().Where(x => x.CustomerId == this.Id).ToList();
     }
 }

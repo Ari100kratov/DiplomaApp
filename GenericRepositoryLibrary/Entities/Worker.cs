@@ -12,6 +12,8 @@ namespace GenericRepositoryLibrary.Entities
     [DataContract]
     public partial class Worker : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -52,5 +54,13 @@ namespace GenericRepositoryLibrary.Entities
         [DataMember]
         [FieldDb]
         public int UserId { get; set; }
+
+        public File Photo => Dm.File.GetList().FirstOrDefault(x => x.Id == this.PhotoId);
+
+        public List<Project> Projects => Dm.Project.GetList().Where(x => x.WorkerId == this.Id).ToList();
+
+        public List<Task> Tasks => Dm.Task.GetList().Where(x => x.WorkerId == this.Id).ToList();
+
+        public User User => Dm.User.GetList().FirstOrDefault(x => x.Id == this.UserId);
     }
 }

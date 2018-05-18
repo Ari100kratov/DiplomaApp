@@ -10,8 +10,10 @@ using System.Runtime.Serialization;
 namespace GenericRepositoryLibrary.Entities
 {
     [DataContract]
-    public partial class Task: IKeyedModel
+    public partial class Task : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -40,5 +42,9 @@ namespace GenericRepositoryLibrary.Entities
         [DataMember]
         [FieldDb]
         public int? FileId { get; set; }
+
+        public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
+
+        public Project Project => Dm.Project.GetList().FirstOrDefault(x => x.Id == this.ProjectId);
     }
 }

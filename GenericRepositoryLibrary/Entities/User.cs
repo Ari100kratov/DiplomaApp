@@ -13,6 +13,8 @@ namespace GenericRepositoryLibrary.Entities
     [DataContract]
     public partial class User : IKeyedModel
     {
+        private DataManager Dm => DataManager.Instance;
+
         [DataMember]
         [PrimaryKey]
         [FieldDb]
@@ -30,6 +32,6 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int RoleId { get; set; }
 
-
+        public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.UserId == this.Id);
     }
 }
