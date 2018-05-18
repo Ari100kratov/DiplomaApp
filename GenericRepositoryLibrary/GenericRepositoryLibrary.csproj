@@ -47,6 +47,8 @@
     <Compile Include="DataManager.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\File.cs" />
+    <Compile Include="Entities\HistoryProject.cs" />
+    <Compile Include="Entities\HistoryTask.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\Task.cs" />
@@ -60,6 +62,8 @@
     </Compile>
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\FileRepository.cs" />
+    <Compile Include="Repositories\HistoryProjectRepository.cs" />
+    <Compile Include="Repositories\HistoryTaskRepository.cs" />
     <Compile Include="Repositories\PositionRepository.cs" />
     <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />

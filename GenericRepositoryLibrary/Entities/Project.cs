@@ -58,5 +58,7 @@ namespace GenericRepositoryLibrary.Entities
         public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
 
         public List<Task> Tasks => Dm.Task.GetList().Where(x => x.ProjectId == this.Id).ToList();
+
+        public List<HistoryProject> History => Dm.HistoryProject.GetList().Where(x => x.ProjectId == this.Id).ToList();
     }
 }

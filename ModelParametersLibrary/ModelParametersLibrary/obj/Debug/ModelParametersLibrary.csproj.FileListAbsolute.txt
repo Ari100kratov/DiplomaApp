@@ -12,7 +12,6 @@ C:\Users\vlads\Desktop\Структурируем\ModelParametersLibrary\ModelPa
 C:\Users\vlads\Desktop\Структурируем\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.pdb
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\bin\Debug\ModelParametersLibrary.dll
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\bin\Debug\ModelParametersLibrary.pdb
-C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.csprojResolveAssemblyReference.cache
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.csproj.CoreCompileInputs.cache
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.dll
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.pdb
