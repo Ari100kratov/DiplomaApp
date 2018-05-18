@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ModelParametersLibrary.Attributes;
 using ModelParametersLibrary.Interfaces;
-using System.ServiceModel;
 using System.Runtime.Serialization;
 
 namespace GenericRepositoryLibrary.Entities
 {
     [DataContract]
-    public partial class User : IKeyedModel
+    public partial class Task: IKeyedModel
     {
         [DataMember]
         [PrimaryKey]
@@ -20,16 +19,26 @@ namespace GenericRepositoryLibrary.Entities
 
         [DataMember]
         [FieldDb]
-        public string Email { get; set; }
+        public string TaskName { get; set; }
 
         [DataMember]
         [FieldDb]
-        public string Password { get; set; }
+        public int? WorkerId { get; set; }
 
         [DataMember]
         [FieldDb]
-        public int RoleId { get; set; }
+        public int? ProjectId { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public Nullable<DateTime> EndDate { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public int StatusId { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public int? FileId { get; set; }
     }
 }

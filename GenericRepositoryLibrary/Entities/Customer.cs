@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using ModelParametersLibrary.Attributes;
 using ModelParametersLibrary.Interfaces;
-using System.ServiceModel;
-using System.Runtime.Serialization;
 
 namespace GenericRepositoryLibrary.Entities
 {
     [DataContract]
-    public partial class User : IKeyedModel
+    public partial class Customer : IKeyedModel
     {
         [DataMember]
         [PrimaryKey]
@@ -20,16 +19,20 @@ namespace GenericRepositoryLibrary.Entities
 
         [DataMember]
         [FieldDb]
+        public string Name { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public string Address { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public string Phone { get; set; }
+
+        [DataMember]
+        [FieldDb]
         public string Email { get; set; }
 
-        [DataMember]
-        [FieldDb]
-        public string Password { get; set; }
-
-        [DataMember]
-        [FieldDb]
-        public int RoleId { get; set; }
-
-
+        public List<Project> Projects;
     }
 }

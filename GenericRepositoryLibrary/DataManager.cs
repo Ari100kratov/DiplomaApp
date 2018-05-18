@@ -11,6 +11,12 @@ namespace GenericRepositoryLibrary
     {
 
         public UserRepository User => new UserRepository();
+        public CustomerRepository Customer => new CustomerRepository();
+        public FileRepository File = new FileRepository();
+        public PositionRepository Position = new PositionRepository();
+        public ProjectRepository Project = new ProjectRepository();
+        public TaskRepository Task = new TaskRepository();
+        public WorkerRepository Worker = new WorkerRepository();
 
         static DataManager _active = null;
         static object _syncRoot = new object();
