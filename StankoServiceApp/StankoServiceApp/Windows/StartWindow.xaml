@@ -1,0 +1,25 @@
+﻿<Window x:Class="StankoServiceApp.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        mc:Ignorable="d"
+        Title="" Height="350" Width="400" WindowStartupLocation="CenterScreen" Visibility="Visible" Icon="Resources/icon.png">
+    <Grid>
+        <Border HorizontalAlignment="Center" Width="300" Margin="0 20 0 20">
+            <StackPanel>
+                <Image Source="Resources/logo.png" StretchDirection="DownOnly" Stretch="None" Margin="0 0 0 10" />
+                <TextBlock FontSize="18"><Run Text="E-mail"/></TextBlock>
+                <dxe:TextEdit x:Name="teLogin" FontSize="18" Margin="0 0 0 10" NullText="Введите электронную почту"/>
+
+                <TextBlock FontSize="18"><Run Text="Пароль"/></TextBlock>
+                <dxe:PasswordBoxEdit x:Name="pbPassword" FontSize="18" BorderThickness="0" Margin="0 0 0 15" NullText="Введите пароль"/>
+                <Button x:Name="sbLogin" Content="Вход" FontSize="18" Margin="0 0 0 5" Click="sbLogin_Click" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
+                <dxe:CheckEdit x:Name="cbRemember" FontSize="16" HorizontalAlignment="Center">Запомнить</dxe:CheckEdit>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
