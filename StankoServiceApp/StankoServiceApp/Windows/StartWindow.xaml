@@ -18,7 +18,7 @@
                 <TextBlock FontSize="18"><Run Text="Пароль"/></TextBlock>
                 <dxe:PasswordBoxEdit x:Name="pbPassword" FontSize="18" BorderThickness="0" Margin="0 0 0 7" NullText="Введите пароль"/>
 
-                <TextBlock x:Name="tbErrorMessage" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="Red" Visibility="Collapsed">Неправильно введен email или пароль!</TextBlock>
+                <TextBlock x:Name="tbErrorMessage" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" Foreground="Red" Visibility="Collapsed">Проверьте правильность введенных данных!</TextBlock>
                 <Button x:Name="sbLogin" Content="Вход" FontSize="18" Margin="0 7 0 5" Click="sbLogin_Click" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
                 <dxe:CheckEdit x:Name="cbRemember" FontSize="16" HorizontalAlignment="Center">Запомнить</dxe:CheckEdit>
             </StackPanel>

@@ -13,6 +13,6 @@ namespace StankoServiceApp
     /// </summary>
     public partial class App : Application
     {
-        public static ServiceReference.ServiceClient service = new ServiceReference.ServiceClient();
+        public static ServiceReference.ServiceClient Service = new ServiceReference.ServiceClient();
     }
 }

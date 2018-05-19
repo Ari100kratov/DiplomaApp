@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using StankoServiceApp.Entities;
+using StankoServiceApp.ServiceReference;
 
 namespace StankoServiceApp
 {
@@ -29,7 +30,7 @@ namespace StankoServiceApp
 
         private void sbLogin_Click(object sender, RoutedEventArgs e)
         {
-            var user = App.service.Authorization(this.teLogin.Text, this.pbPassword.Password);
+            var user = App.Service.Authorization(this.teLogin.Text, this.pbPassword.Password);
 
             if (user == null)
             {
@@ -48,11 +49,17 @@ namespace StankoServiceApp
                 Properties.Settings.Default.Login = "";
                 Properties.Settings.Default.Password = "";
             }
+
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Поздравляю");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            if (!string.IsNullOrWhiteSpace(this.teLogin.Text))
+            {
+                this.cbRemember.IsChecked = true;
+            }
         }
     }
 }

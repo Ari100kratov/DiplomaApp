@@ -8,6 +8,8 @@ namespace StankoServiceApp.Entities
 {
     public partial class Customer
     {
+        
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -18,6 +20,6 @@ namespace StankoServiceApp.Entities
 
         public string Email { get; set; }
 
-        //public List<Project> Projects => DataManager.Instance.Project.GetList().Where(x => x.CustomerId == this.Id).ToList();
+        //public List<Project> Projects => App.Service.GetProjects().Where(x => x.CustomerId == this.Id).ToList();
     }
 }

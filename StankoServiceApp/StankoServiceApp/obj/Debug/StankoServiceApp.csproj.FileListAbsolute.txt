@@ -122,13 +122,11 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ja\DevExpress.Office.v17.1.Core.resources.dll
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ru\DevExpress.Office.v17.1.Core.resources.dll
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp.csprojResolveAssemblyReference.cache
-C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\DirectorWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\ProjectPage.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\StartWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\App.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp_MarkupCompile.cache
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp_MarkupCompile.lref
-C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\DirectorWindow.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\ProjectPage.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\StartWindow.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp.g.resources

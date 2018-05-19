@@ -13,16 +13,187 @@
   <wsdl:message name="IService_Authorization_OutputMessage">
     <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiles" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetHistoryProjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoryProjects" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetHistoryProjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoryProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetHistoryTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoryTasks" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetHistoryTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoryTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPositions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPositions" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPositions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPositionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetProjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjects" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetProjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTasks" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkers" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="Authorization">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Authorization" message="tns:IService_Authorization_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AuthorizationResponse" message="tns:IService_Authorization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetCustomers" message="tns:IService_GetCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetCustomersResponse" message="tns:IService_GetCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetFiles" message="tns:IService_GetFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetFilesResponse" message="tns:IService_GetFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoryProjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetHistoryProjects" message="tns:IService_GetHistoryProjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetHistoryProjectsResponse" message="tns:IService_GetHistoryProjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoryTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetHistoryTasks" message="tns:IService_GetHistoryTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetHistoryTasksResponse" message="tns:IService_GetHistoryTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPositions" message="tns:IService_GetPositions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetPositionsResponse" message="tns:IService_GetPositions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetProjects" message="tns:IService_GetProjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetProjectsResponse" message="tns:IService_GetProjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetTasks" message="tns:IService_GetTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetTasksResponse" message="tns:IService_GetTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetUsers" message="tns:IService_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetUsersResponse" message="tns:IService_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetWorkers" message="tns:IService_GetWorkers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetWorkersResponse" message="tns:IService_GetWorkers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Authorization">
       <soap:operation soapAction="http://tempuri.org/IService/Authorization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <soap:operation soapAction="http://tempuri.org/IService/GetCustomers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <soap:operation soapAction="http://tempuri.org/IService/GetFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoryProjects">
+      <soap:operation soapAction="http://tempuri.org/IService/GetHistoryProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoryTasks">
+      <soap:operation soapAction="http://tempuri.org/IService/GetHistoryTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositions">
+      <soap:operation soapAction="http://tempuri.org/IService/GetPositions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjects">
+      <soap:operation soapAction="http://tempuri.org/IService/GetProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <soap:operation soapAction="http://tempuri.org/IService/GetTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/IService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <soap:operation soapAction="http://tempuri.org/IService/GetWorkers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

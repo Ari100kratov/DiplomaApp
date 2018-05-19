@@ -40,10 +40,13 @@ namespace GenericRepositoryLibrary
 
                 foreach (var prop in properties)
                 {
-                    var fieldName = prop.Name;
-                    var fieldValue = dr[fieldName] == DBNull.Value ? null : dr[fieldName];
+                    if (dt.Columns.Contains(prop.Name))
+                    {
+                        var fieldName = prop.Name;
+                        var fieldValue = dr[fieldName] == DBNull.Value ? null : dr[fieldName];
 
-                    prop.SetValue(item, fieldValue);
+                        prop.SetValue(item, fieldValue);
+                    }
                 }
 
                 this.ListEntities.Add(item);
