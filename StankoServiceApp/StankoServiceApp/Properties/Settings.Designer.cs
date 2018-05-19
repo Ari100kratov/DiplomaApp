@@ -23,12 +23,15 @@ namespace StankoServiceApp.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Login {
             get {
                 return ((string)(this["Login"]));
+            }
+            set {
+                this["Login"] = value;
             }
         }
         

@@ -23,6 +23,8 @@ namespace StankoServiceApp
         public StartWindow()
         {
             InitializeComponent();
+            this.teLogin.Text = Properties.Settings.Default.Login;
+            this.pbPassword.Password = Properties.Settings.Default.Password;
         }
 
         private void sbLogin_Click(object sender, RoutedEventArgs e)
@@ -31,8 +33,26 @@ namespace StankoServiceApp
 
             if (user == null)
             {
-                MessageBox.Show("Такого пользователя не существует");
+                this.tbErrorMessage.Visibility = Visibility.Visible;
+                this.pbPassword.Clear();
+                return;
             }
+
+            if (this.cbRemember.IsChecked == true)
+            {
+                Properties.Settings.Default.Login = this.teLogin.Text;
+                Properties.Settings.Default.Password = this.pbPassword.Password;
+            }
+            else
+            {
+                Properties.Settings.Default.Login = "";
+                Properties.Settings.Default.Password = "";
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

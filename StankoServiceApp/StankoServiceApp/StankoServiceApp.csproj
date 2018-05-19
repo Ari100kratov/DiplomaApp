@@ -92,9 +92,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DirectorWindow.xaml.cs">
-      <DependentUpon>DirectorWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\File.cs" />
+    <Compile Include="Entities\HistoryProject.cs" />
+    <Compile Include="Entities\HistoryTask.cs" />
+    <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\Project.cs" />
+    <Compile Include="Entities\Task.cs" />
+    <Compile Include="Entities\Worker.cs" />
     <Compile Include="Pages\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
     </Compile>
@@ -148,10 +153,6 @@
     <Resource Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Windows\DirectorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\ProjectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
