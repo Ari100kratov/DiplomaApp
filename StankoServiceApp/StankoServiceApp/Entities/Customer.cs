@@ -4,22 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StankoServiceApp.Entities
+namespace StankoServiceApp.ServiceReference
 {
     public partial class Customer
     {
-        
 
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Address { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Email { get; set; }
-
-        //public List<Project> Projects => App.Service.GetProjects().Where(x => x.CustomerId == this.Id).ToList();
+        public List<Project> Projects => App.Service.GetProjects().Where(x => x.CustomerId == this.Id).ToList();
     }
 }

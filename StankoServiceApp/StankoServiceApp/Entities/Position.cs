@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StankoServiceApp.Entities
+namespace StankoServiceApp.ServiceReference
 {
     public partial class Position
     {
-        public int Id { get; set; }
-
-        public string PositionName { get; set; }
-
-        //public List<Worker> Workers => Dm.Worker.GetList().Where(x => x.PositionId == this.Id).ToList();
+        public List<Worker> Workers => App.Service.GetWorkers().Where(x => x.PositionId == this.Id).ToList();
     }
 }

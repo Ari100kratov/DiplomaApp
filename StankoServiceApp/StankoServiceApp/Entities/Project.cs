@@ -4,36 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StankoServiceApp.Entities
+namespace StankoServiceApp.ServiceReference
 {
     public partial class Project
     {
-        public int Id { get; set; }
+        public File File => App.Service.GetFiles().FirstOrDefault(x => x.Id == this.FileId);
 
-        public DateTime StartDate { get; set; }
+        public Customer Customer => App.Service.GetCustomers().FirstOrDefault(x => x.Id == this.CustomerId);
 
-        public Nullable<DateTime> EndDate { get; set; }
+        public Worker Worker => App.Service.GetWorkers().FirstOrDefault(x => x.Id == this.WorkerId);
 
-        public Nullable<DateTime> CompletionDate { get; set; }
+        public List<Task> Tasks => App.Service.GetTasks().Where(x => x.ProjectId == this.Id).ToList();
 
-        public int StatusId { get; set; }
-
-        public int? FileId { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public int WorkerId { get; set; }
-
-        public int TypePeriodId { get; set; }
-
-        //public File File => Dm.File.GetList().FirstOrDefault(x => x.Id == this.FileId);
-
-        //public Customer Customer => Dm.Customer.GetList().FirstOrDefault(x => x.Id == this.CustomerId);
-
-        //public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
-
-        //public List<Task> Tasks => Dm.Task.GetList().Where(x => x.ProjectId == this.Id).ToList();
-
-        //public List<HistoryProject> History => Dm.HistoryProject.GetList().Where(x => x.ProjectId == this.Id).ToList();
+        public List<HistoryProject> History => App.Service.GetHistoryProjects().Where(x => x.ProjectId == this.Id).ToList();
     }
 }
