@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StankoServiceApp.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,7 @@ namespace StankoServiceApp
     /// </summary>
     public partial class App : Application
     {
-        public static ServiceReference.ServiceClient Service = new ServiceReference.ServiceClient();
+        public static ServiceClient Service = new ServiceClient();
+        public static User CurrentUser = new User();
     }
 }

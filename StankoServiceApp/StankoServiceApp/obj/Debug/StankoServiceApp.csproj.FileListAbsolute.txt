@@ -137,3 +137,7 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp.csproj.CopyComplete
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp.exe
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\StankoServiceApp.pdb
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\DirectorWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\DirectorWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\WorkerPage.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\WorkerPage.g.cs

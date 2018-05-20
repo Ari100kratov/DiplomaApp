@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Editors;
 using StankoServiceApp.ServiceReference;
 
 namespace StankoServiceApp
@@ -50,7 +51,9 @@ namespace StankoServiceApp
             }
 
             Properties.Settings.Default.Save();
-            MessageBox.Show("Поздравляю");
+
+            App.CurrentUser = user;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -13,7 +13,7 @@
             <StackPanel>
                 <Image StretchDirection="DownOnly" Stretch="None" Margin="0 0 0 10" Source="/StankoServiceApp;component/Resources/logo.png" />
                 <TextBlock FontSize="18"><Run Text="E-mail"/></TextBlock>
-                <dxe:TextEdit x:Name="teLogin" FontSize="18" Margin="0 0 0 10" NullText="Введите электронную почту"/>
+                <dxe:TextEdit x:Name="teLogin" FontSize="18" Margin="0 0 0 10" NullText="Введите электронную почту" AllowNullInput="False"/>
 
                 <TextBlock FontSize="18"><Run Text="Пароль"/></TextBlock>
                 <dxe:PasswordBoxEdit x:Name="pbPassword" FontSize="18" BorderThickness="0" Margin="0 0 0 7" NullText="Введите пароль"/>

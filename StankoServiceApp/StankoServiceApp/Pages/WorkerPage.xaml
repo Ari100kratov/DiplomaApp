@@ -1,0 +1,35 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.WorkerPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WorkerPage" Background="White" Loaded="Page_Loaded">
+
+    <Grid>
+
+        <dxg:GridControl x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row">
+            <dxg:GridControl.View>
+                <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always"/>
+            </dxg:GridControl.View>
+
+            <dxg:GridColumn Header="Фото" FieldName="ImgPhoto" Binding="{Binding ImgPhoto}">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ImageEditSettings/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Имя" FieldName="Name"/>
+            <dxg:GridColumn Header="Фамилия" FieldName="Surname"/>
+            <dxg:GridColumn Header="Отчетсво" FieldName="Patronymic"/>
+            <dxg:GridColumn Header="Возраст" FieldName="Age"/>
+            <dxg:GridColumn Header="Работает с" FieldName="DateOfEmploy" UnboundType="DateTime"/>
+            <dxg:GridColumn Header="Телефон" FieldName="Phone"/>
+            <dxg:GridColumn Header="Должность" FieldName="Position.PositionName"/>
+            <dxg:GridColumn Header="Эл. адрес" FieldName="User.Email"/>
+        </dxg:GridControl>
+
+    </Grid>
+</Page>
