@@ -12,7 +12,8 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="sbWorker" Content="Сотрудники" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="0 7 0 5" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None" Click="sbWorker_Click"/>
+            <Button x:Name="sbWorker" Content="Сотрудники" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="10 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None" Click="sbWorker_Click"/>
+            <Button x:Name="sbProject" Content="Проекты" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="10 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Row="1"/>
     </Grid>

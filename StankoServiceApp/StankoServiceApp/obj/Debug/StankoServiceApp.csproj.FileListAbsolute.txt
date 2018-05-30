@@ -141,3 +141,14 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\DirectorWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\WorkerPage.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\WorkerPage.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Charts.v17.1.Core.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Xpf.Charts.v17.1.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Xpf.Charts.v17.1.xml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\de\DevExpress.Xpf.Charts.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\es\DevExpress.Xpf.Charts.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ja\DevExpress.Xpf.Charts.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ru\DevExpress.Xpf.Charts.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\EditWorkerWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\EditWorkerWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\StankoserviceEnums.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\StankoserviceEnums.pdb

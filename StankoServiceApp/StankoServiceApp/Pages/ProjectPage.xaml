@@ -5,23 +5,46 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StankoServiceApp"
       xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="StankoServiceApp.ProjectPage"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    dx:ThemeManager.ThemeName="none"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Background="White"
-      Title="ProjectPage">
+      Title="ProjectPage" Loaded="Page_Loaded">
 
     <Grid>
 
-        <dxg:GridControl x:Name="gcProject" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" SelectionMode="Row" ShowLoadingPanel="True">
+        <dxg:GridControl x:Name="gcProject" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" SelectionMode="Row">
             <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowSearchPanelMRUButton="True" ShowSearchPanelNavigationButtons="True"/>
+                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always"/>
             </dxg:GridControl.View>
-            <dxg:GridColumn Header="Наименование" FieldName="Column1" SortOrder="Ascending" SortIndex="0"/>
-            <dxg:GridColumn Header="Дата начала" FieldName="Column1" SortOrder="Ascending" SortIndex="1"/>
-            <dxg:GridColumn Header="Дата завершения" FieldName="Column1" SortOrder="Ascending" SortIndex="2"/>
-            <dxg:GridColumn Header="Рукводитель" FieldName="Column1" SortOrder="Ascending" SortIndex="3"/>
-            <dxg:GridColumn Header="Статус" FieldName="Column1" SortOrder="Ascending" SortIndex="4"/>
-            <dxg:GridColumn Header="Заказчик" FieldName="Column1" SortOrder="Ascending" SortIndex="5"/>
-            <dxg:GridColumn Header="Скачать ТЗ" FieldName="Column1" SortOrder="Ascending" SortIndex="6"/>
+            <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True"/>
+            <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True"/>
+            <dxg:GridColumn Header="Дата завершения" FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True"/>
+            <dxg:GridColumn Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Ответственный за проект"/>
+
+            <dxg:GridColumn Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Текущий статус" AllowAutoFilter="False" AllowColumnFiltering="Default" ColumnFilterMode="DisplayText">
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Path=RowData.Row.StatusIcon}"></Image>
+                            <TextBlock Margin="5 0 0 0" Text="{Binding Path=RowData.Row.GetStatusProject}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+
+
+            <dxg:GridColumn Header="Скачать ТЗ" FieldName="" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Нажмите, чтобы скачать файл" AllowAutoFilter="False" AllowColumnFiltering="False" ImmediateUpdateAutoFilter="False" ImmediateUpdateColumnFilter="False">
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/StankoServiceApp;component/Resources/download.20.png" MinWidth="20" MinHeight="20"></Image>
+                            <TextBlock Margin="5 0 0 0" Text="Скачать"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+
         </dxg:GridControl>
     </Grid>
 </Page>

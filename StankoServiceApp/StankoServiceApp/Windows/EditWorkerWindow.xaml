@@ -1,0 +1,88 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Serialization="clr-namespace:DevExpress.Xpf.LayoutControl.Serialization;assembly=DevExpress.Xpf.LayoutControl.v17.1" xmlns:Custom="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient" x:Class="StankoServiceApp.Windows.EditWorkerWindow"
+        mc:Ignorable="d"
+    dx:ThemeManager.ThemeName="none"
+    
+        Title="" Height="420" Width="350">
+    <Grid>
+
+        <dxlc:LayoutControl Orientation="Vertical" Height="389" VerticalAlignment="Bottom">
+
+            <dxlc:LayoutItem Label="Фамилия" IsRequired="True">
+                <dxe:TextEdit x:Name="teSurname" AllowNullInput="True" MaskType="RegEx" MaskIgnoreBlank="False" Mask="\p{L}+" TabIndex="1">
+                    <dxe:TextEdit.ErrorToolTipContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Обязательное поле"/>
+                        </DataTemplate>
+                    </dxe:TextEdit.ErrorToolTipContentTemplate>
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem Label="Имя" IsRequired="True">
+                <dxe:TextEdit x:Name="teName" MaskType="RegEx" Mask="\p{L}+" AllowNullInput="True" MaskIgnoreBlank="False" InvalidValueBehavior="AllowLeaveEditor" TabIndex="2">
+                    <dxe:TextEdit.ErrorToolTipContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Обязательное поле"/>
+                        </DataTemplate>
+                    </dxe:TextEdit.ErrorToolTipContentTemplate>
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem Label="Отчество">
+                <dxe:TextEdit x:Name="tePatronymic" TabIndex="3"/>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem Label="Дата рождения" IsRequired="True">
+                <dxe:DateEdit x:Name="deDateOfBirth" MinValue="1/1/1900" MaskIgnoreBlank="False" Mask="D" MaskType="DateTime" TabIndex="4">
+                </dxe:DateEdit>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem Label="Работает с" IsRequired="True" >
+                <dxe:DateEdit x:Name="deDateOfEmploy" MinValue="1/1/1900" Mask="D" TabIndex="5">
+                    <dxe:DateEdit.ErrorToolTipContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Выберите дату"/>
+                        </DataTemplate>
+                    </dxe:DateEdit.ErrorToolTipContentTemplate>
+                </dxe:DateEdit>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem Label="Моб. телефон">
+                <dxe:TextEdit x:Name="tePhone" Mask="(\(\d\d\d\) )?\d{1,3}-\d\d-\d\d" MaskType="RegEx" MaskIgnoreBlank="False" MaskAutoComplete="Optimistic" TabIndex="6">
+                    <dxe:TextEdit.ErrorToolTipContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Введите корректный номер"/>
+                        </DataTemplate>
+                    </dxe:TextEdit.ErrorToolTipContentTemplate>
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem Label="Эл. адрес">
+                <dxe:TextEdit x:Name="teEmail" IsEnabled="False"/>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem Label="Должность">
+                <dxe:ComboBoxEdit x:Name="cePosition" SelectedIndex="0" TabIndex="7">
+                    <dxe:ComboBoxEdit.StyleSettings>
+                        <dxe:ComboBoxStyleSettings/>
+                    </dxe:ComboBoxEdit.StyleSettings>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem>
+                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300"  TabIndex="8"/>
+            </dxlc:LayoutItem>
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <dx:SimpleButton x:Name="sbDelete" Margin="0 5 10 0" Content="Удалить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Delete_16x16.png}" TabIndex="10"/>
+                <dx:SimpleButton x:Name="sbSave" Margin="0 5 10 0" Content="Сохранить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Apply_16x16.png}" TabIndex="9"/>
+            </StackPanel>
+
+        </dxlc:LayoutControl>
+    </Grid>
+</Window>

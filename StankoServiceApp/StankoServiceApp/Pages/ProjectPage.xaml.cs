@@ -24,5 +24,11 @@ namespace StankoServiceApp
         {
             InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.gcProject.AutoGenerateColumns = DevExpress.Xpf.Grid.AutoGenerateColumnsMode.None;
+            this.gcProject.ItemsSource = App.Service.GetProjects();
+        }
     }
 }

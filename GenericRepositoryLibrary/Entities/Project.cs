@@ -21,6 +21,10 @@ namespace GenericRepositoryLibrary.Entities
 
         [DataMember]
         [FieldDb]
+        public string Name { get; set; }
+
+        [DataMember]
+        [FieldDb]
         public DateTime StartDate { get; set; }
 
         [DataMember]

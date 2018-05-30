@@ -151,4 +151,37 @@
   <data name="logo_Max" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.Max.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="blue_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brown_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\brown.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="download_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download.20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gray_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gray.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lightblue_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lightblue.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="orange_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\orange.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="purple_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\purple.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\red.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yellow_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yellow.15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
