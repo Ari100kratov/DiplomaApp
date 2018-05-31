@@ -644,6 +644,9 @@ namespace StankoServiceApp.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -731,6 +734,19 @@ namespace StankoServiceApp.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime StartDate {
             get {
                 return this.StartDateField;
@@ -805,9 +821,6 @@ namespace StankoServiceApp.ServiceReference {
         private System.Nullable<System.DateTime> EndDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> FileIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -841,19 +854,6 @@ namespace StankoServiceApp.ServiceReference {
                 if ((this.EndDateField.Equals(value) != true)) {
                     this.EndDateField = value;
                     this.RaisePropertyChanged("EndDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> FileId {
-            get {
-                return this.FileIdField;
-            }
-            set {
-                if ((this.FileIdField.Equals(value) != true)) {
-                    this.FileIdField = value;
-                    this.RaisePropertyChanged("FileId");
                 }
             }
         }
@@ -1122,6 +1122,83 @@ namespace StankoServiceApp.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskFile", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
+    [System.SerializableAttribute()]
+    public partial class TaskFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FileIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TaskIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FileId {
+            get {
+                return this.FileIdField;
+            }
+            set {
+                if ((this.FileIdField.Equals(value) != true)) {
+                    this.FileIdField = value;
+                    this.RaisePropertyChanged("FileId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TaskId {
+            get {
+                return this.TaskIdField;
+            }
+            set {
+                if ((this.TaskIdField.Equals(value) != true)) {
+                    this.TaskIdField = value;
+                    this.RaisePropertyChanged("TaskId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -1185,6 +1262,12 @@ namespace StankoServiceApp.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetWorkers", ReplyAction="http://tempuri.org/IService/GetWorkersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.Worker>> GetWorkersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetTaskFiles", ReplyAction="http://tempuri.org/IService/GetTaskFilesResponse")]
+        System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile> GetTaskFiles();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetTaskFiles", ReplyAction="http://tempuri.org/IService/GetTaskFilesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile>> GetTaskFilesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1292,6 +1375,14 @@ namespace StankoServiceApp.ServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.Worker>> GetWorkersAsync() {
             return base.Channel.GetWorkersAsync();
+        }
+        
+        public System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile> GetTaskFiles() {
+            return base.Channel.GetTaskFiles();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile>> GetTaskFilesAsync() {
+            return base.Channel.GetTaskFilesAsync();
         }
     }
 }

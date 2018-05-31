@@ -43,6 +43,8 @@ namespace WcfServiceApp
         [OperationContract]
         List<Worker> GetWorkers();
 
+        [OperationContract]
+        List<TaskFile> GetTaskFiles();
         #endregion 
     }
 }

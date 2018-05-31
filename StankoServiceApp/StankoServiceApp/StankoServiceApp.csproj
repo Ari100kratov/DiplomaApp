@@ -105,6 +105,9 @@
     <Compile Include="Pages\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TaskPage.xaml.cs">
+      <DependentUpon>TaskPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WorkerPage.xaml.cs">
       <DependentUpon>WorkerPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,9 @@
     <None Include="Connected Services\ServiceReference\StankoServiceApp.ServiceReference.Task.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReference\StankoServiceApp.ServiceReference.TaskFile.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference\StankoServiceApp.ServiceReference.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -189,6 +195,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Pages\ProjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,6 +311,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\download.20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\yellow.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\blue.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\brown.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\gray.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\green.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\lightblue.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\orange.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\purple.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\red.30.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

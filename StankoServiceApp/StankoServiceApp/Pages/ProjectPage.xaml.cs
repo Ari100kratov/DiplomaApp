@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using StankoserviceEnums;
 
 namespace StankoServiceApp
 {
@@ -20,6 +21,7 @@ namespace StankoServiceApp
     /// </summary>
     public partial class ProjectPage : Page
     {
+        public List<StatusProject> ListStatus= new List<StatusProject>();
         public ProjectPage()
         {
             InitializeComponent();
@@ -27,7 +29,6 @@ namespace StankoServiceApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.gcProject.AutoGenerateColumns = DevExpress.Xpf.Grid.AutoGenerateColumnsMode.None;
             this.gcProject.ItemsSource = App.Service.GetProjects();
         }
     }

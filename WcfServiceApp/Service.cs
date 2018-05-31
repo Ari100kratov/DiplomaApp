@@ -22,6 +22,11 @@ namespace WcfServiceApp
             return Dm.Customer.GetList();
         }
 
+        public List<TaskFile> GetTaskFiles()
+        {
+            return Dm.TaskFile.GetList();
+        }
+
         public List<File> GetFiles()
         {
             return Dm.File.GetList();

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+       dx:ThemeManager.ThemeName="none"
         mc:Ignorable="d"
         Title="" Height="450" Width="800" Icon="/StankoServiceApp;component/Resources/icon.png" Loaded="Window_Loaded">
     <Grid>
@@ -12,8 +13,9 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="sbWorker" Content="Сотрудники" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="10 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None" Click="sbWorker_Click"/>
-            <Button x:Name="sbProject" Content="Проекты" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="10 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
+            <Button x:Name="sbWorker" Content="Сотрудники" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="10 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="none" Click="sbWorker_Click"/>
+            <Button x:Name="sbProject" Content="Проекты" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="0 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None" Click="sbProject_Click"/>
+            <Button x:Name="sbTask" Content="Задачи" Width="auto" HorizontalAlignment="Left" FontSize="18" Margin="0 10 0 10" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Row="1"/>
     </Grid>

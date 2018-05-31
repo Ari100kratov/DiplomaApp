@@ -39,10 +39,6 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int StatusId { get; set; }
 
-        [DataMember]
-        [FieldDb]
-        public int? FileId { get; set; }
-
         public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
 
         public Project Project => Dm.Project.GetList().FirstOrDefault(x => x.Id == this.ProjectId);

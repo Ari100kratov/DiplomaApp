@@ -1,50 +1,101 @@
-﻿<Page
+﻿<Page xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StankoServiceApp"
-      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="StankoServiceApp.ProjectPage"
+      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums" xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" x:Class="StankoServiceApp.ProjectPage"
     dx:ThemeManager.ThemeName="none"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Background="White"
       Title="ProjectPage" Loaded="Page_Loaded">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <dxg:GridControl x:Name="gcProject" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" SelectionMode="Row">
+        <dxe:ComboBoxEdit>
+            <dxe:ComboBoxEdit.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock/>
+                </DataTemplate>
+            </dxe:ComboBoxEdit.ItemTemplate>
+        </dxe:ComboBoxEdit>
+
+        <dxg:GridControl x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row">
             <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always"/>
+                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>
             <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True"/>
             <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True"/>
-            <dxg:GridColumn Header="Дата завершения" FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True"/>
+            <dxg:GridColumn Header="Сроки " FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True"/>
+            <dxg:GridColumn FieldName="CompletionDate" Header="Завершено" HeaderToolTip="Реальная дата завершения" ReadOnly="True"/>
             <dxg:GridColumn Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Ответственный за проект"/>
 
             <dxg:GridColumn Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Текущий статус" AllowAutoFilter="False" AllowColumnFiltering="Default" ColumnFilterMode="DisplayText">
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Path=RowData.Row.StatusIcon}"></Image>
-                            <TextBlock Margin="5 0 0 0" Text="{Binding Path=RowData.Row.GetStatusProject}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </dxg:GridColumn.CellTemplate>
-            </dxg:GridColumn>
-
-
-            <dxg:GridColumn Header="Скачать ТЗ" FieldName="" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Нажмите, чтобы скачать файл" AllowAutoFilter="False" AllowColumnFiltering="False" ImmediateUpdateAutoFilter="False" ImmediateUpdateColumnFilter="False">
-                <dxg:GridColumn.CellTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/StankoServiceApp;component/Resources/download.20.png" MinWidth="20" MinHeight="20"></Image>
-                            <TextBlock Margin="5 0 0 0" Text="Скачать"></TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="{Binding RowData.Row.StatusIcon}"/>
+                            <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.GetStatusProject}"/>
                         </StackPanel>
                     </DataTemplate>
                 </dxg:GridColumn.CellTemplate>
             </dxg:GridColumn>
 
         </dxg:GridControl>
+        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2007" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="False">
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="Главная">
+                    <dxr:RibbonPageGroup Caption="Управление">
+                        <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default"/>
+                        <dxb:BarButtonItem x:Name="bbiEditProject" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default"/>
+                        <dxb:BarButtonItem x:Name="bbiDeleteProject" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default"/>
+                    </dxr:RibbonPageGroup>
+                   
+                    <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem x:Name="bbiShowProject" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}"/>
+                        <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать ТЗ" LargeGlyph="{dx:DXImage Image=Download_32x32.png}" Glyph="{dx:DXImage Image=Download_16x16.png}"/>
+                        <dxb:BarButtonItem x:Name="bbiHistory" Content="История" LargeGlyph="{dx:DXImage Image=BOChangeHistory_32x32.png}" Glyph="{dx:DXImage Image=BOChangeHistory_16x16.png}"/>
+
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Статистика">
+                        <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем проектам" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}" Glyph="{dx:DXImage Image=3DColumn_16x16.png}"/>
+                        <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}"/>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Фильтрация и поиск">
+                        <dxb:BarEditItem Content="Статус проекта:">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings>
+                                    <dxe:ComboBoxEditSettings.Items>
+                                        <StankoserviceEnums:StatusProject>Подготовка</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Проектирование</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Реализация</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Тестирование</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Внедрение</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Сопровождение</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Завершен</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Отложен</StankoserviceEnums:StatusProject>
+                                        <StankoserviceEnums:StatusProject>Закрыт</StankoserviceEnums:StatusProject>
+                                    </dxe:ComboBoxEditSettings.Items>
+                                </dxe:ComboBoxEditSettings>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarEditItem Content="Руководитель:">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Сбросить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText"/>
+                    </dxr:RibbonPageGroup>
+
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
     </Grid>
 </Page>

@@ -93,6 +93,16 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blue_30 {
+            get {
+                object obj = ResourceManager.GetObject("blue_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap box_green {
             get {
                 object obj = ResourceManager.GetObject("box_green", resourceCulture);
@@ -106,6 +116,16 @@ namespace StankoServiceApp.Properties {
         internal static System.Drawing.Bitmap brown_15 {
             get {
                 object obj = ResourceManager.GetObject("brown_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap brown_30 {
+            get {
+                object obj = ResourceManager.GetObject("brown_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +173,29 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gray_30 {
+            get {
+                object obj = ResourceManager.GetObject("gray_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap green_15 {
             get {
                 object obj = ResourceManager.GetObject("green_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap green_30 {
+            get {
+                object obj = ResourceManager.GetObject("green_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +226,16 @@ namespace StankoServiceApp.Properties {
         internal static System.Drawing.Bitmap lightblue_15 {
             get {
                 object obj = ResourceManager.GetObject("lightblue_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lightblue_30 {
+            get {
+                object obj = ResourceManager.GetObject("lightblue_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,6 +283,16 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap orange_30 {
+            get {
+                object obj = ResourceManager.GetObject("orange_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap project_BABQS {
             get {
                 object obj = ResourceManager.GetObject("project_BABQS", resourceCulture);
@@ -253,9 +313,29 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap purple_30 {
+            get {
+                object obj = ResourceManager.GetObject("purple_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap red_15 {
             get {
                 object obj = ResourceManager.GetObject("red_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap red_30 {
+            get {
+                object obj = ResourceManager.GetObject("red_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,6 +356,16 @@ namespace StankoServiceApp.Properties {
         internal static System.Drawing.Bitmap yellow_15 {
             get {
                 object obj = ResourceManager.GetObject("yellow_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yellow_30 {
+            get {
+                object obj = ResourceManager.GetObject("yellow_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -152,3 +152,5 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\EditWorkerWindow.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\StankoserviceEnums.dll
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\StankoserviceEnums.pdb
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\TaskPage.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Pages\TaskPage.baml

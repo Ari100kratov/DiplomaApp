@@ -100,6 +100,7 @@
       <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FileId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="StatusId" type="xs:int" />
       <xs:element minOccurs="0" name="TypePeriodId" type="xs:int" />
@@ -116,7 +117,6 @@
   <xs:complexType name="Task">
     <xs:sequence>
       <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FileId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="ProjectId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="StatusId" type="xs:int" />
@@ -152,4 +152,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Worker" nillable="true" type="tns:Worker" />
+  <xs:complexType name="ArrayOfTaskFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskFile" nillable="true" type="tns:TaskFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskFile" nillable="true" type="tns:ArrayOfTaskFile" />
+  <xs:complexType name="TaskFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="TaskId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskFile" nillable="true" type="tns:TaskFile" />
 </xs:schema>
