@@ -13,7 +13,25 @@ namespace WcfServiceApp
         [OperationContract]
         User Authorization(string email, string password);
 
-        
+        [OperationContract]
+        int AddNewProject(File file, Project project);
+
+        [OperationContract]
+        void EditProject(File file, Project project);
+
+        [OperationContract]
+        void DeleteProject(Project project);
+
+
+        [OperationContract]
+        void AddNewWorker(Worker worker, File file, User user);
+
+        [OperationContract]
+        void EditWorker(Worker worker, File file, User user);
+
+        [OperationContract]
+        void DeleteWorker(Worker worker);
+
         #region //Возвращение List всех моделей
 
         [OperationContract]

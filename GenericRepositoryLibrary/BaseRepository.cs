@@ -53,7 +53,7 @@ namespace GenericRepositoryLibrary
             }
         }
 
-        public virtual void Add(T item)
+        public virtual int Add(T item)
         {
             var query = $"INSERT INTO [{TableName}](";
             var valuesQuery = $" VALUES (";
@@ -98,6 +98,7 @@ namespace GenericRepositoryLibrary
             int lastId = Convert.ToInt32(this.SaveChanges(cmd));
             item.Id = lastId;
             this.ListEntities.Add(item);
+            return lastId;
         }
 
 

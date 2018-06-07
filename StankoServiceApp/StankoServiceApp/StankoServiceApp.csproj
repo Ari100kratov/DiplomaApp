@@ -119,13 +119,23 @@
     <Compile Include="Windows\DirectorWindow.xaml.cs">
       <DependentUpon>DirectorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EditProjectWindow.xaml.cs">
+      <DependentUpon>EditProjectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditWorkerWindow.xaml.cs">
       <DependentUpon>EditWorkerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectWorkerWindow.xaml.cs">
+      <DependentUpon>SelectWorkerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Windows\StatProjectWindow.xaml.cs">
+      <DependentUpon>StatProjectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkWithMail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -210,11 +220,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\EditProjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\EditWorkerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\SelectWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\StartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StatProjectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,6 +360,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\red.30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\no_photo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

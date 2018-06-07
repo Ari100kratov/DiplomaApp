@@ -1,0 +1,70 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" x:Class="StankoServiceApp.Windows.StatProjectWindow"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        
+        <dx:DXTabControl>
+            <dx:DXTabItem Header="Общая информация">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Количесто проектов по статусам" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:XYDiagram2D x:Name="diagrammCommon">
+                            <dxc:BarSideBySideSeries2D x:Name="series1" DisplayName="Подготовка" Brush="#FFE8DF24"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series2" Brush="#FF1B53CB" DisplayName="Проектирование"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series3" Brush="#FF44C51E" DisplayName="Реализация"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series4" Brush="#FFF1A114" DisplayName="Тестирование"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series5" Brush="#FFC56625" DisplayName="Внедрение"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series6" Brush="#FF982ED4" DisplayName="Сопровождение"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series7" Brush="#FF6EAFCD" DisplayName="Завершен"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series8" Brush="#FFCFD3C3" DisplayName="Отложен"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series9" Brush="#FFEC1111" DisplayName="Закрыт"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Успеваемость">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Диаграмма успеваемости в заявленные сроки" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend UseCheckBoxes="False"/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:SimpleDiagram2D Dimension="1">
+                            <dxc:PieSeries2D x:Name="seriesSimple" HoleRadiusPercent="0" LegendTextPattern="{}{A}:{VP}{V:%}">
+
+                                <dxc:PieSeries2D.LegendPointOptions>
+                                    <dxc:PointOptions Pattern="{}{A}: {VP}{V:%}" />
+                                </dxc:PieSeries2D.LegendPointOptions>
+
+                                <dxc:PieSeries2D.PointOptions>
+                                    <dxc:PointOptions>
+                                        <dxc:PointOptions.ValueNumericOptions>
+                                            <dxc:NumericOptions Format="Percent" Precision="0" />
+                                        </dxc:PointOptions.ValueNumericOptions>
+                                    </dxc:PointOptions>
+                                </dxc:PieSeries2D.PointOptions>
+                            </dxc:PieSeries2D>
+                        </dxc:SimpleDiagram2D>
+                    </dxc:ChartControl>
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Время">
+                <Grid Background="Transparent">
+                </Grid>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </Grid>
+</Window>

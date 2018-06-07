@@ -45,7 +45,7 @@ namespace GenericRepositoryLibrary.Entities
 
         [DataMember]
         [FieldDb]
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         [DataMember]
         [FieldDb]

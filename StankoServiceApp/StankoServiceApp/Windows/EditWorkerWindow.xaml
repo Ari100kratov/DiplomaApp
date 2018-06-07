@@ -8,81 +8,97 @@
         mc:Ignorable="d"
     dx:ThemeManager.ThemeName="none"
     
-        Title="" Height="420" Width="350">
+        Title="" Height="500" Width="400" Loaded="Window_Loaded">
     <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
 
-        <dxlc:LayoutControl Orientation="Vertical" Height="389" VerticalAlignment="Bottom">
+                <dxlc:LayoutGroup x:Name="LayoutGroup" Header="LayoutGroup" View="Tabs" SelectedTabIndex="0">
+                    <dxlc:LayoutGroup Header="Информация о сотруднике" Orientation="Vertical" Background="White">
+                        <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
-            <dxlc:LayoutItem Label="Фамилия" IsRequired="True">
-                <dxe:TextEdit x:Name="teSurname" AllowNullInput="True" MaskType="RegEx" MaskIgnoreBlank="False" Mask="\p{L}+" TabIndex="1">
-                    <dxe:TextEdit.ErrorToolTipContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Обязательное поле"/>
-                        </DataTemplate>
-                    </dxe:TextEdit.ErrorToolTipContentTemplate>
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem>
+                                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300"  TabIndex="8"/>
+                            </dxlc:LayoutItem>
 
-            <dxlc:LayoutItem Label="Имя" IsRequired="True">
-                <dxe:TextEdit x:Name="teName" MaskType="RegEx" Mask="\p{L}+" AllowNullInput="True" MaskIgnoreBlank="False" InvalidValueBehavior="AllowLeaveEditor" TabIndex="2">
-                    <dxe:TextEdit.ErrorToolTipContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Обязательное поле"/>
-                        </DataTemplate>
-                    </dxe:TextEdit.ErrorToolTipContentTemplate>
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Фамилия*" IsRequired="True">
+                                <dxe:TextEdit x:Name="teSurname" NullText="Введите фамилию" TabIndex="1"/>
+                            </dxlc:LayoutItem>
 
-            <dxlc:LayoutItem Label="Отчество">
-                <dxe:TextEdit x:Name="tePatronymic" TabIndex="3"/>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem Label="Дата рождения" IsRequired="True">
-                <dxe:DateEdit x:Name="deDateOfBirth" MinValue="1/1/1900" MaskIgnoreBlank="False" Mask="D" MaskType="DateTime" TabIndex="4">
-                </dxe:DateEdit>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem Label="Работает с" IsRequired="True" >
-                <dxe:DateEdit x:Name="deDateOfEmploy" MinValue="1/1/1900" Mask="D" TabIndex="5">
-                    <dxe:DateEdit.ErrorToolTipContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Выберите дату"/>
-                        </DataTemplate>
-                    </dxe:DateEdit.ErrorToolTipContentTemplate>
-                </dxe:DateEdit>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem Label="Моб. телефон">
-                <dxe:TextEdit x:Name="tePhone" Mask="(\(\d\d\d\) )?\d{1,3}-\d\d-\d\d" MaskType="RegEx" MaskIgnoreBlank="False" MaskAutoComplete="Optimistic" TabIndex="6">
-                    <dxe:TextEdit.ErrorToolTipContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Введите корректный номер"/>
-                        </DataTemplate>
-                    </dxe:TextEdit.ErrorToolTipContentTemplate>
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem Label="Эл. адрес">
-                <dxe:TextEdit x:Name="teEmail" IsEnabled="False"/>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem Label="Должность">
-                <dxe:ComboBoxEdit x:Name="cePosition" SelectedIndex="0" TabIndex="7">
-                    <dxe:ComboBoxEdit.StyleSettings>
-                        <dxe:ComboBoxStyleSettings/>
-                    </dxe:ComboBoxEdit.StyleSettings>
-                </dxe:ComboBoxEdit>
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem>
-                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300"  TabIndex="8"/>
-            </dxlc:LayoutItem>
-            
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                <dx:SimpleButton x:Name="sbDelete" Margin="0 5 10 0" Content="Удалить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Delete_16x16.png}" TabIndex="10"/>
-                <dx:SimpleButton x:Name="sbSave" Margin="0 5 10 0" Content="Сохранить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Apply_16x16.png}" TabIndex="9"/>
+                            <dxlc:LayoutItem Label="Имя*" IsRequired="True">
+                                <dxe:TextEdit x:Name="teName" NullText="Введите имя" TabIndex="2"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Отчество">
+                                <dxe:TextEdit x:Name="tePatronymic" TabIndex="3" NullText="Введите отчество"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Дата рождения*" IsRequired="True">
+                                <dxe:DateEdit x:Name="deDateOfBirth" MinValue="1/1/1900" Mask="D" MaskType="DateTime" TabIndex="4" NullText="Выберите дату рождения"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Моб. телефон">
+                                <dxe:TextEdit x:Name="tePhone" Mask="(\(\d\d\d\) )?\d{1,3}-\d\d-\d\d" MaskType="RegEx" MaskIgnoreBlank="True" NullText="Введите личный номер телефона" MaskAutoComplete="Optimistic" TabIndex="5"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem x:Name="liShowMail" Visibility="Collapsed" Label="E-mail">
+                                <dxe:TextEdit x:Name="teShowMail" TabIndex="6"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Работает с*" IsRequired="True" >
+                                <dxe:DateEdit x:Name="deDateOfEmploy" MinValue="1/1/1900" Mask="D" TabIndex="7" NullText="Выберите дату нанятия сотрудника"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Должность*" IsRequired="True">
+                                <dxe:ComboBoxEdit x:Name="cePosition" SelectedIndex="0" TabIndex="8" NullText="Выберите должность сотрудника"/>
+                            </dxlc:LayoutItem>
+                            
+                            <dxlc:LayoutItem HorizontalAlignment="Right">
+                                <dxe:CheckEdit x:Name="cheRole" Content="Управляющий проектами"/>
+                            </dxlc:LayoutItem>
+
+                        </dxlc:LayoutControl>
+                    </dxlc:LayoutGroup>
+
+                    <dxlc:LayoutGroup x:Name="lgLogin" Header="Параметры входа" Background="White">
+                        <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                            <dxlc:LayoutItem Label="Электронная почта*" IsRequired="True">
+                                <dxe:TextEdit x:Name="teMail" NullText="Введите адрес электронной почты" Mask="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" MaskType="RegEx" MaskAutoComplete="Optimistic"/>
+                            </dxlc:LayoutItem>
+
+                            <dx:SimpleButton x:Name="sbConfirm" Content="Далее" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=Next_16x16.png}" Click="sbConfirm_Click"></dx:SimpleButton>
+
+                            <dxlc:LayoutItem x:Name="liCode" Label="Код подтверждения" IsRequired="True" Visibility="Collapsed">
+                                <dxe:TextEdit x:Name="teCode" NullText="Код подтверждения выслан на почту"/>
+                            </dxlc:LayoutItem>
+
+                            <StackPanel x:Name="spButtons" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Collapsed">
+                                <dx:SimpleButton x:Name="sbRepeat" Margin="0 0 5 0" Content="Выслать еще раз" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=Reset2_16x16.png}" Click="sbRepeat_Click"></dx:SimpleButton>
+                                <dx:SimpleButton x:Name="sbOK"  Content="ОК" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=IconSetSymbols3_16x16.png}" Click="sbOK_Click"></dx:SimpleButton>
+                            </StackPanel>
+
+                            <TextBlock x:Name="tbMessage" Visibility="Collapsed" Text="Почта успешно подтверждена" TextAlignment="Center" FontSize="14" Foreground="Green"></TextBlock>
+
+                            <dxlc:LayoutItem x:Name="liPassword" Label="Придумайте пароль*" IsRequired="True" Visibility="Collapsed">
+                                <dxe:PasswordBoxEdit x:Name="pbPassword"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem x:Name="liRepeatPassword" Label="Подтвердите пароль*" IsRequired="True" Visibility="Collapsed">
+                                <dxe:PasswordBoxEdit x:Name="pbRepeatPassword"/>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutControl>
+
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+
+                <TextBlock x:Name="tbMessageError" Visibility="Collapsed" Text="Заполните обязательные поля" FontSize="14" TextAlignment="Center" Background="IndianRed" Foreground="White"></TextBlock>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 0 10">
+                    <dx:SimpleButton x:Name="sbCancel" Margin="0 5 10 0" Content="Отменить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Cancel_32x32.png}" TabIndex="10" IsCancel="True"/>
+                    <dx:SimpleButton x:Name="sbSave" Margin="0 5 10 0" Content="Сохранить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Apply_32x32.png}" TabIndex="9" IsDefault="True" Click="sbSave_Click"/>
+                </StackPanel>
             </StackPanel>
-
-        </dxlc:LayoutControl>
+        </ScrollViewer>
     </Grid>
 </Window>

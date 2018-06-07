@@ -1,0 +1,98 @@
+﻿<Window x:Class="StankoServiceApp.Windows.EditProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
+        mc:Ignorable="d"
+        dx:ThemeManager.ThemeName="none"
+        Title="" Height="600" Width="500" WindowStartupLocation="CenterScreen" SizeToContent="Height" Loaded="Window_Loaded" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <dxlc:GroupBox Header="Информация о проекте" Background="White">
+                    <dxlc:LayoutControl Orientation="Vertical">
+                        <dxlc:LayoutItem Label="Название проекта*" IsRequired="True">
+                            <dxe:TextEdit x:Name="teName" NullText="Введите рабочее название проекта"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Дата начала*" IsRequired="True">
+                            <dxe:DateEdit x:Name="deStartDate" Mask="D" NullText="Выберите дату начала работы"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Сроки завершения">
+                            <dxe:DateEdit x:Name="deEndDate" Mask="D" NullText="Выберите запланированную дату окончания"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Завершен">
+                            <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания проекта"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Тип проекта*" IsRequired="True">
+                            <dxe:ComboBoxEdit x:Name="ceTypePeriod" NullText="Выберите тип проекта по продолжительности" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:TypePeriod,UseNumericEnumValue=True}"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Статус проекта*" IsRequired="True">
+                            <dxe:ComboBoxEdit x:Name="ceStatus" NullText="Выберите текущий статус проекта" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusProject,UseNumericEnumValue=True}"/>
+                        </dxlc:LayoutItem>
+                        <TextBlock Text="Техническое задание проекта" Margin="0 10 0 3"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center"/>
+                            <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Загрузить..." Glyph="{dx:DXImage Image=Download_16x16.png}" Click="sbDownLoad_Click"/>
+                        </StackPanel>
+
+                    </dxlc:LayoutControl>
+                </dxlc:GroupBox>
+                <TextBlock x:Name="lblErrorProject" Visibility="Collapsed" Padding="3" Text="Заполните обязательные поля" Background="IndianRed" Foreground="White" TextAlignment="Center" FontSize="14"></TextBlock>
+
+                <dxlc:GroupBox Header="Информация о руководителе" Background="White">
+                    <dxlc:LayoutControl>
+                        <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
+                            <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutGroup Orientation="Vertical">
+                            <dxlc:LayoutItem Label="ФИО:">
+                                <TextBlock x:Name="tbFIO"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Дата рождения:">
+                                <TextBlock x:Name="tbDateOfBirth"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Телефон:">
+                                <TextBlock x:Name="tbPhone"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Работает с:">
+                                <TextBlock x:Name="tbDateOfEmploy"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Должность:">
+                                <TextBlock x:Name="tbPosition"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="E-mail:">
+                                <TextBlock x:Name="tbEmail"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem>
+                                <dx:SimpleButton HorizontalAlignment="Left" Content="Выбрать сотрудника..." x:Name="sbSelectWorker" Glyph="pack://application:,,,/DevExpress.Images.v17.1;component/DevAV/Actions/ChangeView_16x16.png" Click="sbSelectWorker_Click" />
+                            </dxlc:LayoutItem>
+
+                        </dxlc:LayoutGroup>
+
+                    </dxlc:LayoutControl>
+
+                </dxlc:GroupBox>
+                <TextBlock x:Name="lblErrorManager" Visibility="Collapsed" Padding="3" Text="Необходимо выбрать менеджера проекта" Background="IndianRed" Foreground="White" TextAlignment="Center" FontSize="14"></TextBlock>
+
+
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 0 10 10">
+                    <dx:SimpleButton x:Name="sbCancel" Content="Отменить" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" IsCancel="True" Click="sbCancel_Click"/>
+                    <dx:SimpleButton x:Name="sbSave" Content="Сохранить" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSave_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

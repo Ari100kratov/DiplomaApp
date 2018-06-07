@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\App.xaml
-6-306468016
+9-1621066230
 
-20-659980607
+241433352503
 44-625814262
-Pages\ProjectPage.xaml;Pages\TaskPage.xaml;Pages\WorkerPage.xaml;Windows\DirectorWindow.xaml;Windows\EditWorkerWindow.xaml;Windows\StartWindow.xaml;
+Pages\ProjectPage.xaml;Pages\TaskPage.xaml;Pages\WorkerPage.xaml;Windows\DirectorWindow.xaml;Windows\EditProjectWindow.xaml;Windows\EditWorkerWindow.xaml;Windows\SelectWorkerWindow.xaml;Windows\StartWindow.xaml;Windows\StatProjectWindow.xaml;
 
 False
 

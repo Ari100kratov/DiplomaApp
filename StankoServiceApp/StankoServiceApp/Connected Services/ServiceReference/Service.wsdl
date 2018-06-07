@@ -13,6 +13,42 @@
   <wsdl:message name="IService_Authorization_OutputMessage">
     <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_AddNewProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewProject" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddNewProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditProject" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProject" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddNewWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewWorker" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddNewWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditWorker" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorker" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkerResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
@@ -78,6 +114,30 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Authorization" message="tns:IService_Authorization_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AuthorizationResponse" message="tns:IService_Authorization_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddNewProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddNewProject" message="tns:IService_AddNewProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddNewProjectResponse" message="tns:IService_AddNewProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditProject" message="tns:IService_EditProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditProjectResponse" message="tns:IService_EditProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/DeleteProject" message="tns:IService_DeleteProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/DeleteProjectResponse" message="tns:IService_DeleteProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewWorker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddNewWorker" message="tns:IService_AddNewWorker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddNewWorkerResponse" message="tns:IService_AddNewWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditWorker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditWorker" message="tns:IService_EditWorker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditWorkerResponse" message="tns:IService_EditWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/DeleteWorker" message="tns:IService_DeleteWorker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/DeleteWorkerResponse" message="tns:IService_DeleteWorker_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetCustomers" message="tns:IService_GetCustomers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetCustomersResponse" message="tns:IService_GetCustomers_OutputMessage" />
@@ -123,6 +183,60 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Authorization">
       <soap:operation soapAction="http://tempuri.org/IService/Authorization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewProject">
+      <soap:operation soapAction="http://tempuri.org/IService/AddNewProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditProject">
+      <soap:operation soapAction="http://tempuri.org/IService/EditProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProject">
+      <soap:operation soapAction="http://tempuri.org/IService/DeleteProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewWorker">
+      <soap:operation soapAction="http://tempuri.org/IService/AddNewWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditWorker">
+      <soap:operation soapAction="http://tempuri.org/IService/EditWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorker">
+      <soap:operation soapAction="http://tempuri.org/IService/DeleteWorker" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

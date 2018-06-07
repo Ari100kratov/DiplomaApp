@@ -7,25 +7,74 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.WorkerPage"
       mc:Ignorable="d" 
      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     dx:ThemeManager.ThemeName="none"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="800"
       Title="WorkerPage" Background="White" Loaded="Page_Loaded">
+    <Page.Resources>
+        <dx:UnboundDataSource x:Key="UnboundDataSource" Count="2">
+            <dx:DesignDataManager.DesignData>
+                <dx:DesignDataSettings RowCount="5"/>
+            </dx:DesignDataManager.DesignData>
+        </dx:UnboundDataSource>
+    </Page.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <dxg:GridControl x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row">
+        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2007" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="False">
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="Главная">
+                    <dxr:RibbonPageGroup Caption="Управление">
+                        <dxb:BarButtonItem x:Name="bbiNewWorker" Content="Новый сотрудник" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewWorker_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiEditWorker" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditWorker_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiDeleteWorker" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteWorker_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem x:Name="bbiTasks" Content="Задачи сотрудника" Glyph="{dx:DXImage Image=BOTask_16x16.png}" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" RibbonStyle="Default"/>
+                        <dxb:BarButtonItem x:Name="bbiProjects" Content="Проекты сотрудника" Glyph="{dx:DXImage Image=Project_16x16.png}" LargeGlyph="{dx:DXImage Image=Project_32x32.png}" RibbonStyle="Default"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Статистика">
+                        <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" RibbonStyle="Default"/>
+                        <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем сотрудникам" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Фильтрация">
+                        <dxb:BarEditItem x:Name="bbiFilterPosition" Content="Должность:">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterPosition" IsTextEditable="False">
+                                </dxe:ComboBoxEditSettings>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarEditItem x:Name="bbiFilterRole" Content="Роль:">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterRole" IsTextEditable="False"/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText"/>
+                    </dxr:RibbonPageGroup>
+
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+
+        <dxg:GridControl Grid.Row="1" x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcWorker_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn Header="Фото" FieldName="ImgPhoto" Binding="{Binding ImgPhoto}" AllowMoving="True" ReadOnly="True">
+            <dxg:GridColumn Header="Фото" FieldName="ImgPhoto"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
-                    <dxe:ImageEditSettings/>
+                    <dxe:ImageEditSettings MaxWidth="150"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>
             <dxg:GridColumn Header="Фамилия" FieldName="Surname" ReadOnly="True"/>
-            <dxg:GridColumn Header="Отчетсво" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
+            <dxg:GridColumn Header="Отчество" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
             <dxg:GridColumn Header="Возраст" FieldName="Age" ReadOnly="True"/>
             <dxg:GridColumn Header="Работает с" FieldName="DateOfEmploy" ReadOnly="True"/>
             <dxg:GridColumn Header="Телефон" FieldName="Phone" UnboundType="DateTime" ReadOnly="True"/>

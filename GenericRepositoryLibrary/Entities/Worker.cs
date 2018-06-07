@@ -45,7 +45,7 @@ namespace GenericRepositoryLibrary.Entities
 
         [DataMember]
         [FieldDb]
-        public int PhotoId { get; set; }
+        public int? PhotoId { get; set; }
 
         [DataMember]
         [FieldDb]

@@ -63,6 +63,14 @@ namespace StankoServiceApp.ServiceReference
             }
         }
 
+        public TypePeriod TypeProject
+        {
+            get
+            {
+                return (TypePeriod)this.TypePeriodId;
+            }
+        }
+
         public File File => App.Service.GetFiles().FirstOrDefault(x => x.Id == this.FileId);
 
         public Customer Customer => App.Service.GetCustomers().FirstOrDefault(x => x.Id == this.CustomerId);
