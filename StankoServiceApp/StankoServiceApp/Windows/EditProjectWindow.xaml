@@ -26,15 +26,20 @@
                             <dxe:DateEdit x:Name="deEndDate" Mask="D" NullText="Выберите запланированную дату окончания"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Завершен">
-                            <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания проекта"/>
+                            <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания проекта" EditValueChanged="deCompletionDate_EditValueChanged"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Тип проекта*" IsRequired="True">
                             <dxe:ComboBoxEdit x:Name="ceTypePeriod" NullText="Выберите тип проекта по продолжительности" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:TypePeriod,UseNumericEnumValue=True}"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem Label="Статус проекта*" IsRequired="True">
-                            <dxe:ComboBoxEdit x:Name="ceStatus" NullText="Выберите текущий статус проекта" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusProject,UseNumericEnumValue=True}"/>
+                            <dxe:ComboBoxEdit x:Name="ceStatus" NullText="Выберите текущий статус проекта" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusProject,UseNumericEnumValue=True}" EditValueChanged="ceStatus_EditValueChanged"/>
                         </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem x:Name="liComment" Label="Комментарий" Visibility="Collapsed">
+                            <dxe:TextEdit x:Name="teComment" NullText="Введите комментарий для статуса"/>
+                        </dxlc:LayoutItem>
+
                         <TextBlock Text="Техническое задание проекта" Margin="0 10 0 3"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                             <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center"/>

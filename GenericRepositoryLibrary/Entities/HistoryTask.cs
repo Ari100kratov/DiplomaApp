@@ -20,23 +20,23 @@ namespace GenericRepositoryLibrary.Entities
         public int Id { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public DateTime DateTime { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int UserId { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int StatusId { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public string Comment { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int TaskId { get; set; }
 
         public Task Task => Dm.Task.GetList().FirstOrDefault(x => x.Id == this.TaskId);

@@ -91,7 +91,6 @@ namespace StankoServiceApp
             {
                 this.bbiFilterType.EditValue = null;
                 this.bbiFilterStatus.EditValue = null;
-                this.FillDgv();
             }
             catch (Exception ex)
             {
@@ -270,6 +269,12 @@ namespace StankoServiceApp
                 rowHandles.Add(rowHandle);
             }
             return rowHandles;
+        }
+
+        private void bbiShowProject_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            var show = new ShowProjectWindow(this.SelectProject);
+            show.ShowDialog();
         }
     }
 }

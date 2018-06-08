@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DevExpress.Xpf.Editors;
 using StankoServiceApp.ServiceReference;
+using StankoServiceApp.Windows;
+using StankoserviceEnums;
 
 namespace StankoServiceApp
 {
@@ -53,6 +55,14 @@ namespace StankoServiceApp
             Properties.Settings.Default.Save();
 
             App.CurrentUser = user;
+
+            switch(App.CurrentUser.RoleUser)
+            {
+                case (Role.Директор):
+                    var dirWin = new DirectorWindow();
+                    dirWin.Show();
+                    break;
+            }
 
         }
 

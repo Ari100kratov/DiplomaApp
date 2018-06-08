@@ -62,10 +62,9 @@
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
-                        <dxb:BarButtonItem x:Name="bbiShowProject" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}"/>
-                        <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать ТЗ" LargeGlyph="{dx:DXImage Image=Download_32x32.png}" Glyph="{dx:DXImage Image=Download_16x16.png}" ItemClick="bbiDownload_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать ТЗ" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" ItemClick="bbiDownload_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiShowProject" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiHistory" Content="История" LargeGlyph="{dx:DXImage Image=BOChangeHistory_32x32.png}" Glyph="{dx:DXImage Image=BOChangeHistory_16x16.png}"/>
-
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Статистика">
                         <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем проектам" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" ItemClick="bbiStatAll_ItemClick"/>

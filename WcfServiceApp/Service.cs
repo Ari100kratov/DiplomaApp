@@ -16,7 +16,7 @@ namespace WcfServiceApp
             return Dm.User.GetList().FirstOrDefault(x => x.Email == email && x.Password == password);
         }
 
-        public int AddNewProject(File file, Project project)
+        public void AddNewProject(File file, Project project, User user, string comment)
         {
             if (file != null)
             {
@@ -24,10 +24,21 @@ namespace WcfServiceApp
                 project.FileId = lastIdFile;
             }
 
-            return DataManager.Instance.Project.Add(project);
+            var lastId = Dm.Project.Add(project);
+
+            var history = new HistoryProject
+            {
+                Comment = comment,
+                DateTime = DateTime.Now,
+                ProjectId = project.Id,
+                StatusId = project.StatusId,
+                UserId = user.Id
+            };
+
+            Dm.HistoryProject.Add(history);
         }
 
-        public void EditProject(File file, Project project)
+        public void EditProject(File file, Project project, string comment, User user = null)
         {
             if (file != null)
             {
@@ -47,12 +58,32 @@ namespace WcfServiceApp
                 }
             }
 
-            DataManager.Instance.Project.Update(project);
+            if (user != null)
+            {
+                var history = new HistoryProject
+                {
+                    Comment = comment,
+                    DateTime = DateTime.Now,
+                    ProjectId = project.Id,
+                    StatusId = project.StatusId,
+                    UserId = user.Id
+                };
+
+                Dm.HistoryProject.Add(history);
+            }
+
+            Dm.Project.Update(project);
+
         }
 
         public void DeleteProject(Project project)
         {
             var file = Dm.File.GetList().FirstOrDefault(x => x.Id == project.FileId);
+            var histroy = Dm.HistoryProject.GetList().Where(x => x.ProjectId == project.Id).ToList();
+            foreach (var item in histroy)
+            {
+                Dm.HistoryProject.Delete(item);
+            }
 
             if (file != null)
             {
@@ -62,23 +93,28 @@ namespace WcfServiceApp
             Dm.Project.Delete(project);
         }
 
-        public void AddNewWorker(Worker worker, File file, User user)
+        public void AddNewWorker(Worker worker, File photo, File resume, User user)
         {
-            if (file != null)
+            if (photo != null)
             {
-                var lastIdFile = DataManager.Instance.File.Add(file);
-                worker.PhotoId = lastIdFile;
+                var lastIdPhoto = Dm.File.Add(photo);
+                worker.PhotoId = lastIdPhoto;
+            }
+            if (resume != null)
+            {
+                var lastIdResume = Dm.File.Add(resume);
+                worker.ResumeId = lastIdResume;
             }
 
-            var lastIdUser = DataManager.Instance.User.Add(user);
+            var lastIdUser = Dm.User.Add(user);
             worker.UserId = lastIdUser;
 
-            DataManager.Instance.Worker.Add(worker);
+            Dm.Worker.Add(worker);
         }
 
-        public void EditWorker(Worker worker, File file, User user)
+        public void EditWorker(Worker worker, File photo, File resume, User user)
         {
-            if (file == null)
+            if (photo == null)
             {
                 if (worker.Photo != null)
                 {
@@ -90,12 +126,33 @@ namespace WcfServiceApp
             {
                 if (worker.Photo != null)
                 {
-                    DataManager.Instance.File.Update(file);
+                    DataManager.Instance.File.Update(photo);
                 }
                 else
                 {
-                    var lastId = DataManager.Instance.File.Add(file);
+                    var lastId = DataManager.Instance.File.Add(photo);
                     worker.PhotoId = lastId;
+                }
+            }
+
+            if (resume == null)
+            {
+                if (worker.Resume != null)
+                {
+                    worker.ResumeId = null;
+                    Dm.File.Delete(worker.Resume);
+                }
+            }
+            else
+            {
+                if (worker.Resume != null)
+                {
+                    Dm.File.Update(resume);
+                }
+                else
+                {
+                    var lastId = Dm.File.Add(resume);
+                    worker.ResumeId = lastId;
                 }
             }
 
@@ -108,6 +165,11 @@ namespace WcfServiceApp
             if (worker.Photo != null)
             {
                 Dm.File.Delete(worker.Photo);
+            }
+
+            if (worker.Resume != null)
+            {
+                Dm.File.Delete(worker.Resume);
             }
 
             Dm.User.Delete(worker.User);

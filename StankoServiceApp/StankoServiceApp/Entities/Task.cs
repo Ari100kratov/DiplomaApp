@@ -13,5 +13,7 @@ namespace StankoServiceApp.ServiceReference
         public Project Project => App.Service.GetProjects().FirstOrDefault(x => x.Id == this.ProjectId);
 
         public List<HistoryTask> History => App.Service.GetHistoryTasks().Where(x => x.TaskId == this.Id).ToList();
+
+        public List<TaskFile> Files => App.Service.GetTaskFiles().Where(x => x.TaskId == this.Id).ToList();
     }
 }

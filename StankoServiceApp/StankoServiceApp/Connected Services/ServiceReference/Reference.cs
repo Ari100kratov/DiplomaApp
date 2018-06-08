@@ -422,6 +422,9 @@ namespace StankoServiceApp.ServiceReference {
         private int PositionIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ResumeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -537,6 +540,19 @@ namespace StankoServiceApp.ServiceReference {
                 if ((this.PositionIdField.Equals(value) != true)) {
                     this.PositionIdField = value;
                     this.RaisePropertyChanged("PositionId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ResumeId {
+            get {
+                return this.ResumeIdField;
+            }
+            set {
+                if ((this.ResumeIdField.Equals(value) != true)) {
+                    this.ResumeIdField = value;
+                    this.RaisePropertyChanged("ResumeId");
                 }
             }
         }
@@ -1013,6 +1029,9 @@ namespace StankoServiceApp.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PriorityIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ProjectIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1056,6 +1075,19 @@ namespace StankoServiceApp.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PriorityId {
+            get {
+                return this.PriorityIdField;
+            }
+            set {
+                if ((this.PriorityIdField.Equals(value) != true)) {
+                    this.PriorityIdField = value;
+                    this.RaisePropertyChanged("PriorityId");
                 }
             }
         }
@@ -1210,16 +1242,16 @@ namespace StankoServiceApp.ServiceReference {
         System.Threading.Tasks.Task<StankoServiceApp.ServiceReference.User> AuthorizationAsync(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewProject", ReplyAction="http://tempuri.org/IService/AddNewProjectResponse")]
-        int AddNewProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project);
+        void AddNewProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, StankoServiceApp.ServiceReference.User user, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewProject", ReplyAction="http://tempuri.org/IService/AddNewProjectResponse")]
-        System.Threading.Tasks.Task<int> AddNewProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project);
+        System.Threading.Tasks.Task AddNewProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, StankoServiceApp.ServiceReference.User user, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditProject", ReplyAction="http://tempuri.org/IService/EditProjectResponse")]
-        void EditProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project);
+        void EditProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, string comment, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditProject", ReplyAction="http://tempuri.org/IService/EditProjectResponse")]
-        System.Threading.Tasks.Task EditProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project);
+        System.Threading.Tasks.Task EditProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, string comment, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteProject", ReplyAction="http://tempuri.org/IService/DeleteProjectResponse")]
         void DeleteProject(StankoServiceApp.ServiceReference.Project project);
@@ -1228,16 +1260,16 @@ namespace StankoServiceApp.ServiceReference {
         System.Threading.Tasks.Task DeleteProjectAsync(StankoServiceApp.ServiceReference.Project project);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewWorker", ReplyAction="http://tempuri.org/IService/AddNewWorkerResponse")]
-        void AddNewWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user);
+        void AddNewWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewWorker", ReplyAction="http://tempuri.org/IService/AddNewWorkerResponse")]
-        System.Threading.Tasks.Task AddNewWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user);
+        System.Threading.Tasks.Task AddNewWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditWorker", ReplyAction="http://tempuri.org/IService/EditWorkerResponse")]
-        void EditWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user);
+        void EditWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditWorker", ReplyAction="http://tempuri.org/IService/EditWorkerResponse")]
-        System.Threading.Tasks.Task EditWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user);
+        System.Threading.Tasks.Task EditWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteWorker", ReplyAction="http://tempuri.org/IService/DeleteWorkerResponse")]
         void DeleteWorker(StankoServiceApp.ServiceReference.Worker worker);
@@ -1341,20 +1373,20 @@ namespace StankoServiceApp.ServiceReference {
             return base.Channel.AuthorizationAsync(email, password);
         }
         
-        public int AddNewProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project) {
-            return base.Channel.AddNewProject(file, project);
+        public void AddNewProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, StankoServiceApp.ServiceReference.User user, string comment) {
+            base.Channel.AddNewProject(file, project, user, comment);
         }
         
-        public System.Threading.Tasks.Task<int> AddNewProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project) {
-            return base.Channel.AddNewProjectAsync(file, project);
+        public System.Threading.Tasks.Task AddNewProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, StankoServiceApp.ServiceReference.User user, string comment) {
+            return base.Channel.AddNewProjectAsync(file, project, user, comment);
         }
         
-        public void EditProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project) {
-            base.Channel.EditProject(file, project);
+        public void EditProject(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, string comment, StankoServiceApp.ServiceReference.User user) {
+            base.Channel.EditProject(file, project, comment, user);
         }
         
-        public System.Threading.Tasks.Task EditProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project) {
-            return base.Channel.EditProjectAsync(file, project);
+        public System.Threading.Tasks.Task EditProjectAsync(StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.Project project, string comment, StankoServiceApp.ServiceReference.User user) {
+            return base.Channel.EditProjectAsync(file, project, comment, user);
         }
         
         public void DeleteProject(StankoServiceApp.ServiceReference.Project project) {
@@ -1365,20 +1397,20 @@ namespace StankoServiceApp.ServiceReference {
             return base.Channel.DeleteProjectAsync(project);
         }
         
-        public void AddNewWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user) {
-            base.Channel.AddNewWorker(worker, file, user);
+        public void AddNewWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user) {
+            base.Channel.AddNewWorker(worker, photo, resume, user);
         }
         
-        public System.Threading.Tasks.Task AddNewWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user) {
-            return base.Channel.AddNewWorkerAsync(worker, file, user);
+        public System.Threading.Tasks.Task AddNewWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user) {
+            return base.Channel.AddNewWorkerAsync(worker, photo, resume, user);
         }
         
-        public void EditWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user) {
-            base.Channel.EditWorker(worker, file, user);
+        public void EditWorker(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user) {
+            base.Channel.EditWorker(worker, photo, resume, user);
         }
         
-        public System.Threading.Tasks.Task EditWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File file, StankoServiceApp.ServiceReference.User user) {
-            return base.Channel.EditWorkerAsync(worker, file, user);
+        public System.Threading.Tasks.Task EditWorkerAsync(StankoServiceApp.ServiceReference.Worker worker, StankoServiceApp.ServiceReference.File photo, StankoServiceApp.ServiceReference.File resume, StankoServiceApp.ServiceReference.User user) {
+            return base.Channel.EditWorkerAsync(worker, photo, resume, user);
         }
         
         public void DeleteWorker(StankoServiceApp.ServiceReference.Worker worker) {

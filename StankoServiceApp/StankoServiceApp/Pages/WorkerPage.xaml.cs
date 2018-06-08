@@ -1,5 +1,7 @@
-﻿using StankoServiceApp.ServiceReference;
+﻿using Microsoft.Win32;
+using StankoServiceApp.ServiceReference;
 using StankoServiceApp.Windows;
+using StankoserviceEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,15 +32,49 @@ namespace StankoServiceApp.Pages
             InitializeComponent();
         }
 
-        private async void FillGc()
+        private void FillList()
         {
-            this.ListWorkers = await App.Service.GetWorkersAsync();
-            this.gcWorker.ItemsSource = this.ListWorkers;
+            this.ListWorkers = App.Service.GetWorkers();
+            this.FillGc();
+        }
+
+        private void FillGc()
+        {
+            if (this.bbiFilterRole.EditValue == null && this.bbiFilterPosition.EditValue == null)
+            {
+                this.gcWorker.ItemsSource = this.ListWorkers;
+            }
+
+            if (this.bbiFilterPosition.EditValue != null && this.bbiFilterRole.EditValue == null)
+            {
+                this.gcWorker.ItemsSource = this.ListWorkers.Where(x => x.PositionId == (int)this.bbiFilterPosition.EditValue).ToList();
+            }
+
+            if (this.bbiFilterPosition.EditValue == null && this.bbiFilterRole.EditValue != null)
+            {
+                this.gcWorker.ItemsSource = this.ListWorkers.Where(x => x.User.RoleUser == (Role)this.bbiFilterRole.EditValue).ToList();
+            }
+
+            if (this.bbiFilterPosition.EditValue != null && this.bbiFilterRole.EditValue != null)
+            {
+                this.gcWorker.ItemsSource = this.ListWorkers.Where(x => x.PositionId == (int)this.bbiFilterPosition.EditValue && x.User.RoleUser == (Role)this.bbiFilterRole.EditValue).ToList();
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.FillGc();
+            try
+            {
+                this.cbFilterPosition.ItemsSource = App.Service.GetPositions();
+                this.cbFilterPosition.DisplayMember = "PositionName";
+                this.cbFilterPosition.ValueMember = "Id";
+
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiNewWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
@@ -47,7 +83,7 @@ namespace StankoServiceApp.Pages
             {
                 var newWorker = new EditWorkerWindow();
                 newWorker.ShowDialog();
-                this.FillGc();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -67,13 +103,24 @@ namespace StankoServiceApp.Pages
                     this.bbiDeleteWorker.IsEnabled = false;
                     this.bbiTasks.IsEnabled = false;
                     this.bbiProjects.IsEnabled = false;
+                    this.bbiDownload.IsEnabled = false;
                 }
                 else
                 {
+
                     this.bbiEditWorker.IsEnabled = true;
                     this.bbiDeleteWorker.IsEnabled = true;
                     this.bbiTasks.IsEnabled = true;
                     this.bbiProjects.IsEnabled = true;
+
+                    if (this.Worker.Resume == null)
+                    {
+                        this.bbiDownload.IsEnabled = false;
+                    }
+                    else
+                    {
+                        this.bbiDownload.IsEnabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -88,7 +135,7 @@ namespace StankoServiceApp.Pages
             {
                 var editWorker = new EditWorkerWindow(this.Worker);
                 editWorker.ShowDialog();
-                this.FillGc();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -106,6 +153,70 @@ namespace StankoServiceApp.Pages
                 }
 
                 App.Service.DeleteWorker(this.Worker);
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bbiDownload_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            try
+            {
+                var save = new SaveFileDialog
+                {
+                    Title = "Сохранить файл",
+                    DefaultExt = this.Worker.Resume.Title,
+                    AddExtension = true,
+                    FileName = this.Worker.Resume.FileName
+                };
+
+                if (save.ShowDialog() == true)
+                {
+                    using (var stream = save.OpenFile())
+                    {
+                        stream.Write(this.Worker.Resume.Data, 0, this.Worker.Resume.Data.Length);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bbiClearFilter_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            try
+            {
+                this.bbiFilterPosition.EditValue = null;
+                this.bbiFilterRole.EditValue = null;
+                //this.FillGc();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bbiFilterPosition_EditValueChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.FillGc();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bbiFilterRole_EditValueChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
                 this.FillGc();
             }
             catch (Exception ex)

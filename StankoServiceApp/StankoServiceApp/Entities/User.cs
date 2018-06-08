@@ -11,7 +11,7 @@ namespace StankoServiceApp.ServiceReference
 {
     public partial class User
     {
-        Worker Worker => App.Service.GetWorkers().FirstOrDefault(x => x.UserId == this.Id);
+        public Worker Worker => App.Service.GetWorkers().FirstOrDefault(x => x.UserId == this.Id);
 
         public Role RoleUser
         {

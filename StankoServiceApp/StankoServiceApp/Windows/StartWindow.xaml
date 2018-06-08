@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:StankoServiceApp"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        dx:ThemeManager.ThemeName="none"
         mc:Ignorable="d"
         Title="" Height="350" Width="400" WindowStartupLocation="CenterScreen" Visibility="Visible" Loaded="Window_Loaded" Icon="/StankoServiceApp;component/Resources/icon.png">
     <Grid>
@@ -19,7 +20,7 @@
                 <dxe:PasswordBoxEdit x:Name="pbPassword" FontSize="18" BorderThickness="0" Margin="0 0 0 7" NullText="Введите пароль"/>
 
                 <TextBlock x:Name="tbErrorMessage" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" Foreground="Red" Visibility="Collapsed">Проверьте правильность введенных данных!</TextBlock>
-                <Button x:Name="sbLogin" Content="Вход" FontSize="18" Margin="0 7 0 5" Click="sbLogin_Click" Background="#006A68" Foreground="White" dx:ThemeManager.ThemeName="None"/>
+                <dx:SimpleButton x:Name="sbLogin" Content="Вход" FontSize="18" Margin="0 7 0 5" Click="sbLogin_Click" GlyphAlignment="Right"/>
                 <dxe:CheckEdit x:Name="cbRemember" FontSize="16" HorizontalAlignment="Center">Запомнить</dxe:CheckEdit>
             </StackPanel>
         </Border>

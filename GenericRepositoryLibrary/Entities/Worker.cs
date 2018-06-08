@@ -55,7 +55,13 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int UserId { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public int? ResumeId { get; set; }
+
         public File Photo => Dm.File.GetList().FirstOrDefault(x => x.Id == this.PhotoId);
+
+        public File Resume => Dm.File.GetList().FirstOrDefault(x => x.Id == this.ResumeId);
 
         public List<Project> Projects => Dm.Project.GetList().Where(x => x.WorkerId == this.Id).ToList();
 

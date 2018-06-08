@@ -30,7 +30,7 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.MainFrame.Navigate(new WorkerPage());
+            this.MainFrame.Navigate(new ProjectPage());
         }
 
         private void sbWorker_Click(object sender, RoutedEventArgs e)

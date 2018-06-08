@@ -15,28 +15,28 @@ namespace GenericRepositoryLibrary.Entities
         private DataManager Dm => DataManager.Instance;
 
         [DataMember]
-        [PrimaryKey]
         [FieldDb]
+        [PrimaryKey]
         public int Id { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public DateTime DateTime { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int UserId { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int StatusId { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public string Comment { get; set; }
 
         [DataMember]
-        [PrimaryKey]
+        [FieldDb]
         public int ProjectId { get; set; }
 
         public Project Project => Dm.Project.GetList().FirstOrDefault(x => x.Id == this.ProjectId);

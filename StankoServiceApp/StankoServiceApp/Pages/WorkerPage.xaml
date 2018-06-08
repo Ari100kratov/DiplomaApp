@@ -4,11 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.WorkerPage"
-      mc:Ignorable="d" 
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums" x:Class="StankoServiceApp.Pages.WorkerPage"
+      mc:Ignorable="d"
     dx:ThemeManager.ThemeName="none"
       d:DesignHeight="700" d:DesignWidth="800"
       Title="WorkerPage" Background="White" Loaded="Page_Loaded">
@@ -22,8 +23,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2007" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="False">
@@ -36,6 +37,7 @@
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать резюме" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" RibbonStyle="Default" ItemClick="bbiDownload_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiTasks" Content="Задачи сотрудника" Glyph="{dx:DXImage Image=BOTask_16x16.png}" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" RibbonStyle="Default"/>
                         <dxb:BarButtonItem x:Name="bbiProjects" Content="Проекты сотрудника" Glyph="{dx:DXImage Image=Project_16x16.png}" LargeGlyph="{dx:DXImage Image=Project_32x32.png}" RibbonStyle="Default"/>
                     </dxr:RibbonPageGroup>
@@ -44,18 +46,22 @@
                         <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем сотрудникам" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Фильтрация">
-                        <dxb:BarEditItem x:Name="bbiFilterPosition" Content="Должность:">
+                        <dxb:BarEditItem x:Name="bbiFilterPosition" Content="Должность:" EditValueChanged="bbiFilterPosition_EditValueChanged">
                             <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings x:Name="cbFilterPosition" IsTextEditable="False">
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterPosition" IsTextEditable="False"/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarEditItem x:Name="bbiFilterRole" Content="Роль:" EditValueChanged="bbiFilterRole_EditValueChanged">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterRole" IsTextEditable="False">
+                                    <dxe:ComboBoxEditSettings.Items>
+                                        <StankoserviceEnums:Role>Менеджер</StankoserviceEnums:Role>
+                                        <StankoserviceEnums:Role>Исполнитель</StankoserviceEnums:Role>
+                                    </dxe:ComboBoxEditSettings.Items>
                                 </dxe:ComboBoxEditSettings>
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Name="bbiFilterRole" Content="Роль:">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings x:Name="cbFilterRole" IsTextEditable="False"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText"/>
+                        <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                 </dxr:RibbonPage>

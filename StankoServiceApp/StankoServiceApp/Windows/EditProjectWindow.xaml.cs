@@ -26,6 +26,7 @@ namespace StankoServiceApp.Windows
         private File File = new File();
         public Worker Worker = null;
         private bool IsAdd => this.Project == null;
+        private StatusProject StartStatus;
 
         public EditProjectWindow(Project project = null)
         {
@@ -33,6 +34,7 @@ namespace StankoServiceApp.Windows
             this.Project = project;
             this.Worker = Project?.Worker;
             this.File = Project?.File;
+            this.StartStatus = (StatusProject)project?.GetStatusProject;
         }
 
         private void FillWorker()
@@ -63,8 +65,8 @@ namespace StankoServiceApp.Windows
                 this.deStartDate.EditValue = this.Project.StartDate;
                 this.deEndDate.EditValue = this.Project.EndDate;
                 this.deCompletionDate.EditValue = this.Project.CompletionDate;
-                this.ceStatus.EditValue = this.Project.TypePeriodId;
-                this.ceTypePeriod.EditValue = this.Project.StatusId;
+                this.ceStatus.EditValue = this.Project.StatusId;
+                this.ceTypePeriod.EditValue = this.Project.TypePeriodId;
 
                 if (this.Project.File == null)
                 {
@@ -154,7 +156,7 @@ namespace StankoServiceApp.Windows
                         WorkerId = this.Worker.Id
                     };
 
-                    App.Service.AddNewProject(this.File, project);
+                    App.Service.AddNewProject(this.File, project, App.CurrentUser, this.teComment.Text);
 
                     if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
@@ -171,7 +173,16 @@ namespace StankoServiceApp.Windows
                     this.Project.StatusId = (int)this.ceStatus.EditValue;
                     this.Project.TypePeriodId = (int)this.ceTypePeriod.EditValue;
                     this.Project.WorkerId = this.Worker.Id;
-                    App.Service.EditProject(this.File, this.Project);
+
+                    if (this.StartStatus != this.Project.GetStatusProject)
+                    {
+                        App.Service.EditProject(this.File, this.Project, this.teComment.Text, App.CurrentUser);
+                    }
+                    else
+                    {
+                        User user = null;
+                        App.Service.EditProject(this.File, this.Project, this.teComment.Text, user);
+                    }
 
                     if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
@@ -190,6 +201,25 @@ namespace StankoServiceApp.Windows
         private void sbCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ceStatus_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
+        {
+            this.liComment.Visibility = Visibility.Visible;
+        }
+
+        private void deCompletionDate_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
+        {
+            if (this.deCompletionDate.EditValue != null)
+            {
+                this.ceStatus.SelectedItem = StatusProject.Завершен;
+                this.ceStatus.IsEnabled = false;
+            }
+            else
+            {
+                this.ceStatus.SelectedItem = null;
+                this.ceStatus.IsEnabled = true;
+            }
         }
     }
 }

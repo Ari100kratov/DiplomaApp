@@ -39,7 +39,13 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int StatusId { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public int PriorityId { get; set; }
+
         public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
+
+        public List<TaskFile> Files => Dm.TaskFile.GetList().Where(x => x.TaskId == this.Id).ToList();
 
         public Project Project => Dm.Project.GetList().FirstOrDefault(x => x.Id == this.ProjectId);
 

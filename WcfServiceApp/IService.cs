@@ -14,20 +14,20 @@ namespace WcfServiceApp
         User Authorization(string email, string password);
 
         [OperationContract]
-        int AddNewProject(File file, Project project);
+        void AddNewProject(File file, Project project, User user, string comment);
 
         [OperationContract]
-        void EditProject(File file, Project project);
+        void EditProject(File file, Project project, string comment, User user);
 
         [OperationContract]
         void DeleteProject(Project project);
 
 
         [OperationContract]
-        void AddNewWorker(Worker worker, File file, User user);
+        void AddNewWorker(Worker worker, File photo, File resume, User user);
 
         [OperationContract]
-        void EditWorker(Worker worker, File file, User user);
+        void EditWorker(Worker worker, File photo, File resume, User user);
 
         [OperationContract]
         void DeleteWorker(Worker worker);

@@ -38,6 +38,6 @@ namespace StankoserviceEnums
     {
         Директор = 0,
         Менеджер,
-        Сотрудник
+        Исполнитель
     }
 }

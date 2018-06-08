@@ -17,6 +17,8 @@ namespace StankoServiceApp.ServiceReference
     {
         public File Photo => App.Service.GetFiles().FirstOrDefault(x => x.Id == this.PhotoId);
 
+        public File Resume => App.Service.GetFiles().FirstOrDefault(x => x.Id == this.ResumeId);
+
         public List<Project> Projects => App.Service.GetProjects().Where(x => x.WorkerId == this.Id).ToList();
 
         public List<Task> Tasks => App.Service.GetTasks().Where(x => x.WorkerId == this.Id).ToList();

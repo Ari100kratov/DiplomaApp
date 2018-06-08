@@ -8,7 +8,7 @@
         mc:Ignorable="d"
     dx:ThemeManager.ThemeName="none"
     
-        Title="" Height="500" Width="400" Loaded="Window_Loaded">
+        Title="" Height="550" Width="400" Loaded="Window_Loaded">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
@@ -56,6 +56,12 @@
                             <dxlc:LayoutItem HorizontalAlignment="Right">
                                 <dxe:CheckEdit x:Name="cheRole" Content="Управляющий проектами"/>
                             </dxlc:LayoutItem>
+
+                            <TextBlock Text="Резюме сотрудника" Margin="0 5 0 3"/>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center"/>
+                                <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Загрузить..." Glyph="{dx:DXImage Image=Download_16x16.png}" Click="sbDownLoad_Click"/>
+                            </StackPanel>
 
                         </dxlc:LayoutControl>
                     </dxlc:LayoutGroup>

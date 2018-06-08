@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.Mail;
 using StankoserviceEnums;
 using StankoServiceApp.ServiceReference;
+using Microsoft.Win32;
 
 namespace StankoServiceApp.Windows
 {
@@ -26,12 +27,14 @@ namespace StankoServiceApp.Windows
         private string ConfirmCode = null;
 
         private Worker Worker = null;
+        private File Resume = new File();
         private bool IsAdd => this.Worker == null;
 
         public EditWorkerWindow(Worker worker = null)
         {
             InitializeComponent();
             this.Worker = worker;
+            this.Resume = worker?.Resume;
         }
 
         public void GenerateConfirmCode()
@@ -160,7 +163,7 @@ namespace StankoServiceApp.Windows
                     }
                 }
 
-                var role = (bool)this.cheRole.IsChecked ? Role.Менеджер : Role.Сотрудник;
+                var role = (bool)this.cheRole.IsChecked ? Role.Менеджер : Role.Исполнитель;
 
                 if (this.IsAdd)
                 {
@@ -193,7 +196,7 @@ namespace StankoServiceApp.Windows
                         PositionId = (int)this.cePosition.EditValue
                     };
 
-                    await App.Service.AddNewWorkerAsync(worker, photo, user);
+                    await App.Service.AddNewWorkerAsync(worker, photo, this.Resume, user);
                     this.Close();
                 }
                 else
@@ -218,7 +221,7 @@ namespace StankoServiceApp.Windows
                     this.Worker.Phone = this.tePhone.Text;
                     this.Worker.PositionId = (int)this.cePosition.EditValue;
 
-                    await App.Service.EditWorkerAsync(this.Worker, photo, user);
+                    await App.Service.EditWorkerAsync(this.Worker, photo, this.Resume, user);
                     this.Close();
                 }
             }
@@ -255,6 +258,51 @@ namespace StankoServiceApp.Windows
 
                 this.teShowMail.Visibility = Visibility.Visible;
                 this.teShowMail.Text = this.Worker.User.Email;
+
+                if (this.Worker.Resume == null)
+                {
+                    this.tbDownloadFile.Foreground = Brushes.IndianRed;
+                    return;
+                }
+
+                this.tbDownloadFile.Foreground = Brushes.DarkGreen;
+                this.tbDownloadFile.Text = this.Worker.Resume.FileName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void sbDownLoad_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var openFile = new OpenFileDialog();
+                openFile.Filter = "Все файлы (*.*)|*.*";
+                openFile.CheckFileExists = true;
+
+                if (openFile.ShowDialog() == true)
+                {
+                    if (this.Resume == null)
+                    {
+                        this.Resume = new File()
+                        {
+                            FileName = System.IO.Path.GetFileName(openFile.FileName),
+                            Title = System.IO.Path.GetExtension(openFile.FileName),
+                            Data = System.IO.File.ReadAllBytes(openFile.FileName)
+                        };
+                    }
+                    else
+                    {
+                        this.Resume.FileName = System.IO.Path.GetFileName(openFile.FileName);
+                        this.Resume.Title = System.IO.Path.GetExtension(openFile.FileName);
+                        this.Resume.Data = System.IO.File.ReadAllBytes(openFile.FileName);
+                    }
+
+                    this.tbDownloadFile.Text = System.IO.Path.GetFileName(openFile.FileName);
+                    this.tbDownloadFile.Foreground = Brushes.DarkGreen;
+                }
             }
             catch (Exception ex)
             {

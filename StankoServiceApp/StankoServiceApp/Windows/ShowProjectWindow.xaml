@@ -1,0 +1,128 @@
+﻿<Window xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  x:Class="StankoServiceApp.Windows.ShowProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        dx:ThemeManager.ThemeName="none"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <dxlc:GroupBox Header="Информация о проекте" Background="White" Grid.Column="0" Grid.Row="0">
+            <dxlc:LayoutControl>
+
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="Название:">
+                        <TextBlock x:Name="tbNameProject"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Дата начала:">
+                        <TextBlock x:Name="tbDateStart"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Сроки завершения:">
+                        <TextBlock x:Name="tbDateEnd"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Завершен:">
+                        <TextBlock x:Name="tbCompletionDate"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Тип проекта:">
+                        <TextBlock x:Name="tbTypeProject"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Статус проекта:">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="imgIcon" Margin="0 0 5 0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="tbStatusProject" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </dxlc:LayoutItem>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBlock Text="ТЗ проекта:" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Скачать..." Glyph="{dx:DXImage Image=ExportFile_16x16.png}" HorizontalAlignment="Right" Click="sbDownLoad_Click"/>
+                    </StackPanel>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+        </dxlc:GroupBox>
+
+
+        <dxlc:GroupBox Header="Информация о руководителе" Background="White" Grid.Column="1" Grid.Row="0">
+            <dxlc:LayoutControl>
+                <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
+                    <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="ФИО:">
+                        <TextBlock x:Name="tbFIO"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Дата рождения:">
+                        <TextBlock x:Name="tbDateOfBirth"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Телефон:">
+                        <TextBlock x:Name="tbPhone"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Работает с:">
+                        <TextBlock x:Name="tbDateOfEmploy"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Должность:">
+                        <TextBlock x:Name="tbPosition"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="E-mail:">
+                        <TextBlock x:Name="tbEmail"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+        </dxlc:GroupBox>
+
+
+        <dxlc:GroupBox x:Name="gbHistory" Header="История изменения статусов проекта" Background="White" Grid.ColumnSpan="2" Grid.Row="1">
+
+            <dxg:GridControl x:Name="gcHistory" AutoGenerateColumns="None" SelectionMode="None" AllowInitiallyFocusedRow="False" Focusable="False">
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowEditing="False" NavigationStyle="None"/>
+                </dxg:GridControl.View>
+
+                <dxg:GridColumn Header="Кто изменил" FieldName="FullName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
+                <dxg:GridColumn Header="Дата и время" FieldName="DateTime" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата и время изменения" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="dd-MM-yyyy HH:mm:ss"/>
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Комментарий" FieldName="Comment" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Оставленный комментарий" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+
+                <dxg:GridColumn Header="Изменил статус на" FieldName="HistoryProject" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Статус на который изменил" AllowAutoFilter="False" VisibleIndex="2" >
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Image Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
+                                <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.StatusProjectHistory}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
+
+            </dxg:GridControl>
+        </dxlc:GroupBox>
+    </Grid>
+</Window>
