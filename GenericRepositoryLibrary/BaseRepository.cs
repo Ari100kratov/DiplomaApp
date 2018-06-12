@@ -118,7 +118,7 @@ namespace GenericRepositoryLibrary
 
         public virtual void Delete(T item)
         {
-            var cmd = new SqlCommand($"DELETE FROM {this.TableName} WHERE Id = @Id");
+            var cmd = new SqlCommand($"DELETE FROM [{this.TableName}] WHERE Id = @Id");
             cmd.Parameters.AddWithValue("@Id", item.Id);
 
             this.SaveChanges(cmd);

@@ -34,7 +34,13 @@ namespace StankoServiceApp
             InitializeComponent();
         }
 
-        private void FillDgv()
+        private async void FillList()
+        {
+            this.ProjectList = await App.Service.GetProjectsAsync();
+            this.FillGc();
+        }
+
+        private void FillGc()
         {
             int status = 0;
             int type = 0;
@@ -52,32 +58,30 @@ namespace StankoServiceApp
 
             if (this.bbiFilterStatus.EditValue == null && this.bbiFilterType.EditValue == null)
             {
-                this.ProjectList = App.Service.GetProjects();
+                this.gcProject.ItemsSource = this.ProjectList;
             }
 
             if (this.bbiFilterType.EditValue != null && this.bbiFilterStatus.EditValue == null)
             {
-                this.ProjectList = App.Service.GetProjects().Where(x => x.TypePeriodId == type).ToList();
+                this.gcProject.ItemsSource = this.ProjectList.Where(x => x.TypePeriodId == type).ToList();
             }
 
             if (this.bbiFilterType.EditValue == null && this.bbiFilterStatus.EditValue != null)
             {
-                this.ProjectList = App.Service.GetProjects().Where(x => x.StatusId == status).ToList();
+                this.gcProject.ItemsSource = this.ProjectList.Where(x => x.StatusId == status).ToList();
             }
 
             if (this.bbiFilterType.EditValue != null && this.bbiFilterStatus.EditValue != null)
             {
-                this.ProjectList = App.Service.GetProjects().Where(x => x.TypePeriodId == type && x.StatusId == status).ToList();
+                this.gcProject.ItemsSource = this.ProjectList.Where(x => x.TypePeriodId == type && x.StatusId == status).ToList();
             }
-
-            this.gcProject.ItemsSource = this.ProjectList;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.FillDgv();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -102,19 +106,7 @@ namespace StankoServiceApp
         {
             try
             {
-                this.FillDgv();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void bbiFilterManager_EditValueChanged(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.FillDgv();
+                this.FillGc();
             }
             catch (Exception ex)
             {
@@ -159,7 +151,7 @@ namespace StankoServiceApp
         {
             try
             {
-                this.FillDgv();
+                this.FillGc();
             }
             catch (Exception ex)
             {
@@ -173,7 +165,7 @@ namespace StankoServiceApp
             {
                 var newProject = new Windows.EditProjectWindow();
                 newProject.ShowDialog();
-                this.FillDgv();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -188,7 +180,7 @@ namespace StankoServiceApp
             {
                 var editProject = new Windows.EditProjectWindow(this.SelectProject);
                 editProject.ShowDialog();
-                this.gcProject.RefreshData();
+                FillList();
             }
             catch (Exception ex)
             {
@@ -207,13 +199,11 @@ namespace StankoServiceApp
 
                 if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    WorkWithMail.SendMessageFromMainMail("Проект был удален", $"Проект '{this.SelectProject.Name}', руководителем которого вы являлись был удален из базы данных\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.SelectProject.Worker.User.Email);
+                    Methods.SendMessageFromMainMail("Проект был удален", $"Проект '{this.SelectProject.Name}', руководителем которого вы являлись был удален из базы данных\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.SelectProject.Worker.User.Email);
                 }
 
                 App.Service.DeleteProject(this.SelectProject);
-                this.FillDgv();
-
-
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -251,7 +241,6 @@ namespace StankoServiceApp
         {
             var statAll = new StatProjectWindow(App.Service.GetProjects());
             statAll.ShowDialog();
-
         }
 
         private void bbiStatFilter_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
@@ -275,6 +264,11 @@ namespace StankoServiceApp
         {
             var show = new ShowProjectWindow(this.SelectProject);
             show.ShowDialog();
+        }
+
+        private void bbiRefresh_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.FillList();
         }
     }
 }

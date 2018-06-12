@@ -21,14 +21,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <dxe:ComboBoxEdit>
-            <dxe:ComboBoxEdit.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock/>
-                </DataTemplate>
-            </dxe:ComboBoxEdit.ItemTemplate>
-        </dxe:ComboBoxEdit>
-
         <dxg:GridControl x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
@@ -44,8 +36,8 @@
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Image Source="{Binding RowData.Row.StatusIcon}"/>
-                            <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.GetStatusProject}"/>
+                            <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                            <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
                         </StackPanel>
                     </DataTemplate>
                 </dxg:GridColumn.CellTemplate>
@@ -59,6 +51,7 @@
                         <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditProject" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDeleteProject" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteProject_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">

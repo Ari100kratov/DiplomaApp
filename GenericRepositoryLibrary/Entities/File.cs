@@ -10,7 +10,7 @@ using ModelParametersLibrary.Interfaces;
 namespace GenericRepositoryLibrary.Entities
 {
     [DataContract]
-    public partial class File: IKeyedModel
+    public partial class File : IKeyedModel
     {
         [DataMember]
         [PrimaryKey]
@@ -28,5 +28,9 @@ namespace GenericRepositoryLibrary.Entities
         [DataMember]
         [FieldDb]
         public byte[] Data { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public Nullable<DateTime> ChangeDate { get; set; }
     }
 }

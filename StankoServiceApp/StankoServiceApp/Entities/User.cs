@@ -24,5 +24,20 @@ namespace StankoServiceApp.ServiceReference
                 this.RoleId = (int)value;
             }
         }
+
+        public string FullName
+        {
+            get
+            {
+                if(this.Worker!=null)
+                {
+                    return this.Worker.FullName;
+                }
+                else
+                {
+                    return "Директор";
+                }
+            }
+        }
     }
 }

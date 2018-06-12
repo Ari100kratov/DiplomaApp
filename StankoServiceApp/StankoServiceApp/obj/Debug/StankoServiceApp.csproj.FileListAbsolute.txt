@@ -164,3 +164,13 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Xpf.Carousel.v17.1.xml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ShowProjectWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ShowProjectWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\EditTaskWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\EditTaskWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Xpf.RichEdit.v17.1.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\DevExpress.Xpf.RichEdit.v17.1.xml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\de\DevExpress.Xpf.RichEdit.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\es\DevExpress.Xpf.RichEdit.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ja\DevExpress.Xpf.RichEdit.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\bin\Debug\ru\DevExpress.Xpf.RichEdit.v17.1.resources.dll
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ShowTaskWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ShowTaskWindow.baml

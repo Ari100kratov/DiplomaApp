@@ -34,7 +34,7 @@ namespace StankoServiceApp.Windows
             this.Project = project;
             this.Worker = Project?.Worker;
             this.File = Project?.File;
-            this.StartStatus = (StatusProject)project?.GetStatusProject;
+
         }
 
         private void FillWorker()
@@ -60,6 +60,7 @@ namespace StankoServiceApp.Windows
                 {
                     return;
                 }
+                this.StartStatus = (StatusProject)this.Project.GetStatusProject;
                 this.FillWorker();
                 this.teName.Text = this.Project.Name;
                 this.deStartDate.EditValue = this.Project.StartDate;
@@ -75,7 +76,7 @@ namespace StankoServiceApp.Windows
                 }
 
                 this.tbDownloadFile.Foreground = Brushes.DarkGreen;
-                this.tbDownloadFile.Text = this.Project.File.FileName;
+                this.tbDownloadFile.Text = $"{this.Project.File.FileName} ({this.Project.File.ChangeDate.Value.ToLongDateString()})";
             }
             catch (Exception ex)
             {
@@ -97,10 +98,11 @@ namespace StankoServiceApp.Windows
                     {
                         FileName = System.IO.Path.GetFileName(openFile.FileName),
                         Title = System.IO.Path.GetExtension(openFile.FileName),
-                        Data = System.IO.File.ReadAllBytes(openFile.FileName)
+                        Data = System.IO.File.ReadAllBytes(openFile.FileName),
+                        ChangeDate = DateTime.Now
                     };
 
-                    this.tbDownloadFile.Text = System.IO.Path.GetFileName(openFile.FileName);
+                    this.tbDownloadFile.Text = $"{System.IO.Path.GetFileName(openFile.FileName)} ({DateTime.Now.ToLongDateString()})";
                     this.tbDownloadFile.Foreground = Brushes.DarkGreen;
                 }
             }
@@ -124,7 +126,7 @@ namespace StankoServiceApp.Windows
             }
         }
 
-        private void sbSave_Click(object sender, RoutedEventArgs e)
+        private async void sbSave_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -156,11 +158,11 @@ namespace StankoServiceApp.Windows
                         WorkerId = this.Worker.Id
                     };
 
-                    App.Service.AddNewProject(this.File, project, App.CurrentUser, this.teComment.Text);
+                    await App.Service.AddNewProjectAsync(this.File, project, App.CurrentUser, this.teComment.Text);
 
                     if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        WorkWithMail.SendMessageFromMainMail("Вы - руководитель нового проекта", $"Вас назначали руководителем нового проекта '{this.teName.Text}'.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Worker.User.Email);
+                        Methods.SendMessageFromMainMail("Вы - руководитель нового проекта", $"Вас назначали руководителем нового проекта '{this.teName.Text}'.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Worker.User.Email);
                     }
 
                 }
@@ -181,12 +183,12 @@ namespace StankoServiceApp.Windows
                     else
                     {
                         User user = null;
-                        App.Service.EditProject(this.File, this.Project, this.teComment.Text, user);
+                        await App.Service.EditProjectAsync(this.File, this.Project, this.teComment.Text, user);
                     }
 
                     if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        WorkWithMail.SendMessageFromMainMail("Изменение информации о проекте", $"Информация о проекте '{this.teName.Text} была изменена.'\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Worker.User.Email);
+                        Methods.SendMessageFromMainMail("Изменение информации о проекте", $"Информация о проекте '{this.teName.Text}' была изменена.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Worker.User.Email);
                     }
                 }
 
@@ -205,7 +207,21 @@ namespace StankoServiceApp.Windows
 
         private void ceStatus_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            this.liComment.Visibility = Visibility.Visible;
+            if (this.IsAdd)
+            {
+                this.liComment.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if ((int)this.ceStatus.EditValue == (int)this.StartStatus)
+                {
+                    this.liComment.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    this.liComment.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void deCompletionDate_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)

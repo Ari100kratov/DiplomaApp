@@ -34,6 +34,7 @@
                         <dxb:BarButtonItem x:Name="bbiNewWorker" Content="Новый сотрудник" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditWorker" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDeleteWorker" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteWorker_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick" RibbonStyle="All"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
@@ -73,7 +74,7 @@
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn Header="Фото" FieldName="ImgPhoto"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
+            <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
                     <dxe:ImageEditSettings MaxWidth="150"/>
                 </dxg:GridColumn.EditSettings>

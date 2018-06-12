@@ -32,6 +32,15 @@ namespace WcfServiceApp
         [OperationContract]
         void DeleteWorker(Worker worker);
 
+        [OperationContract]
+        void AddNewTask(Task task, List<File> lstFiles, User user, string comment);
+
+        [OperationContract]
+        void EditTask(Task task, List<File> lstFiles, List<File> lstDelete, User user, string comment);
+
+        [OperationContract]
+        void DeleteTask(Task task);
+
         #region //Возвращение List всех моделей
 
         [OperationContract]

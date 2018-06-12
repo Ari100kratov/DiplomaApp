@@ -46,7 +46,7 @@ namespace StankoServiceApp.Windows
         public void SendMessage()
         {
             this.GenerateConfirmCode();
-            WorkWithMail.SendMessageFromMainMail("Регистрация сотрудника", $"Ваш код подтверждения: {this.ConfirmCode}", this.teMail.Text);
+            Methods.SendMessageFromMainMail("Регистрация сотрудника", $"Ваш код подтверждения: {this.ConfirmCode}", this.teMail.Text);
         }
 
         private void sbConfirm_Click(object sender, RoutedEventArgs e)
@@ -174,7 +174,8 @@ namespace StankoServiceApp.Windows
                         photo = new File
                         {
                             FileName = $"PhotoBy{this.teSurname.Text}",
-                            Data = this.iePhoto.EditValue as byte[]
+                            Data = this.iePhoto.EditValue as byte[],
+                            ChangeDate = DateTime.Now
                         };
                     }
 
@@ -211,6 +212,7 @@ namespace StankoServiceApp.Windows
                         photo = this.Worker.Photo == null ? new File() : this.Worker.Photo;
                         photo.FileName = $"PhotoBy{this.teSurname.Text}";
                         photo.Data = this.iePhoto.EditValue as byte[];
+                        photo.ChangeDate = DateTime.Now;
                     }
 
                     this.Worker.Name = this.teName.Text;
@@ -266,7 +268,7 @@ namespace StankoServiceApp.Windows
                 }
 
                 this.tbDownloadFile.Foreground = Brushes.DarkGreen;
-                this.tbDownloadFile.Text = this.Worker.Resume.FileName;
+                this.tbDownloadFile.Text = $"{this.Worker.Resume.FileName} ({this.Worker.Resume.ChangeDate.Value.ToLongDateString()})";
             }
             catch (Exception ex)
             {
@@ -290,7 +292,8 @@ namespace StankoServiceApp.Windows
                         {
                             FileName = System.IO.Path.GetFileName(openFile.FileName),
                             Title = System.IO.Path.GetExtension(openFile.FileName),
-                            Data = System.IO.File.ReadAllBytes(openFile.FileName)
+                            Data = System.IO.File.ReadAllBytes(openFile.FileName),
+                            ChangeDate = DateTime.Now
                         };
                     }
                     else
@@ -298,9 +301,10 @@ namespace StankoServiceApp.Windows
                         this.Resume.FileName = System.IO.Path.GetFileName(openFile.FileName);
                         this.Resume.Title = System.IO.Path.GetExtension(openFile.FileName);
                         this.Resume.Data = System.IO.File.ReadAllBytes(openFile.FileName);
+                        this.Resume.ChangeDate = DateTime.Now;
                     }
 
-                    this.tbDownloadFile.Text = System.IO.Path.GetFileName(openFile.FileName);
+                    this.tbDownloadFile.Text = $"{System.IO.Path.GetFileName(openFile.FileName)} ({DateTime.Now.ToLongDateString()})";
                     this.tbDownloadFile.Foreground = Brushes.DarkGreen;
                 }
             }

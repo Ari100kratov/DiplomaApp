@@ -21,10 +21,22 @@ namespace StankoserviceEnums
 
     public enum StatusTask
     {
-        Принята = 0,
-        Отклонена,
+        Новая = 0,
+        Выполняется,
+        Отменена,
+        Отложена,
         Выполнена,
         Подтверждается
+    }
+
+    public enum PriorityTask
+    {
+        Неотложный = 0,
+        Срочный,
+        Высокий,
+        Нормальный,
+        Низкий,
+        Отложенный
     }
 
     public enum TypePeriod

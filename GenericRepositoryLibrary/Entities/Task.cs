@@ -43,6 +43,20 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int PriorityId { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public string Description { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public Nullable<DateTime> CompletionDate { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public int ManagerId { get; set; }
+
+        public User Manager => Dm.User.GetList().FirstOrDefault(x => x.Id == this.ManagerId);
+
         public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);
 
         public List<TaskFile> Files => Dm.TaskFile.GetList().Where(x => x.TaskId == this.Id).ToList();

@@ -67,6 +67,25 @@ namespace StankoServiceApp.ServiceReference
             }
         }
 
+        public byte[] PhotoShow
+        {
+            get
+            {
+                if (this.Photo != null)
+                {
+                    return this.Photo.Data;
+                }
+                else
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        Properties.Resources.no_photo.Save(stream, Properties.Resources.no_photo.RawFormat);
+                        return stream.ToArray();
+                    }
+                }
+            }
+        }
+
         public int Age => DateTime.Now.Year - this.DateOfBirth.Year;
 
         public string FullName => $"{this.Surname} {this.Name} {this.Patronymic}";

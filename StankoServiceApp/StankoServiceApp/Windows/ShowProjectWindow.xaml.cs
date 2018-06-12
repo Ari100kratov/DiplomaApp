@@ -42,7 +42,7 @@ namespace StankoServiceApp.Windows
 
             if (this.Project.File != null)
             {
-                this.tbDownloadFile.Text = this.Project.File.FileName;
+                this.tbDownloadFile.Text = $"{this.Project.File.FileName} ({this.Project.File.ChangeDate.Value.ToLongDateString()})";
                 this.tbDownloadFile.Foreground = Brushes.Green;
             }
             else

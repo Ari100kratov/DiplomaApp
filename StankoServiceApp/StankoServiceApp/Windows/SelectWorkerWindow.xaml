@@ -20,9 +20,9 @@
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False" ShowFocusedRectangle="True"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn Header="Фото" FieldName="ImgPhoto" Binding="{Binding ImgPhoto}" AllowMoving="True" ReadOnly="True" SortOrder="Ascending" SortIndex="0">
+            <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
-                    <dxe:ImageEditSettings ShowMenu="True"/>
+                    <dxe:ImageEditSettings MaxWidth="150"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>

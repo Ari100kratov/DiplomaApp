@@ -214,4 +214,40 @@
   <data name="no_photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\no_photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="priority1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="priority2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="priority3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="priority4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="priority5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="priority6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\priority6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -42,5 +42,10 @@ namespace StankoServiceApp.Windows
         {
             this.MainFrame.Navigate(new ProjectPage());
         }
+
+        private void sbTask_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Navigate(new TaskPage());
+        }
     }
 }

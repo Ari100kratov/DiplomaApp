@@ -1,0 +1,133 @@
+﻿<Window x:Class="StankoServiceApp.Windows.EditTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
+        xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        dx:ThemeManager.ThemeName="none"
+        mc:Ignorable="d"
+        Title="" Height="700" Width="500" ScrollViewer.HorizontalScrollBarVisibility="Auto" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <dxlc:GroupBox Header="Информация о задаче" Background="White">
+                    <dxlc:LayoutControl Orientation="Vertical">
+
+                        <dxlc:LayoutItem Label="Наименование*" IsRequired="True">
+                            <dxe:TextEdit x:Name="teNameTask" NullText="Введите рабочее название задачи"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Проект">
+                            <dxe:ComboBoxEdit x:Name="ceProject" NullText="Выберите проект для задачи"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Сроки завершения">
+                            <dxe:DateEdit x:Name="deEndDate" NullText="Выберите срок заверешения"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Приоритет задачи*" IsRequired="True">
+                            <dxe:ComboBoxEdit x:Name="cePriority" NullText="Выберите приоритет задачи" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:PriorityTask,UseNumericEnumValue=True}">
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem x:Name="liStatus" Label="Статус задачи*" IsRequired="True">
+                            <dxe:ComboBoxEdit x:Name="ceStatus" NullText="Выберите статус задачи задачи" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusTask,UseNumericEnumValue=True}" EditValueChanged="ceStatus_EditValueChanged">
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem x:Name="liComment" Label="Комментарий">
+                            <dxe:MemoEdit x:Name="meComment" NullText="Введите комментарий к статусу" ShowIcon="True"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem x:Name="liCompletionDate" Label="Завершена">
+                            <dxe:DateEdit x:Name="deCompletionDate" NullText="Выберите фактическую дату завершения"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Описание">
+                            <dxe:MemoEdit x:Name="meDescription" />
+                        </dxlc:LayoutItem>
+
+                    </dxlc:LayoutControl>
+                </dxlc:GroupBox>
+
+                <dxlc:GroupBox Header="Вложения задачи" Background="White">
+                    <StackPanel Orientation="Horizontal" MaxHeight="200" HorizontalAlignment="Stretch">
+                        <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True" CurrentItemChanged="gcFiles_CurrentItemChanged">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False"/>
+                            </dxg:GridControl.View>
+
+                            <dxg:GridColumn Header="Файл" FieldName="FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
+                            <dxg:GridColumn Header="Расширение" FieldName="Title" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Расширение файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
+                            <dxg:GridColumn Header="Дата изменения" FieldName="ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2"/>
+
+                        </dxg:GridControl>
+
+                        <StackPanel Orientation="Vertical" Margin="5 0 5 0" HorizontalAlignment="Right">
+                            <dx:SimpleButton IsEnabled="False" x:Name="sbDeleteFile" Content="" Margin="0 0 0 5" Glyph="{dx:DXImage Image=Delete_16x16.png}" Click="sbDeleteFile_Click"/>
+                            <dx:SimpleButton IsEnabled="False" x:Name="sbEditFile" Content="" Margin="0 0 0 5" Glyph="{dx:DXImage Image=Edit_16x16.png}" Click="sbEditFile_Click"/>
+                            <dx:SimpleButton x:Name="sbAddFile" Content="" Glyph="{dx:DXImage Image=AddFile_16x16.png}" Click="sbAddFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </dxlc:GroupBox>
+
+                <dxlc:GroupBox Header="Исполнитель" Background="White">
+                    <dxlc:LayoutControl>
+                        <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
+                            <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutGroup Orientation="Vertical">
+                            <dxlc:LayoutItem Label="ФИО:">
+                                <TextBlock x:Name="tbFIO"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Дата рождения:">
+                                <TextBlock x:Name="tbDateOfBirth"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Телефон:">
+                                <TextBlock x:Name="tbPhone"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Работает с:">
+                                <TextBlock x:Name="tbDateOfEmploy"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="Должность:">
+                                <TextBlock x:Name="tbPosition"/>
+                            </dxlc:LayoutItem>
+
+                            <dxlc:LayoutItem Label="E-mail:">
+                                <TextBlock x:Name="tbEmail"/>
+                            </dxlc:LayoutItem>
+
+                            <StackPanel Orientation="Horizontal">
+                                <dxlc:LayoutItem>
+                                    <dx:SimpleButton HorizontalAlignment="Left" Content="Выбрать сотрудника..." x:Name="sbSelectWorker" Glyph="pack://application:,,,/DevExpress.Images.v17.1;component/DevAV/Actions/ChangeView_16x16.png" Click="sbSelectWorker_Click" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Margin="10 0 0 0">
+                                    <dx:SimpleButton HorizontalAlignment="Left" Content="Очистить выбор" x:Name="sbDeleteWorker" Glyph="{dx:DXImage Image=Clear_16x16.png}" Click="sbDeleteWorker_Click" />
+                                </dxlc:LayoutItem>
+                            </StackPanel>
+
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutControl>
+                </dxlc:GroupBox>
+
+                <TextBlock x:Name="lblError" Visibility="Collapsed" Padding="3" Text="Необходимо выбрать менеджера проекта" Background="IndianRed" Foreground="White" TextAlignment="Center" FontSize="14"></TextBlock>
+
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 0 10 10">
+                    <dx:SimpleButton x:Name="sbCancel" Content="Отменить" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" IsCancel="True"/>
+                    <dx:SimpleButton x:Name="sbSave" Content="Сохранить" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSave_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

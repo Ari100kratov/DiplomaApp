@@ -22,15 +22,33 @@ namespace StankoServiceApp.Windows
     public partial class SelectWorkerWindow : Window
     {
         private EditProjectWindow EditProject = new EditProjectWindow();
-        public SelectWorkerWindow(EditProjectWindow editProject)
+        private EditTaskWindow EditTask = new EditTaskWindow();
+
+
+        public SelectWorkerWindow(EditTaskWindow editTask, EditProjectWindow editProject = null)
         {
             InitializeComponent();
+            this.EditProject = editProject;
+            this.EditTask = editTask;
+        }
+
+        public SelectWorkerWindow(EditProjectWindow editProject, EditTaskWindow editTask = null)
+        {
+            InitializeComponent();
+            this.EditTask = editTask;
             this.EditProject = editProject;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Менеджер).ToList();
+            if (this.EditTask == null)
+            {
+                this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Менеджер).ToList();
+            }
+            else
+            {
+                this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Исполнитель).ToList();
+            }
         }
 
         private void sbCancel_Click(object sender, RoutedEventArgs e)
@@ -48,7 +66,15 @@ namespace StankoServiceApp.Windows
                 return;
             }
 
-            this.EditProject.Worker = worker;
+            if (this.EditTask == null)
+            {
+                this.EditProject.Worker = worker;
+            }
+            else
+            {
+                this.EditTask.Worker = worker;
+            }
+
             this.Close();
         }
     }

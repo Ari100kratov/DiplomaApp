@@ -8,7 +8,7 @@
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
         dx:ThemeManager.ThemeName="none"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="" Height="450" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" MinWidth="500" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -23,35 +23,35 @@
             <dxlc:LayoutControl>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutItem Label="Название:">
+                    <dxlc:LayoutItem Label="Название:" IsRequired="True">
                         <TextBlock x:Name="tbNameProject"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Дата начала:">
+                    <dxlc:LayoutItem Label="Дата начала:" IsRequired="True">
                         <TextBlock x:Name="tbDateStart"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Сроки завершения:">
+                    <dxlc:LayoutItem Label="Сроки завершения:" IsRequired="True">
                         <TextBlock x:Name="tbDateEnd"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Завершен:">
+                    <dxlc:LayoutItem Label="Завершен:" IsRequired="True">
                         <TextBlock x:Name="tbCompletionDate"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Тип проекта:">
+                    <dxlc:LayoutItem Label="Тип проекта:" IsRequired="True">
                         <TextBlock x:Name="tbTypeProject"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Статус проекта:">
+                    <dxlc:LayoutItem Label="Статус проекта:" IsRequired="True">
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="imgIcon" Margin="0 0 5 0" VerticalAlignment="Center"/>
                             <TextBlock x:Name="tbStatusProject" VerticalAlignment="Center"/>
                         </StackPanel>
                     </dxlc:LayoutItem>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                        <TextBlock Text="ТЗ проекта:" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                        <TextBlock Text="ТЗ проекта:" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium"/>
                         <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                         <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Скачать..." Glyph="{dx:DXImage Image=ExportFile_16x16.png}" HorizontalAlignment="Right" Click="sbDownLoad_Click"/>
                     </StackPanel>
@@ -67,27 +67,27 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutItem Label="ФИО:">
+                    <dxlc:LayoutItem Label="ФИО:" IsRequired="True">
                         <TextBlock x:Name="tbFIO"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Дата рождения:">
+                    <dxlc:LayoutItem Label="Дата рождения:" IsRequired="True">
                         <TextBlock x:Name="tbDateOfBirth"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Телефон:">
+                    <dxlc:LayoutItem Label="Телефон:" IsRequired="True">
                         <TextBlock x:Name="tbPhone"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Работает с:">
+                    <dxlc:LayoutItem Label="Работает с:" IsRequired="True">
                         <TextBlock x:Name="tbDateOfEmploy"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Должность:">
+                    <dxlc:LayoutItem Label="Должность:" IsRequired="True">
                         <TextBlock x:Name="tbPosition"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="E-mail:">
+                    <dxlc:LayoutItem Label="E-mail:" IsRequired="True">
                         <TextBlock x:Name="tbEmail"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>

@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace StankoServiceApp
 {
-    public static class WorkWithMail
+    public static class Methods
     {
         public static void SendMessageFromMainMail(string sub, string body, string to)
         {

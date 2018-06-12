@@ -49,6 +49,24 @@
   <wsdl:message name="IService_DeleteWorker_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteWorkerResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_AddNewTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewTask" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddNewTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditTask" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTask" />
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTaskResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
@@ -137,6 +155,18 @@
     <wsdl:operation name="DeleteWorker">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/DeleteWorker" message="tns:IService_DeleteWorker_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/DeleteWorkerResponse" message="tns:IService_DeleteWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddNewTask" message="tns:IService_AddNewTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddNewTaskResponse" message="tns:IService_AddNewTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditTask" message="tns:IService_EditTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditTaskResponse" message="tns:IService_EditTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/DeleteTask" message="tns:IService_DeleteTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/DeleteTaskResponse" message="tns:IService_DeleteTask_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetCustomers" message="tns:IService_GetCustomers_InputMessage" />
@@ -237,6 +267,33 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteWorker">
       <soap:operation soapAction="http://tempuri.org/IService/DeleteWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewTask">
+      <soap:operation soapAction="http://tempuri.org/IService/AddNewTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditTask">
+      <soap:operation soapAction="http://tempuri.org/IService/EditTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <soap:operation soapAction="http://tempuri.org/IService/DeleteTask" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

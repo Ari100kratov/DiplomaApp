@@ -116,6 +116,9 @@ namespace StankoServiceApp.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> ChangeDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] DataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -134,6 +137,19 @@ namespace StankoServiceApp.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> ChangeDate {
+            get {
+                return this.ChangeDateField;
+            }
+            set {
+                if ((this.ChangeDateField.Equals(value) != true)) {
+                    this.ChangeDateField = value;
+                    this.RaisePropertyChanged("ChangeDate");
+                }
             }
         }
         
@@ -595,6 +611,195 @@ namespace StankoServiceApp.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Task", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
+    [System.SerializableAttribute()]
+    public partial class Task : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> CompletionDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> EndDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ManagerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PriorityIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ProjectIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StatusIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TaskNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> WorkerIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> CompletionDate {
+            get {
+                return this.CompletionDateField;
+            }
+            set {
+                if ((this.CompletionDateField.Equals(value) != true)) {
+                    this.CompletionDateField = value;
+                    this.RaisePropertyChanged("CompletionDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> EndDate {
+            get {
+                return this.EndDateField;
+            }
+            set {
+                if ((this.EndDateField.Equals(value) != true)) {
+                    this.EndDateField = value;
+                    this.RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ManagerId {
+            get {
+                return this.ManagerIdField;
+            }
+            set {
+                if ((this.ManagerIdField.Equals(value) != true)) {
+                    this.ManagerIdField = value;
+                    this.RaisePropertyChanged("ManagerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PriorityId {
+            get {
+                return this.PriorityIdField;
+            }
+            set {
+                if ((this.PriorityIdField.Equals(value) != true)) {
+                    this.PriorityIdField = value;
+                    this.RaisePropertyChanged("PriorityId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ProjectId {
+            get {
+                return this.ProjectIdField;
+            }
+            set {
+                if ((this.ProjectIdField.Equals(value) != true)) {
+                    this.ProjectIdField = value;
+                    this.RaisePropertyChanged("ProjectId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int StatusId {
+            get {
+                return this.StatusIdField;
+            }
+            set {
+                if ((this.StatusIdField.Equals(value) != true)) {
+                    this.StatusIdField = value;
+                    this.RaisePropertyChanged("StatusId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TaskName {
+            get {
+                return this.TaskNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TaskNameField, value) != true)) {
+                    this.TaskNameField = value;
+                    this.RaisePropertyChanged("TaskName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> WorkerId {
+            get {
+                return this.WorkerIdField;
+            }
+            set {
+                if ((this.WorkerIdField.Equals(value) != true)) {
+                    this.WorkerIdField = value;
+                    this.RaisePropertyChanged("WorkerId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Customer", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
     [System.SerializableAttribute()]
     public partial class Customer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1015,147 +1220,6 @@ namespace StankoServiceApp.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Task", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
-    [System.SerializableAttribute()]
-    public partial class Task : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> EndDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PriorityIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> ProjectIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int StatusIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TaskNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> WorkerIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
-                return this.EndDateField;
-            }
-            set {
-                if ((this.EndDateField.Equals(value) != true)) {
-                    this.EndDateField = value;
-                    this.RaisePropertyChanged("EndDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PriorityId {
-            get {
-                return this.PriorityIdField;
-            }
-            set {
-                if ((this.PriorityIdField.Equals(value) != true)) {
-                    this.PriorityIdField = value;
-                    this.RaisePropertyChanged("PriorityId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> ProjectId {
-            get {
-                return this.ProjectIdField;
-            }
-            set {
-                if ((this.ProjectIdField.Equals(value) != true)) {
-                    this.ProjectIdField = value;
-                    this.RaisePropertyChanged("ProjectId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int StatusId {
-            get {
-                return this.StatusIdField;
-            }
-            set {
-                if ((this.StatusIdField.Equals(value) != true)) {
-                    this.StatusIdField = value;
-                    this.RaisePropertyChanged("StatusId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TaskName {
-            get {
-                return this.TaskNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskNameField, value) != true)) {
-                    this.TaskNameField = value;
-                    this.RaisePropertyChanged("TaskName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> WorkerId {
-            get {
-                return this.WorkerIdField;
-            }
-            set {
-                if ((this.WorkerIdField.Equals(value) != true)) {
-                    this.WorkerIdField = value;
-                    this.RaisePropertyChanged("WorkerId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TaskFile", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
     [System.SerializableAttribute()]
     public partial class TaskFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1276,6 +1340,24 @@ namespace StankoServiceApp.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteWorker", ReplyAction="http://tempuri.org/IService/DeleteWorkerResponse")]
         System.Threading.Tasks.Task DeleteWorkerAsync(StankoServiceApp.ServiceReference.Worker worker);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewTask", ReplyAction="http://tempuri.org/IService/AddNewTaskResponse")]
+        void AddNewTask(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddNewTask", ReplyAction="http://tempuri.org/IService/AddNewTaskResponse")]
+        System.Threading.Tasks.Task AddNewTaskAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditTask", ReplyAction="http://tempuri.org/IService/EditTaskResponse")]
+        void EditTask(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstDelete, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditTask", ReplyAction="http://tempuri.org/IService/EditTaskResponse")]
+        System.Threading.Tasks.Task EditTaskAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstDelete, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteTask", ReplyAction="http://tempuri.org/IService/DeleteTaskResponse")]
+        void DeleteTask(StankoServiceApp.ServiceReference.Task task);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteTask", ReplyAction="http://tempuri.org/IService/DeleteTaskResponse")]
+        System.Threading.Tasks.Task DeleteTaskAsync(StankoServiceApp.ServiceReference.Task task);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetCustomers", ReplyAction="http://tempuri.org/IService/GetCustomersResponse")]
         System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers();
@@ -1419,6 +1501,30 @@ namespace StankoServiceApp.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteWorkerAsync(StankoServiceApp.ServiceReference.Worker worker) {
             return base.Channel.DeleteWorkerAsync(worker);
+        }
+        
+        public void AddNewTask(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, StankoServiceApp.ServiceReference.User user, string comment) {
+            base.Channel.AddNewTask(task, lstFiles, user, comment);
+        }
+        
+        public System.Threading.Tasks.Task AddNewTaskAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, StankoServiceApp.ServiceReference.User user, string comment) {
+            return base.Channel.AddNewTaskAsync(task, lstFiles, user, comment);
+        }
+        
+        public void EditTask(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstDelete, StankoServiceApp.ServiceReference.User user, string comment) {
+            base.Channel.EditTask(task, lstFiles, lstDelete, user, comment);
+        }
+        
+        public System.Threading.Tasks.Task EditTaskAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstFiles, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> lstDelete, StankoServiceApp.ServiceReference.User user, string comment) {
+            return base.Channel.EditTaskAsync(task, lstFiles, lstDelete, user, comment);
+        }
+        
+        public void DeleteTask(StankoServiceApp.ServiceReference.Task task) {
+            base.Channel.DeleteTask(task);
+        }
+        
+        public System.Threading.Tasks.Task DeleteTaskAsync(StankoServiceApp.ServiceReference.Task task) {
+            return base.Channel.DeleteTaskAsync(task);
         }
         
         public System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers() {

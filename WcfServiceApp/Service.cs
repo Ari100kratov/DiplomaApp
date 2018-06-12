@@ -176,6 +176,108 @@ namespace WcfServiceApp
             Dm.Worker.Delete(worker);
         }
 
+        public void AddNewTask(Task task, List<File> lstFiles, User user, string comment)
+        {
+            var lastIdTask = Dm.Task.Add(task);
+
+            var history = new HistoryTask
+            {
+                DateTime = DateTime.Now,
+                TaskId = lastIdTask,
+                UserId = user.Id,
+                StatusId = task.StatusId,
+                Comment = comment
+            };
+
+            Dm.HistoryTask.Add(history);
+
+            foreach (var item in lstFiles)
+            {
+                var lastIdFile = Dm.File.Add(item);
+                var taskFile = new TaskFile
+                {
+                    FileId = lastIdFile,
+                    TaskId = lastIdTask
+                };
+                Dm.TaskFile.Add(taskFile);
+            }
+        }
+
+        public void EditTask(Task task, List<File> lstFiles, List<File> lstDelete, User user = null, string comment = null)
+        {
+            var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
+
+            foreach (var item in taskFiles)
+            {
+                var deleteRow = lstDelete.FirstOrDefault(x => x.Id == item.Id);
+
+                if (deleteRow != null)
+                {
+                    Dm.TaskFile.Delete(item);
+                }
+            }
+
+            foreach (var item in lstDelete)
+            {
+                Dm.File.Delete(item);
+            }
+
+            foreach (var item in lstFiles)
+            {
+                if (item.Id == 0)
+                {
+                    var lastIdFile = Dm.File.Add(item);
+
+                    var taskFile = new TaskFile
+                    {
+                        TaskId = task.Id,
+                        FileId = lastIdFile
+                    };
+
+                    Dm.TaskFile.Add(taskFile);
+                }
+                else
+                {
+                    Dm.File.Update(item);
+                }
+            }
+
+            Dm.Task.Update(task);
+
+            if (user != null)
+            {
+                var history = new HistoryTask
+                {
+                    DateTime = DateTime.Now,
+                    TaskId = task.Id,
+                    UserId = user.Id,
+                    StatusId = task.StatusId,
+                    Comment = comment
+                };
+
+                Dm.HistoryTask.Add(history);
+            }
+        }
+
+        public void DeleteTask(Task task)
+        {
+            var history = Dm.HistoryTask.GetList().Where(x => x.TaskId == task.Id).ToList();
+            var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
+
+            foreach (var item in history)
+            {
+                Dm.HistoryTask.Delete(item);
+            }
+
+            foreach (var item in taskFiles)
+            {
+                Dm.TaskFile.Delete(item);
+                Dm.File.Delete(item.File);
+            }
+
+            Dm.Task.Delete(task);
+        }
+
         #region //Реализация получения List всех моделей
         public List<Customer> GetCustomers()
         {
