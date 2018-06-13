@@ -46,7 +46,7 @@
 
                 <dxlc:LayoutItem x:Name="liStatus" Label="Статус задачи" IsRequired="True">
                     <StackPanel Orientation="Horizontal">
-                        <Image x:Name="imgIconStatus" Margin="0 0 5 0" VerticalAlignment="Center"/>
+                        <Image x:Name="imgIconStatus" Margin="5 0 5 0" VerticalAlignment="Center"/>
                         <TextBlock x:Name="tbStatus" VerticalAlignment="Center"/>
                     </StackPanel>
                 </dxlc:LayoutItem>
@@ -97,6 +97,7 @@
         </dxlc:GroupBox>
 
         <dxlc:GroupBox x:Name="gbManager" Header="Менеджер" Background="White" Grid.Column="2" Grid.Row="0">
+
             <dxlc:LayoutControl x:Name="lcManager">
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
                     <Image x:Name="imgPhotoM" MaxHeight="150" MaxWidth="150"/>
@@ -163,8 +164,8 @@
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Image Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
-                                <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.StatusTaskHistory}" VerticalAlignment="Center"/>
+                                <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                <TextBlock  Text="{Binding RowData.Row.StatusTaskHistory}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </dxg:GridColumn.CellTemplate>

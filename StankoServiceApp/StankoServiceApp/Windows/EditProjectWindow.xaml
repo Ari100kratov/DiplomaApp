@@ -37,7 +37,7 @@
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem x:Name="liComment" Label="Комментарий" Visibility="Collapsed">
-                            <dxe:TextEdit x:Name="teComment" NullText="Введите комментарий для статуса"/>
+                            <dxe:MemoEdit x:Name="teComment" NullText="Введите комментарий для статуса"/>
                         </dxlc:LayoutItem>
 
                         <TextBlock Text="Техническое задание проекта" Margin="0 10 0 3"/>

@@ -8,14 +8,16 @@
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         mc:Ignorable="d"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    dx:ThemeManager.ThemeName="none"
+        xmlns:dxlc="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        dx:ThemeManager.ThemeName="none"
         Title="" Height="650" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <dxg:GridControl x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row">
+        <dxg:GridControl x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcWorker_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False" ShowFocusedRectangle="True"/>
             </dxg:GridControl.View>
@@ -35,7 +37,67 @@
             <dxg:GridColumn Header="Эл. адрес" FieldName="User.Email" ReadOnly="True"/>
         </dxg:GridControl>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10">
+        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbTask" Header="Текущие задачи сотрудника" Background="White" Grid.Row="1">
+            <dxg:GridControl x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
+                    <dxg:GridControl.View>
+                        <dxg:TableView ShowGroupPanel="False" Focusable="False" AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
+                    </dxg:GridControl.View>
+
+                    <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                    <dxg:GridColumn Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                    <dxg:GridColumn Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                    <dxg:GridColumn Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+
+                    <dxg:GridColumn Header="Статус" FieldName="Task" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Image Width="15" Height="15" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Приоритет" FieldName="Task" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Image Width="15" Height="15" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+                </dxg:GridControl>
+        </dxlc:GroupBox>
+
+        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbProject" Header="Текущие проекты сотрудника" Background="White" Grid.Row="1">
+            <dxg:GridControl x:Name="gcProject" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
+                <dxg:GridControl.View>
+                    <dxg:TableView Focusable="False" AllowPerPixelScrolling="True" ShowGroupPanel="False" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
+                </dxg:GridControl.View>
+                <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+                <dxg:GridColumn Header="Сроки " FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+                <dxg:GridColumn FieldName="CompletionDate" Header="Завершено" SortIndex="3" HeaderToolTip="Реальная дата завершения" ReadOnly="True" UnboundType="DateTime"/>
+                <dxg:GridColumn Header="Тип" FieldName="TypeProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Продолжительность" AllowBestFit="True"/>
+
+                <dxg:GridColumn Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                                <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
+
+            </dxg:GridControl>
+        </dxlc:GroupBox>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10">
             <dx:SimpleButton x:Name="sbCancel" Content="Отменить" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" IsCancel="True" Click="sbCancel_Click"/>
             <dx:SimpleButton x:Name="sbSelect" Content="Выбрать" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSelect_Click"/>
         </StackPanel>

@@ -32,45 +32,58 @@ namespace StankoServiceApp
 
         private void sbLogin_Click(object sender, RoutedEventArgs e)
         {
-            var user = App.Service.Authorization(this.teLogin.Text, this.pbPassword.Password);
-
-            if (user == null)
+            try
             {
-                this.tbErrorMessage.Visibility = Visibility.Visible;
-                this.pbPassword.Clear();
-                return;
-            }
+                var user = App.Service.Authorization(this.teLogin.Text, this.pbPassword.Password);
 
-            if (this.cbRemember.IsChecked == true)
+                if (user == null)
+                {
+                    this.tbErrorMessage.Visibility = Visibility.Visible;
+                    this.pbPassword.Clear();
+                    return;
+                }
+
+                if (this.cbRemember.IsChecked == true)
+                {
+                    Properties.Settings.Default.Login = this.teLogin.Text;
+                    Properties.Settings.Default.Password = this.pbPassword.Password;
+                }
+                else
+                {
+                    Properties.Settings.Default.Login = "";
+                    Properties.Settings.Default.Password = "";
+                }
+
+                Properties.Settings.Default.Save();
+
+                App.CurrentUser = user;
+
+                switch (App.CurrentUser.RoleUser)
+                {
+                    case (Role.Директор):
+                        var dirWin = new DirectorWindow();
+                        dirWin.Show();
+                        break;
+                }
+            }
+            catch (Exception ex)
             {
-                Properties.Settings.Default.Login = this.teLogin.Text;
-                Properties.Settings.Default.Password = this.pbPassword.Password;
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-            {
-                Properties.Settings.Default.Login = "";
-                Properties.Settings.Default.Password = "";
-            }
-
-            Properties.Settings.Default.Save();
-
-            App.CurrentUser = user;
-
-            switch(App.CurrentUser.RoleUser)
-            {
-                case (Role.Директор):
-                    var dirWin = new DirectorWindow();
-                    dirWin.Show();
-                    break;
-            }
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.teLogin.Text))
+            try
             {
-                this.cbRemember.IsChecked = true;
+                if (!string.IsNullOrWhiteSpace(this.teLogin.Text))
+                {
+                    this.cbRemember.IsChecked = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

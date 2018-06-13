@@ -27,3 +27,5 @@ DevExpress.Xpf.LayoutControl.GroupBox, DevExpress.Xpf.LayoutControl.v17.1, Versi
 DevExpress.Xpf.Charts.Chart3DControl, DevExpress.Xpf.Charts.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.Core.DXTabControl, DevExpress.Xpf.Core.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.Carousel.CarouselPanel, DevExpress.Xpf.Carousel.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.Xpf.Editors.SearchControl, DevExpress.Xpf.Core.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.Xpf.Scheduler.SchedulerControl, DevExpress.Xpf.Scheduler.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a

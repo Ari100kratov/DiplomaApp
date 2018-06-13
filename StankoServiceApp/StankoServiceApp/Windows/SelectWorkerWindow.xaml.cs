@@ -23,7 +23,7 @@ namespace StankoServiceApp.Windows
     {
         private EditProjectWindow EditProject = new EditProjectWindow();
         private EditTaskWindow EditTask = new EditTaskWindow();
-
+        private Worker Worker = null;
 
         public SelectWorkerWindow(EditTaskWindow editTask, EditProjectWindow editProject = null)
         {
@@ -39,15 +39,36 @@ namespace StankoServiceApp.Windows
             this.EditProject = editProject;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void ShowCurrent()
         {
-            if (this.EditTask == null)
+            if (this.EditTask != null)
             {
-                this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Менеджер).ToList();
+                this.gbTask.Visibility = Visibility.Visible;
+                this.gcTask.ItemsSource = App.Service.GetTasks().Where(x => x.WorkerId == this.Worker.Id && (x.StatusId != (int)StatusTask.Выполнена && x.StatusId != (int)StatusTask.Отложена && x.StatusId != (int)StatusTask.Отменена)).ToList();
             }
             else
             {
-                this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Исполнитель).ToList();
+                this.gbProject.Visibility = Visibility.Visible;
+                this.gcProject.ItemsSource = App.Service.GetProjects().Where(x => x.WorkerId == this.Worker.Id && (x.StatusId != (int)StatusProject.Завершен && x.StatusId != (int)StatusProject.Закрыт && x.StatusId != (int)StatusProject.Отложен)).ToList();
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.EditTask == null)
+                {
+                    this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Менеджер).ToList();
+                }
+                else
+                {
+                    this.gcWorker.ItemsSource = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Исполнитель).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -58,24 +79,46 @@ namespace StankoServiceApp.Windows
 
         private void sbSelect_Click(object sender, RoutedEventArgs e)
         {
-            var worker = this.gcWorker.CurrentItem as Worker;
-
-            if (worker == null)
+            try
             {
-                MessageBox.Show("Выберите сотрудника!", "Сообщение об ошибке", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                if (this.Worker == null)
+                {
+                    MessageBox.Show("Выберите сотрудника!", "Сообщение об ошибке", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-            if (this.EditTask == null)
-            {
-                this.EditProject.Worker = worker;
-            }
-            else
-            {
-                this.EditTask.Worker = worker;
-            }
+                if (this.EditTask == null)
+                {
+                    this.EditProject.Worker = this.Worker;
+                }
+                else
+                {
+                    this.EditTask.Worker = this.Worker;
+                }
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void gcWorker_CurrentItemChanged(object sender, DevExpress.Xpf.Grid.CurrentItemChangedEventArgs e)
+        {
+            try
+            {
+                this.Worker = this.gcWorker.CurrentItem as Worker;
+
+                if (this.Worker != null)
+                {
+                    this.ShowCurrent();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -56,7 +56,7 @@
             </dxg:GridColumn>
         </dxg:GridControl>
 
-        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2007" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="False">
+        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
                 <dxr:RibbonPage Caption="Главная">
                     <dxr:RibbonPageGroup Caption="Управление">

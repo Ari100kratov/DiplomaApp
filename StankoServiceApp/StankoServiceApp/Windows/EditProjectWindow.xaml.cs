@@ -213,13 +213,16 @@ namespace StankoServiceApp.Windows
             }
             else
             {
-                if ((int)this.ceStatus.EditValue == (int)this.StartStatus)
+                if (this.ceStatus.EditValue != null)
                 {
-                    this.liComment.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    this.liComment.Visibility = Visibility.Visible;
+                    if ((int)this.ceStatus.EditValue == (int)this.StartStatus)
+                    {
+                        this.liComment.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        this.liComment.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }

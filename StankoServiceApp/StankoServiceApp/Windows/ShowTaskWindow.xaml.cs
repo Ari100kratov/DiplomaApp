@@ -112,16 +112,23 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Worker = this.Task.Worker;
-            this.Manager = this.Task.Manager;
-            this.ListFiles = App.Service.GetTaskFiles().Where(x => x.TaskId == this.Task.Id).ToList();
-            this.ListHistory = App.Service.GetHistoryTasks().Where(x => x.TaskId == this.Task.Id).ToList();
+            try
+            {
+                this.Worker = this.Task.Worker;
+                this.Manager = this.Task.Manager;
+                this.ListFiles = App.Service.GetTaskFiles().Where(x => x.TaskId == this.Task.Id).ToList();
+                this.ListHistory = App.Service.GetHistoryTasks().Where(x => x.TaskId == this.Task.Id).ToList();
 
-            this.FillFiles();
-            this.FillWorker();
-            this.FillManager();
-            this.FillHistory();
-            this.FillTask();
+                this.FillFiles();
+                this.FillWorker();
+                this.FillManager();
+                this.FillHistory();
+                this.FillTask();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
