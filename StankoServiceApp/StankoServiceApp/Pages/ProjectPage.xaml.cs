@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Editors;
 using Microsoft.Win32;
 using StankoServiceApp.ServiceReference;
@@ -81,6 +82,12 @@ namespace StankoServiceApp
         {
             try
             {
+                this.rbStatus.IsEnabled = false;
+                this.bbiEditProject.IsEnabled = false;
+                this.bbiDeleteProject.IsEnabled = false;
+                this.bbiShowProject.IsEnabled = false;
+                this.bbiDownload.IsEnabled = false;
+
                 this.FillList();
             }
             catch (Exception ex)
@@ -122,15 +129,15 @@ namespace StankoServiceApp
 
                 if (this.SelectProject == null)
                 {
+                    this.rbStatus.IsEnabled = false;
                     this.bbiEditProject.IsEnabled = false;
                     this.bbiDeleteProject.IsEnabled = false;
                     this.bbiShowProject.IsEnabled = false;
-                    this.bbiHistory.IsEnabled = false;
                     this.bbiDownload.IsEnabled = false;
                 }
                 else
                 {
-                    this.bbiHistory.IsEnabled = true;
+                    this.rbStatus.IsEnabled = true;
                     this.bbiEditProject.IsEnabled = true;
                     this.bbiDeleteProject.IsEnabled = true;
                     this.bbiShowProject.IsEnabled = true;
@@ -239,14 +246,28 @@ namespace StankoServiceApp
 
         private void bbiStatAll_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var statAll = new StatProjectWindow(App.Service.GetProjects());
-            statAll.ShowDialog();
+            try
+            {
+                var statAll = new StatProjectWindow(App.Service.GetProjects());
+                statAll.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiStatFilter_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var statAll = new StatProjectWindow(GetDataRowHandles());
-            statAll.ShowDialog();
+            try
+            {
+                var statAll = new StatProjectWindow(GetDataRowHandles());
+                statAll.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private List<Project> GetDataRowHandles()
@@ -262,13 +283,92 @@ namespace StankoServiceApp
 
         private void bbiShowProject_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var show = new ShowProjectWindow(this.SelectProject);
-            show.ShowDialog();
+            try
+            {
+                var show = new ShowProjectWindow(this.SelectProject);
+                show.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiRefresh_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            this.FillList();
+            try
+            {
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EditStatus(StatusProject status)
+        {
+            try
+            {
+                if (this.SelectProject.StatusId == (int)status)
+                {
+                    MessageBox.Show("Это текущий статус проекта", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                var editStatus = new EditStatusWindow(this.SelectProject, status);
+                editStatus.ShowDialog();
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void status0_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Подготовка);
+        }
+
+        private void status1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Тестирование);
+        }
+
+        private void status2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Завершен);
+        }
+
+        private void status3_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Проектирование);
+        }
+
+        private void status4_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Внедрение);
+        }
+
+        private void status5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Отложен);
+        }
+
+        private void status6_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Реализация);
+        }
+
+        private void status7_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Сопровождение);
+        }
+
+        private void status8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusProject.Закрыт);
         }
     }
 }

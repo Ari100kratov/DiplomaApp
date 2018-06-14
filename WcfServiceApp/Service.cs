@@ -118,8 +118,11 @@ namespace WcfServiceApp
             {
                 if (worker.Photo != null)
                 {
+                    var deletePhoto = worker.Photo;
                     worker.PhotoId = null;
-                    DataManager.Instance.File.Delete(worker.Photo);
+                    DataManager.Instance.Worker.Update(worker);
+                    DataManager.Instance.File.Delete(deletePhoto);
+                    
                 }
             }
             else
@@ -139,8 +142,10 @@ namespace WcfServiceApp
             {
                 if (worker.Resume != null)
                 {
+                    var deleteResume = worker.Resume;
                     worker.ResumeId = null;
-                    Dm.File.Delete(worker.Resume);
+                    DataManager.Instance.Worker.Update(worker);
+                    Dm.File.Delete(deleteResume);
                 }
             }
             else
@@ -276,6 +281,46 @@ namespace WcfServiceApp
             }
 
             Dm.Task.Delete(task);
+        }
+
+        public void EditStatusProject(Project project, int status, User user, string comment)
+        {
+            var history = new HistoryProject
+            {
+                Comment = comment,
+                DateTime = DateTime.Now,
+                ProjectId = project.Id,
+                StatusId = status,
+                UserId = user.Id
+            };
+
+            Dm.HistoryProject.Add(history);
+
+            project.StatusId = status;
+            Dm.Project.Update(project);
+        }
+
+        public void EditStatusTask(Task task, int status, User user, string comment)
+        {
+            var history = new HistoryTask
+            {
+                Comment = comment,
+                DateTime = DateTime.Now,
+                TaskId = task.Id,
+                StatusId = status,
+                UserId = user.Id
+            };
+
+            Dm.HistoryTask.Add(history);
+
+            task.StatusId = status;
+            Dm.Task.Update(task);
+        }
+
+        public void EditPriorityTask(Task task, int priority)
+        {
+            task.PriorityId = priority;
+            Dm.Task.Update(task);
         }
 
         #region //Реализация получения List всех моделей

@@ -1359,6 +1359,24 @@ namespace StankoServiceApp.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteTask", ReplyAction="http://tempuri.org/IService/DeleteTaskResponse")]
         System.Threading.Tasks.Task DeleteTaskAsync(StankoServiceApp.ServiceReference.Task task);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditStatusProject", ReplyAction="http://tempuri.org/IService/EditStatusProjectResponse")]
+        void EditStatusProject(StankoServiceApp.ServiceReference.Project project, int status, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditStatusProject", ReplyAction="http://tempuri.org/IService/EditStatusProjectResponse")]
+        System.Threading.Tasks.Task EditStatusProjectAsync(StankoServiceApp.ServiceReference.Project project, int status, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditStatusTask", ReplyAction="http://tempuri.org/IService/EditStatusTaskResponse")]
+        void EditStatusTask(StankoServiceApp.ServiceReference.Task task, int status, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditStatusTask", ReplyAction="http://tempuri.org/IService/EditStatusTaskResponse")]
+        System.Threading.Tasks.Task EditStatusTaskAsync(StankoServiceApp.ServiceReference.Task task, int status, StankoServiceApp.ServiceReference.User user, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditPriorityTask", ReplyAction="http://tempuri.org/IService/EditPriorityTaskResponse")]
+        void EditPriorityTask(StankoServiceApp.ServiceReference.Task task, int priority);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditPriorityTask", ReplyAction="http://tempuri.org/IService/EditPriorityTaskResponse")]
+        System.Threading.Tasks.Task EditPriorityTaskAsync(StankoServiceApp.ServiceReference.Task task, int priority);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetCustomers", ReplyAction="http://tempuri.org/IService/GetCustomersResponse")]
         System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers();
         
@@ -1525,6 +1543,30 @@ namespace StankoServiceApp.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteTaskAsync(StankoServiceApp.ServiceReference.Task task) {
             return base.Channel.DeleteTaskAsync(task);
+        }
+        
+        public void EditStatusProject(StankoServiceApp.ServiceReference.Project project, int status, StankoServiceApp.ServiceReference.User user, string comment) {
+            base.Channel.EditStatusProject(project, status, user, comment);
+        }
+        
+        public System.Threading.Tasks.Task EditStatusProjectAsync(StankoServiceApp.ServiceReference.Project project, int status, StankoServiceApp.ServiceReference.User user, string comment) {
+            return base.Channel.EditStatusProjectAsync(project, status, user, comment);
+        }
+        
+        public void EditStatusTask(StankoServiceApp.ServiceReference.Task task, int status, StankoServiceApp.ServiceReference.User user, string comment) {
+            base.Channel.EditStatusTask(task, status, user, comment);
+        }
+        
+        public System.Threading.Tasks.Task EditStatusTaskAsync(StankoServiceApp.ServiceReference.Task task, int status, StankoServiceApp.ServiceReference.User user, string comment) {
+            return base.Channel.EditStatusTaskAsync(task, status, user, comment);
+        }
+        
+        public void EditPriorityTask(StankoServiceApp.ServiceReference.Task task, int priority) {
+            base.Channel.EditPriorityTask(task, priority);
+        }
+        
+        public System.Threading.Tasks.Task EditPriorityTaskAsync(StankoServiceApp.ServiceReference.Task task, int priority) {
+            return base.Channel.EditPriorityTaskAsync(task, priority);
         }
         
         public System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers() {

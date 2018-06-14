@@ -30,22 +30,34 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.MainFrame.Navigate(new ProjectPage());
+            this.MainFrame.Navigate(new System.Uri("Pages/ProjectPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void sbWorker_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.MainFrame.Navigate(new WorkerPage());
-        }
+            try
+            {
+                var index = int.Parse(((Button)e.Source).Uid);
 
-        private void sbProject_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Navigate(new ProjectPage());
-        }
+                this.GridCursor.Margin = new Thickness(10 + (150 * index), 0, 0, 0);
 
-        private void sbTask_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Navigate(new TaskPage());
+                switch (index)
+                {
+                    case (0):
+                        this.MainFrame.Navigate(new System.Uri("Pages/ProjectPage.xaml", UriKind.RelativeOrAbsolute));
+                        break;
+                    case (1):
+                        this.MainFrame.Navigate(new System.Uri("Pages/TaskPage.xaml", UriKind.RelativeOrAbsolute));
+                        break;
+                    case (2):
+                        this.MainFrame.Navigate(new System.Uri("Pages/WorkerPage.xaml", UriKind.RelativeOrAbsolute));
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

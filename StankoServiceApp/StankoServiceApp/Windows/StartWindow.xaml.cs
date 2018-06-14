@@ -55,7 +55,7 @@ namespace StankoServiceApp
                 }
 
                 Properties.Settings.Default.Save();
-
+                this.tbErrorMessage.Visibility = Visibility.Collapsed;
                 App.CurrentUser = user;
 
                 switch (App.CurrentUser.RoleUser)

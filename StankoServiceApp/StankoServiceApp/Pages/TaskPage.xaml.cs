@@ -1,5 +1,6 @@
 ﻿using StankoServiceApp.ServiceReference;
 using StankoServiceApp.Windows;
+using StankoserviceEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,11 @@ namespace StankoServiceApp.Pages
         {
             try
             {
+                this.rpgPriority.IsEnabled = false;
+                this.rpgStatus.IsEnabled = false;
+                this.bbiEditTask.IsEnabled = false;
+                this.bbiDeleteTask.IsEnabled = false;
+                this.bbiShowTask.IsEnabled = false;
                 this.FillListDirector();
             }
             catch (Exception ex)
@@ -130,10 +136,11 @@ namespace StankoServiceApp.Pages
 
                 if (this.Task == null)
                 {
+                    this.rpgPriority.IsEnabled = false;
+                    this.rpgStatus.IsEnabled = false;
                     this.bbiEditTask.IsEnabled = false;
                     this.bbiDeleteTask.IsEnabled = false;
                     this.bbiShowTask.IsEnabled = false;
-                    this.rpgStatus.IsEnabled = false;
                 }
                 else
                 {
@@ -141,6 +148,7 @@ namespace StankoServiceApp.Pages
                     this.bbiDeleteTask.IsEnabled = true;
                     this.bbiShowTask.IsEnabled = true;
                     this.rpgStatus.IsEnabled = true;
+                    this.rpgPriority.IsEnabled = true;
                 }
             }
             catch (Exception ex)
@@ -226,6 +234,110 @@ namespace StankoServiceApp.Pages
             {
                 MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void EditStatus(StatusTask status)
+        {
+            try
+            {
+                if (this.Task.StatusId == (int)status)
+                {
+                    MessageBox.Show("Это текущий статус задачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                var editStatus = new EditStatusWindow(this.Task, status);
+                editStatus.ShowDialog();
+                this.FillListDirector();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Editpriority(PriorityTask prior)
+        {
+            try
+            {
+                if (this.Task.PriorityId == (int)prior)
+                {
+                    MessageBox.Show("Это текущий приоритет задачи задачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                if (MessageBox.Show($"Поменять приоритет задачи на {prior.ToString()}", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                App.Service.EditPriorityTask(this.Task, (int)prior);
+                this.FillListDirector();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void status1_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Новая);
+        }
+
+        private void status2_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Выполняется);
+        }
+
+        private void status6_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Подтверждается);
+        }
+
+        private void status5_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Выполнена);
+        }
+
+        private void status4_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Отложена);
+        }
+
+        private void status3_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.EditStatus(StatusTask.Отменена);
+        }
+
+        private void prior6_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Отложенный);
+        }
+
+        private void prior5_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Низкий);
+        }
+
+        private void prior4_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Нормальный);
+        }
+
+        private void prior3_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Высокий);
+        }
+
+        private void prior2_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Срочный);
+        }
+
+        private void prior1_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.Editpriority(PriorityTask.Неотложный);
         }
     }
 }

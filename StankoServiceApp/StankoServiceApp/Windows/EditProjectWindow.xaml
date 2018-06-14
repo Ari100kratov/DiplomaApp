@@ -53,7 +53,7 @@
                 <dxlc:GroupBox Header="Информация о руководителе" Background="White">
                     <dxlc:LayoutControl>
                         <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                            <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                            <Image RenderOptions.EdgeMode="Unspecified" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutGroup Orientation="Vertical">
@@ -82,7 +82,7 @@
                             </dxlc:LayoutItem>
 
                             <dxlc:LayoutItem>
-                                <dx:SimpleButton HorizontalAlignment="Left" Content="Выбрать сотрудника..." x:Name="sbSelectWorker" Glyph="pack://application:,,,/DevExpress.Images.v17.1;component/DevAV/Actions/ChangeView_16x16.png" Click="sbSelectWorker_Click" />
+                                <dx:SimpleButton HorizontalAlignment="Left" Content="Выбрать сотрудника..." x:Name="sbSelectWorker" Click="sbSelectWorker_Click" Glyph="pack://application:,,,/DevExpress.Images.v17.1;component/DevAV/Actions/Redo_16x16.png" />
                             </dxlc:LayoutItem>
 
                         </dxlc:LayoutGroup>

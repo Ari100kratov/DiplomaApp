@@ -80,7 +80,7 @@
                 <dxlc:GroupBox Header="Исполнитель" Background="White">
                     <dxlc:LayoutControl>
                         <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                            <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                            <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutGroup Orientation="Vertical">

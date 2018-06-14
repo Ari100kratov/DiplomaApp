@@ -8,11 +8,15 @@
         mc:Ignorable="d"
         Title="" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
         
         <dx:DXTabControl>
             <dx:DXTabItem Header="Общая информация">
                 <Grid Background="Transparent">
-                    <dxc:ChartControl>
+                    <dxc:ChartControl AnimationMode="OnLoad">
                         <dxc:ChartControl.Titles>
                             <dxc:Title Content="Количесто проектов по статусам" HorizontalAlignment="Center"/>
                         </dxc:ChartControl.Titles>
@@ -27,15 +31,15 @@
                             <dxc:BarSideBySideSeries2D x:Name="series5" Brush="#FFC56625" DisplayName="Внедрение"/>
                             <dxc:BarSideBySideSeries2D x:Name="series6" Brush="#FF982ED4" DisplayName="Сопровождение"/>
                             <dxc:BarSideBySideSeries2D x:Name="series7" Brush="#FF6EAFCD" DisplayName="Завершен"/>
-                            <dxc:BarSideBySideSeries2D x:Name="series8" Brush="#FFCFD3C3" DisplayName="Отложен"/>
-                            <dxc:BarSideBySideSeries2D x:Name="series9" Brush="#FFEC1111" DisplayName="Закрыт"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series8" Brush="#FFEC1111" DisplayName="Отложен"/>
+                            <dxc:BarSideBySideSeries2D x:Name="series9" Brush="#FFCFD3C3" DisplayName="Закрыт"/>
                         </dxc:XYDiagram2D>
                     </dxc:ChartControl>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="Успеваемость">
                 <Grid Background="Transparent">
-                    <dxc:ChartControl>
+                    <dxc:ChartControl AnimationMode="OnLoad">
                         <dxc:ChartControl.Titles>
                             <dxc:Title Content="Диаграмма успеваемости в заявленные сроки" HorizontalAlignment="Center"/>
                         </dxc:ChartControl.Titles>
@@ -46,7 +50,7 @@
                             <dxc:PieSeries2D x:Name="seriesSimple" HoleRadiusPercent="0" LegendTextPattern="{}{A}:{VP}{V:%}">
 
                                 <dxc:PieSeries2D.LegendPointOptions>
-                                    <dxc:PointOptions Pattern="{}{A}: {VP}{V:%}" />
+                                    <dxc:PointOptions Pattern="{}{A}:" />
                                 </dxc:PieSeries2D.LegendPointOptions>
 
                                 <dxc:PieSeries2D.PointOptions>
@@ -66,5 +70,7 @@
                 </Grid>
             </dx:DXTabItem>
         </dx:DXTabControl>
+
+        <TextBlock Grid.Row="1" x:Name="tbCountDays" Foreground="DarkGray" FontSize="22" HorizontalAlignment="Center" Text="Среднее количество дней на проект: "></TextBlock>
     </Grid>
 </Window>

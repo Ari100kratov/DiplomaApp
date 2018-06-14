@@ -18,7 +18,7 @@
                         <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                             <dxlc:LayoutItem>
-                                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300"  TabIndex="8"/>
+                                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300" RenderOptions.EdgeMode="Aliased" TabIndex="8"/>
                             </dxlc:LayoutItem>
 
                             <dxlc:LayoutItem Label="Фамилия*" IsRequired="True">

@@ -65,11 +65,8 @@ namespace StankoServiceApp.Windows
 
         private void FillFiles()
         {
-            if (this.ListFile.Count != 0)
-            {
-                this.gcFiles.ItemsSource = null;
-                this.gcFiles.ItemsSource = this.ListFile;
-            }
+            this.gcFiles.ItemsSource = null;
+            this.gcFiles.ItemsSource = this.ListFile;
         }
 
         private void sbSelectWorker_Click(object sender, RoutedEventArgs e)

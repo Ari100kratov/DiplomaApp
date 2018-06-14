@@ -207,38 +207,36 @@ namespace StankoServiceApp.Windows
 
         private void ceStatus_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            if (this.IsAdd)
+            try
             {
-                this.liComment.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                if (this.ceStatus.EditValue != null)
+                if (this.IsAdd)
                 {
-                    if ((int)this.ceStatus.EditValue == (int)this.StartStatus)
+                    this.liComment.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    if (this.ceStatus.EditValue != null)
                     {
-                        this.liComment.Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        this.liComment.Visibility = Visibility.Visible;
+                        if ((int)this.ceStatus.EditValue == (int)this.StartStatus)
+                        {
+                            this.liComment.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            this.liComment.Visibility = Visibility.Visible;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void deCompletionDate_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            if (this.deCompletionDate.EditValue != null)
-            {
-                this.ceStatus.SelectedItem = StatusProject.Завершен;
-                this.ceStatus.IsEnabled = false;
-            }
-            else
-            {
-                this.ceStatus.SelectedItem = null;
-                this.ceStatus.IsEnabled = true;
-            }
+            
         }
     }
 }

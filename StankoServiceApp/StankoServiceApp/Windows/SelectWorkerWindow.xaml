@@ -24,7 +24,7 @@
 
             <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
-                    <dxe:ImageEditSettings MaxWidth="150"/>
+                    <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>
@@ -52,7 +52,7 @@
                         <dxg:GridColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <Image Width="15" Height="15" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                <Image RenderOptions.EdgeMode="Aliased" Width="15" Height="15" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -63,7 +63,7 @@
                         <dxg:GridColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <Image Width="15" Height="15" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                <Image RenderOptions.EdgeMode="Aliased" Width="15" Height="15" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -87,7 +87,7 @@
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                                <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
                                 <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
                             </StackPanel>
                         </DataTemplate>

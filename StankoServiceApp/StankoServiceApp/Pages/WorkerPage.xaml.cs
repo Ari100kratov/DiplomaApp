@@ -65,9 +65,16 @@ namespace StankoServiceApp.Pages
         {
             try
             {
+
                 this.cbFilterPosition.ItemsSource = await App.Service.GetPositionsAsync();
                 this.cbFilterPosition.DisplayMember = "PositionName";
                 this.cbFilterPosition.ValueMember = "Id";
+
+                this.bbiEditWorker.IsEnabled = false;
+                this.bbiDeleteWorker.IsEnabled = false;
+                this.bbiTasks.IsEnabled = false;
+                this.bbiProjects.IsEnabled = false;
+                this.bbiDownload.IsEnabled = false;
 
                 await this.FillList();
             }
@@ -99,6 +106,7 @@ namespace StankoServiceApp.Pages
 
                 if (this.Worker == null)
                 {
+
                     this.bbiEditWorker.IsEnabled = false;
                     this.bbiDeleteWorker.IsEnabled = false;
                     this.bbiTasks.IsEnabled = false;

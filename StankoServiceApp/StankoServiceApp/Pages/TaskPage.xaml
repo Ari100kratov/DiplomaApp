@@ -12,8 +12,8 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.TaskPage"
     dx:ThemeManager.ThemeName="none"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="900" Background="White"
-      Title="TaskPage" Loaded="Page_Loaded">
+      d:DesignHeight="450" d:DesignWidth="1000" Background="White"
+      Title="TaskPage" Loaded="Page_Loaded" KeepAlive="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,9 +21,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <dxg:GridControl x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcTask_CurrentItemChanged">
+        <dxg:GridControl  AllowInitiallyFocusedRow="False" x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcTask_CurrentItemChanged">
             <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
+                <dxg:TableView  AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>
 
             <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
@@ -37,7 +37,7 @@
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Width="15" Height="15" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
@@ -48,7 +48,7 @@
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Width="15" Height="15" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
@@ -62,11 +62,30 @@
                     <dxr:RibbonPageGroup Caption="Управление">
                         <dxb:BarButtonItem x:Name="bbiNewTask" Content="Новая задача" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewTask_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditTask" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditTask_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="bbiDeleteTask" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteTask_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiDeleteTask" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Remove_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteTask_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Обозреватель">
                         <dxb:BarButtonItem x:Name="bbiShowTask" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowTask_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+
+                    
+                    <dxr:RibbonPageGroup x:Name="rpgStatus" Caption="Статус задачи" ShowCaptionButton="False">
+                        <dxb:BarButtonItem x:Name="status1" Content="Новая" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task01.png" ItemClick="status1_ItemClick" />
+                        <dxb:BarButtonItem x:Name="status2" Content="В работе" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task02.png" ItemClick="status2_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status6" Content="Подтверждается" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task06.png" ItemClick="status6_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status5" Content="Выполнена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task05.png" ItemClick="status5_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status4" Content="Отложена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task04.png" ItemClick="status4_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status3" Content="Отменена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task03.png" ItemClick="status3_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup x:Name="rpgPriority" Caption="Приоритет задачи" ShowCaptionButton="False">
+                        <dxb:BarButtonItem x:Name="prior6" Content="Отложенный" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr6.whBRd.png" RibbonStyle="Default" ItemClick="prior6_ItemClick" />
+                        <dxb:BarButtonItem x:Name="prior5" Content="Низкий" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr5.S643o.png" ItemClick="prior5_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="prior4" Content="Нормальный" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr4.7xH6z.png" ItemClick="prior4_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="prior3" Content="Высокий" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr3.tdc4h.png" ItemClick="prior3_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="prior2" Content="Срочный" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr2.97lqL.png" ItemClick="prior2_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="prior1" Content="Неотложный" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/pr1.QHIXW.png" ItemClick="prior1_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Фильтрация и поиск">
@@ -83,15 +102,7 @@
                         </dxb:BarEditItem>
                         <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Name="rpgStatus" Caption="Статус задачи" ShowCaptionButton="False">
-                        <dxb:BarButtonItem Content="Новая" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task1.jpg"/>
-                        <dxb:BarButtonItem Content="В работе" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task2.jpg"/>
-                        <dxb:BarButtonItem Content="Подтверждается" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task6.jpg"/>
-                        <dxb:BarButtonItem Content="Выполнена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task5.jpg"/>
-                        <dxb:BarButtonItem Content="Отложена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task4.jpg"/>
-                        <dxb:BarButtonItem Content="Отменена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task3.jpg"/>
-                    </dxr:RibbonPageGroup>
-
+                    
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>

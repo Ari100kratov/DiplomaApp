@@ -33,20 +33,20 @@
                     <TextBlock x:Name="tbProject"/>
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem Label="Сроки завершения" IsRequired="True">
+                <dxlc:LayoutItem Label="Сроки до" IsRequired="True">
                     <TextBlock x:Name="tbEndDate"/>
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem Label="Приоритет задачи" IsRequired="True">
+                <dxlc:LayoutItem Label="Приоритет" IsRequired="True">
                     <StackPanel Orientation="Horizontal">
-                        <Image x:Name="imgIconPriority" Margin="0 0 5 0" VerticalAlignment="Center"/>
+                        <Image RenderOptions.EdgeMode="Aliased" x:Name="imgIconPriority" Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center"/>
                         <TextBlock x:Name="tbPriority" VerticalAlignment="Center"/>
                     </StackPanel>
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem x:Name="liStatus" Label="Статус задачи" IsRequired="True">
+                <dxlc:LayoutItem x:Name="liStatus" Label="Статус" IsRequired="True">
                     <StackPanel Orientation="Horizontal">
-                        <Image x:Name="imgIconStatus" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                        <Image RenderOptions.EdgeMode="Aliased" x:Name="imgIconStatus" Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center"/>
                         <TextBlock x:Name="tbStatus" VerticalAlignment="Center"/>
                     </StackPanel>
                 </dxlc:LayoutItem>
@@ -65,7 +65,7 @@
         <dxlc:GroupBox x:Name="gbWorker" Header="Исполнитель" Background="White" Grid.Column="1" Grid.Row="0">
             <dxlc:LayoutControl x:Name="lcWorker">
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                    <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -100,7 +100,7 @@
 
             <dxlc:LayoutControl x:Name="lcManager">
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image x:Name="imgPhotoM" MaxHeight="150" MaxWidth="150"/>
+                    <Image x:Name="imgPhotoM" MaxHeight="150" MaxWidth="150" RenderOptions.EdgeMode="Aliased"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -132,9 +132,9 @@
         </dxlc:GroupBox>
 
         <dxlc:GroupBox x:Name="gbFiles" Header="Вложения задачи" Background="White" Grid.Column="0" Grid.Row="1">
-            <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True">
+            <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True"  MouseDoubleClick="gcFiles_MouseDoubleClick">
                 <dxg:GridControl.View>
-                    <dxg:TableView AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False"/>
+                    <dxg:TableView AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False" />
                 </dxg:GridControl.View>
 
                 <dxg:GridColumn Header="Файл" FieldName="File.FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
@@ -164,7 +164,7 @@
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                <Image RenderOptions.EdgeMode="Aliased" Width="20" Height="20" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
                                 <TextBlock  Text="{Binding RowData.Row.StatusTaskHistory}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>

@@ -12,8 +12,8 @@
       x:Class="StankoServiceApp.ProjectPage"
       dx:ThemeManager.ThemeName="none"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="White"
-      Title="ProjectPage" Loaded="Page_Loaded">
+      d:DesignHeight="450" d:DesignWidth="1100" Background="White"
+      Title="ProjectPage" Loaded="Page_Loaded" KeepAlive="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <dxg:GridControl x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
+        <dxg:GridControl AllowInitiallyFocusedRow="False" x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>
@@ -36,7 +36,7 @@
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Image Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                            <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
                             <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
                         </StackPanel>
                     </DataTemplate>
@@ -50,18 +50,31 @@
                     <dxr:RibbonPageGroup Caption="Управление">
                         <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditProject" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditProject_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="bbiDeleteProject" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteProject_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiDeleteProject" Content="Удалить" Glyph="{dx:DXImage Image=Remove_32x32.png}" LargeGlyph="{dx:DXImage Image=Remove_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
                         <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать ТЗ" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" ItemClick="bbiDownload_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiShowProject" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowProject_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="bbiHistory" Content="История" LargeGlyph="{dx:DXImage Image=BOChangeHistory_32x32.png}" Glyph="{dx:DXImage Image=BOChangeHistory_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Статистика">
                         <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем проектам" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" ItemClick="bbiStatAll_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}" ItemClick="bbiStatFilter_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Статус проекта" x:Name="rbStatus">
+                        <dxb:BarButtonItem x:Name="status0" Content="Подготовка" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/yellow.15.png" ItemClick="status0_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status1" Content="Тестирование" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/orange.15.png" ItemClick="status1_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status2" Content="Завершен" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/lightblue.15.png" ItemClick="status2_ItemClick"/>
+
+                        <dxb:BarButtonItem x:Name="status3" Content="Проектирование" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/blue.15.png" ItemClick="status3_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status4" Content="Внедрение" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/brown.15.png" ItemClick="status4_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status5" Content="Отложен" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/red.15.png" ItemClick="status5_ItemClick"/>
+
+                        <dxb:BarButtonItem x:Name="status6" Content="Реализация" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/green.15.png" ItemClick="status6_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status7" Content="Сопровождение" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/purple.15.png" ItemClick="status7_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status8" Content="Закрыт" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/gray.15.png" ItemClick="status8_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Фильтрация и поиск">
@@ -78,6 +91,8 @@
                         </dxb:BarEditItem>
                         <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
                     </dxr:RibbonPageGroup>
+                    
+
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>

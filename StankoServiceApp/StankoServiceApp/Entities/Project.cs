@@ -36,9 +36,9 @@ namespace StankoServiceApp.ServiceReference
                     case (6):
                         return this.ConvertFromBitmap(Properties.Resources.lightblue_15);
                     case (7):
-                        return this.ConvertFromBitmap(Properties.Resources.gray_15);
-                    case (8):
                         return this.ConvertFromBitmap(Properties.Resources.red_15);
+                    case (8):
+                        return this.ConvertFromBitmap(Properties.Resources.gray_15);
                     default:
                         return this.ConvertFromBitmap(Properties.Resources.red_15);
                 }

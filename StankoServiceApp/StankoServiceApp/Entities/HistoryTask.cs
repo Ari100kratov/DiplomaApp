@@ -26,19 +26,19 @@ namespace StankoServiceApp.ServiceReference
                 switch (this.StatusId)
                 {
                     case (0):
-                        return this.ConvertFromBitmap(Properties.Resources.task1);
+                        return this.ConvertFromBitmap(Properties.Resources.task01);
                     case (1):
-                        return this.ConvertFromBitmap(Properties.Resources.task2);
+                        return this.ConvertFromBitmap(Properties.Resources.task02);
                     case (2):
-                        return this.ConvertFromBitmap(Properties.Resources.task3);
+                        return this.ConvertFromBitmap(Properties.Resources.task03);
                     case (3):
-                        return this.ConvertFromBitmap(Properties.Resources.task4);
+                        return this.ConvertFromBitmap(Properties.Resources.task04);
                     case (4):
-                        return this.ConvertFromBitmap(Properties.Resources.task5);
+                        return this.ConvertFromBitmap(Properties.Resources.task05);
                     case (5):
-                        return this.ConvertFromBitmap(Properties.Resources.task6);
+                        return this.ConvertFromBitmap(Properties.Resources.task06);
                     default:
-                        return this.ConvertFromBitmap(Properties.Resources.task1);
+                        return this.ConvertFromBitmap(Properties.Resources.task01);
                 }
             }
         }

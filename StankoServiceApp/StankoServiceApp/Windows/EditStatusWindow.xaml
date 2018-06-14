@@ -1,0 +1,30 @@
+﻿<Window xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  x:Class="StankoServiceApp.Windows.EditStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        dx:ThemeManager.ThemeName="none"
+        mc:Ignorable="d"
+        Height="130" Width="400" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" WindowStyle="None">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+
+                <dxlc:LayoutControl Orientation="Vertical">
+                    <dxlc:LayoutItem Label="Комментарий к статусу">
+                        <dxe:MemoEdit x:Name="meComment"></dxe:MemoEdit>
+                    </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Label="Отправить уведомление">
+                    <dxe:ToggleSwitch x:Name="tsSend" HorizontalAlignment="Left" IsThreeState="False"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 0 10 10">
+                <dx:SimpleButton x:Name="sbCancel" Content="Отменить" Glyph="{dx:DXImage Image=Cancel_16x16.png}" Margin="10 0 0 0" GlyphAlignment="Left" IsCancel="True" Click="sbCancel_Click"/>
+                <dx:SimpleButton x:Name="sbSave" Content="Принять" Glyph="{dx:DXImage Image=Apply_16x16.png}" Margin="10 0 0 0" IsDefault="True" Click="sbSave_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

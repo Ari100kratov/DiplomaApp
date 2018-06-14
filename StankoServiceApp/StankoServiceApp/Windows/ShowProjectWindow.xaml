@@ -31,7 +31,7 @@
                         <TextBlock x:Name="tbDateStart"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Сроки завершения:" IsRequired="True">
+                    <dxlc:LayoutItem Label="Сроки до:" IsRequired="True">
                         <TextBlock x:Name="tbDateEnd"/>
                     </dxlc:LayoutItem>
 
@@ -45,7 +45,7 @@
 
                     <dxlc:LayoutItem Label="Статус проекта:" IsRequired="True">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="imgIcon" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <Image x:Name="imgIcon" Margin="0 0 5 0" VerticalAlignment="Center"/>
                             <TextBlock x:Name="tbStatusProject" VerticalAlignment="Center"/>
                         </StackPanel>
                     </dxlc:LayoutItem>
@@ -63,7 +63,7 @@
         <dxlc:GroupBox Header="Информация о руководителе" Background="White" Grid.Column="1" Grid.Row="0">
             <dxlc:LayoutControl>
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                    <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -115,7 +115,7 @@
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Image Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
+                                <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
                                 <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.StatusProjectHistory}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>

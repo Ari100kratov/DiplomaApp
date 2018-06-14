@@ -41,6 +41,15 @@ namespace WcfServiceApp
         [OperationContract]
         void DeleteTask(Task task);
 
+        [OperationContract]
+        void EditStatusProject(Project project, int status, User user, string comment);
+
+        [OperationContract]
+        void EditStatusTask(Task task, int status, User user, string comment);
+
+        [OperationContract]
+        void EditPriorityTask(Task task, int priority);
+
         #region //Возвращение List всех моделей
 
         [OperationContract]

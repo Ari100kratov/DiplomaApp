@@ -79,11 +79,18 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.History = App.Service.GetHistoryProjects().Where(x => x.ProjectId == this.Project.Id).ToList();
+            try
+            {
+                this.History = App.Service.GetHistoryProjects().Where(x => x.ProjectId == this.Project.Id).ToList();
 
-            this.FillHistory();
-            this.FillProject();
-            this.FillWorker();
+                this.FillHistory();
+                this.FillProject();
+                this.FillWorker();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void sbDownLoad_Click(object sender, RoutedEventArgs e)

@@ -303,9 +303,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority1 {
+        internal static System.Drawing.Bitmap pr1 {
             get {
-                object obj = ResourceManager.GetObject("priority1", resourceCulture);
+                object obj = ResourceManager.GetObject("pr1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,9 +313,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority2 {
+        internal static System.Drawing.Bitmap pr1_QHIXW {
             get {
-                object obj = ResourceManager.GetObject("priority2", resourceCulture);
+                object obj = ResourceManager.GetObject("pr1_QHIXW", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +323,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority3 {
+        internal static System.Drawing.Bitmap pr2 {
             get {
-                object obj = ResourceManager.GetObject("priority3", resourceCulture);
+                object obj = ResourceManager.GetObject("pr2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +333,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority4 {
+        internal static System.Drawing.Bitmap pr2_97lqL {
             get {
-                object obj = ResourceManager.GetObject("priority4", resourceCulture);
+                object obj = ResourceManager.GetObject("pr2_97lqL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -343,9 +343,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority5 {
+        internal static System.Drawing.Bitmap pr3 {
             get {
-                object obj = ResourceManager.GetObject("priority5", resourceCulture);
+                object obj = ResourceManager.GetObject("pr3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,9 +353,69 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap priority6 {
+        internal static System.Drawing.Bitmap pr3_tdc4h {
             get {
-                object obj = ResourceManager.GetObject("priority6", resourceCulture);
+                object obj = ResourceManager.GetObject("pr3_tdc4h", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr4 {
+            get {
+                object obj = ResourceManager.GetObject("pr4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr4_7xH6z {
+            get {
+                object obj = ResourceManager.GetObject("pr4_7xH6z", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr5 {
+            get {
+                object obj = ResourceManager.GetObject("pr5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr5_S643o {
+            get {
+                object obj = ResourceManager.GetObject("pr5_S643o", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr6 {
+            get {
+                object obj = ResourceManager.GetObject("pr6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pr6_whBRd {
+            get {
+                object obj = ResourceManager.GetObject("pr6_whBRd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +473,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap task1 {
+        internal static System.Drawing.Bitmap task01 {
             get {
-                object obj = ResourceManager.GetObject("task1", resourceCulture);
+                object obj = ResourceManager.GetObject("task01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,9 +483,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap task2 {
+        internal static System.Drawing.Bitmap task01_3s3yt {
             get {
-                object obj = ResourceManager.GetObject("task2", resourceCulture);
+                object obj = ResourceManager.GetObject("task01_3s3yt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,9 +493,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap task3 {
+        internal static System.Drawing.Bitmap task02 {
             get {
-                object obj = ResourceManager.GetObject("task3", resourceCulture);
+                object obj = ResourceManager.GetObject("task02", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -443,9 +503,9 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap task4 {
+        internal static System.Drawing.Bitmap task02_5QwjB {
             get {
-                object obj = ResourceManager.GetObject("task4", resourceCulture);
+                object obj = ResourceManager.GetObject("task02_5QwjB", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,9 +513,79 @@ namespace StankoServiceApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap task5 {
+        internal static System.Drawing.Bitmap task03 {
             get {
-                object obj = ResourceManager.GetObject("task5", resourceCulture);
+                object obj = ResourceManager.GetObject("task03", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task03_8qFsp {
+            get {
+                object obj = ResourceManager.GetObject("task03_8qFsp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task04 {
+            get {
+                object obj = ResourceManager.GetObject("task04", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task04_TbCT8 {
+            get {
+                object obj = ResourceManager.GetObject("task04_TbCT8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task05 {
+            get {
+                object obj = ResourceManager.GetObject("task05", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task05_ULdb1 {
+            get {
+                object obj = ResourceManager.GetObject("task05_ULdb1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task06 {
+            get {
+                object obj = ResourceManager.GetObject("task06", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task06_udCDt {
+            get {
+                object obj = ResourceManager.GetObject("task06_udCDt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

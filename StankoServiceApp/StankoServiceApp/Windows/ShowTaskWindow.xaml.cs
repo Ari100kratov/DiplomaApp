@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using StankoServiceApp.ServiceReference;
 
 namespace StankoServiceApp.Windows
@@ -124,6 +125,39 @@ namespace StankoServiceApp.Windows
                 this.FillManager();
                 this.FillHistory();
                 this.FillTask();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void gcFiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var taskFile = this.gcFiles.CurrentItem as TaskFile;
+
+            if (taskFile == null)
+            {
+                return;
+            }
+
+            try
+            {
+                var save = new SaveFileDialog
+                {
+                    Title = "Сохранить файл",
+                    DefaultExt = taskFile.File.Title,
+                    AddExtension = true,
+                    FileName = taskFile.File.FileName
+                };
+
+                if (save.ShowDialog() == true)
+                {
+                    using (var stream = save.OpenFile())
+                    {
+                        stream.Write(taskFile.File.Data, 0, taskFile.File.Data.Length);
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -31,20 +31,42 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.series1.AddPoint("Подготовка", this.ListProject.Where(x=>x.GetStatusProject ==StatusProject.Подготовка).Count());
-            this.series2.AddPoint("Проектирование", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Проектирование).Count());
-            this.series3.AddPoint("Реализация", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Реализация).Count());
-            this.series4.AddPoint("Тестирование", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Тестирование).Count());
-            this.series5.AddPoint("Внедрение", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Внедрение).Count());
-            this.series6.AddPoint("Сопровождение", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Сопровождение).Count());
-            this.series7.AddPoint("Завершен", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Завершен).Count());
-            this.series8.AddPoint("Отложен", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Отложен).Count());
-            this.series9.AddPoint("Закрыт", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Закрыт).Count());
+            try
+            {
+                this.series1.AddPoint("Подготовка", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Подготовка).Count());
+                this.series2.AddPoint("Проектирование", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Проектирование).Count());
+                this.series3.AddPoint("Реализация", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Реализация).Count());
+                this.series4.AddPoint("Тестирование", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Тестирование).Count());
+                this.series5.AddPoint("Внедрение", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Внедрение).Count());
+                this.series6.AddPoint("Сопровождение", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Сопровождение).Count());
+                this.series7.AddPoint("Завершен", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Завершен).Count());
+                this.series8.AddPoint("Отложен", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Отложен).Count());
+                this.series9.AddPoint("Закрыт", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Закрыт).Count());
 
-            var listFilter = this.ListProject.Where(x => x.EndDate != null && x.CompletionDate!=null).ToList();
+                var listFilter = this.ListProject.Where(x => x.EndDate != null && x.CompletionDate != null).ToList();
 
-            this.seriesSimple.AddPoint("Заврешенные в срок", listFilter.Where(x=>x.CompletionDate<=x.EndDate).Count());
-            this.seriesSimple.AddPoint("С опозданием", listFilter.Where(x => x.CompletionDate > x.EndDate).Count());
+                this.seriesSimple.AddPoint("Заврешенные в срок", listFilter.Where(x => x.CompletionDate <= x.EndDate).Count());
+                this.seriesSimple.AddPoint("С опозданием", listFilter.Where(x => x.CompletionDate > x.EndDate).Count());
+
+                var listEnd = this.ListProject.Where(x => x.CompletionDate != null).ToList();
+                int count = 0;
+                int days = 0;
+
+                if (listEnd.Count() != 0)
+                {
+                    for (var i = 0; i < listEnd.Count(); i++)
+                    {
+                        count++;
+                        days += (listEnd[i].CompletionDate.Value - listEnd[i].StartDate).Days;
+                    }
+
+                    this.tbCountDays.Text = $"Количество дней, затрачиваемое на проект в среднем - {days / count}";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
