@@ -9,73 +9,82 @@
         mc:Ignorable="d"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
         xmlns:dxlc="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-        dx:ThemeManager.ThemeName="none"
-        Title="" Height="650" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        dx:ThemeManager.ThemeName="Office2010Blue" Title="Выберите сотрудника"
+         Height="650" Width="800" MinHeight="800" MinWidth="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
+            
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <dxg:GridControl x:Name="gcWorker" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcWorker_CurrentItemChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        <dxg:GridControl x:Name="gcWorker" Grid.RowSpan="2" Grid.Column="0" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcWorker_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False" ShowFocusedRectangle="True"/>
             </dxg:GridControl.View>
 
             <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
-                    <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased"/>
+                    <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>
             <dxg:GridColumn Header="Фамилия" FieldName="Surname" ReadOnly="True"/>
             <dxg:GridColumn Header="Отчетсво" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
-            <dxg:GridColumn Header="Возраст" FieldName="Age" ReadOnly="True"/>
+            <dxg:GridColumn Header="Дата рожд" FieldName="DateOfBirth" ReadOnly="True"/>
             <dxg:GridColumn Header="Работает с" FieldName="DateOfEmploy" ReadOnly="True"/>
             <dxg:GridColumn Header="Телефон" FieldName="Phone" UnboundType="DateTime" ReadOnly="True"/>
             <dxg:GridColumn Header="Должность" FieldName="Position.PositionName" ReadOnly="True"/>
             <dxg:GridColumn Header="Эл. адрес" FieldName="User.Email" ReadOnly="True"/>
         </dxg:GridControl>
 
-        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbTask" Header="Текущие задачи сотрудника" Background="White" Grid.Row="1">
-            <dxg:GridControl x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
-                    <dxg:GridControl.View>
-                        <dxg:TableView ShowGroupPanel="False" Focusable="False" AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
-                    </dxg:GridControl.View>
+        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbTask" Header="Текущие задачи сотрудника" Background="White" Grid.Row="2" Grid.ColumnSpan="2">
+            <dxg:GridControl x:Name="gcTask" AllowInitiallyFocusedRow="False" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowGroupPanel="False" Focusable="False" AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="False" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
+                </dxg:GridControl.View>
 
-                    <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
-                    <dxg:GridColumn Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
-                    <dxg:GridColumn Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
-                    <dxg:GridColumn Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                <dxg:GridColumn Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                <dxg:GridColumn Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                <dxg:GridColumn Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
 
-                    <dxg:GridColumn Header="Статус" FieldName="Task" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
-                        <dxg:GridColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <dxg:GridColumn Header="Статус" FieldName="Task" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image RenderOptions.EdgeMode="Aliased" Width="15" Height="15" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </dxg:GridColumn.CellTemplate>
-                    </dxg:GridColumn>
+                                <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
 
-                    <dxg:GridColumn Header="Приоритет" FieldName="Task" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
-                        <dxg:GridColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <dxg:GridColumn Header="Приоритет" FieldName="Task" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image RenderOptions.EdgeMode="Aliased" Width="15" Height="15" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </dxg:GridColumn.CellTemplate>
-                    </dxg:GridColumn>
-                </dxg:GridControl>
+                                <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
+            </dxg:GridControl>
         </dxlc:GroupBox>
 
-        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbProject" Header="Текущие проекты сотрудника" Background="White" Grid.Row="1">
-            <dxg:GridControl x:Name="gcProject" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
+        <dxlc:GroupBox Visibility="Collapsed" x:Name="gbProject" Header="Текущие проекты сотрудника" Background="White" Grid.Row="2" Grid.ColumnSpan="2">
+            <dxg:GridControl x:Name="gcProject" AllowInitiallyFocusedRow="False" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="None">
                 <dxg:GridControl.View>
-                    <dxg:TableView Focusable="False" AllowPerPixelScrolling="True" ShowGroupPanel="False" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
+                    <dxg:TableView Focusable="False" AllowPerPixelScrolling="True" ShowGroupPanel="False" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="False" ShowFilterPanelMode="Default" ShowSearchPanelMode="Default"/>
                 </dxg:GridControl.View>
                 <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
                 <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
@@ -97,7 +106,142 @@
             </dxg:GridControl>
         </dxlc:GroupBox>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10">
+        <dxlc:GroupBox Margin="5 0 5 0" FontSize="14" Visibility="Collapsed" x:Name="gbInfoWorker" Header="Статистика" Background="White" Grid.Row="0" Grid.Column="1" >
+            <StackPanel Orientation="Vertical">
+                
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <TextBlock  VerticalAlignment="Center" Text="Задач всего: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 5">
+                        <Image x:Name="imgStatus02" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/task02.png"/>
+                        <TextBlock x:Name="tbStatus02" VerticalAlignment="Center" Text="В работе: "/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <Image x:Name="imgStatus03" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/task03.png"/>
+                        <TextBlock x:Name="tbStatus03" VerticalAlignment="Center" Text="Отменено: "/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <Image x:Name="imgStatus04" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/task04.png"/>
+                        <TextBlock x:Name="tbStatus04" VerticalAlignment="Center" Text="Отложено: "/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <Image x:Name="imgStatus05" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/task05.png"/>
+                        <TextBlock x:Name="tbStatus05" VerticalAlignment="Center" Text="Выполнено: "/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <Image x:Name="imgStatus06" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/task06.png"/>
+                        <TextBlock x:Name="tbStatus06" VerticalAlignment="Center" Text="На проверке: "/>
+                    </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="tbCountTask" Margin="5 10 0 0" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb02" Margin="5 10 0 0" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb03" Margin="5 6 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb04" Margin="5 2 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb05" Margin="5 0 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb06" Margin="5 2 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                    </StackPanel>
+                </StackPanel>
+
+                
+                
+                
+            </StackPanel>
+        </dxlc:GroupBox>
+
+        <dxc:ChartControl x:Name="ccTerm" AnimationMode="OnDataChanged" Grid.Column="1" Grid.Row="1">
+            <dxc:ChartControl.Legends>
+                <dxc:Legend VerticalPosition="Top" ItemVisibilityMode="AutoGeneratedAndCustom"/>
+            </dxc:ChartControl.Legends>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="Успеваемость" HorizontalAlignment="Center" FontSize="16"/>
+            </dxc:ChartControl.Titles>
+
+            <dxc:SimpleDiagram2D Dimension="1" x:Name="sdTerm" >
+                <dxc:PieSeries2D x:Name="seriesSimple" HoleRadiusPercent="0" LabelsVisibility="True">
+
+                    <dxc:PieSeries2D.LegendPointOptions>
+                        <dxc:PointOptions Pattern="{}{A}:" PointView="SeriesName" />
+                    </dxc:PieSeries2D.LegendPointOptions>
+
+                    <dxc:PieSeries2D.PointOptions>
+                        <dxc:PointOptions>
+                            <dxc:PointOptions.ValueNumericOptions>
+                                <dxc:NumericOptions Format="Percent" Precision="0" />
+                            </dxc:PointOptions.ValueNumericOptions>
+                        </dxc:PointOptions>
+                    </dxc:PieSeries2D.PointOptions>
+                </dxc:PieSeries2D>
+            </dxc:SimpleDiagram2D>
+        </dxc:ChartControl>
+
+
+        <dxlc:GroupBox  Margin="5 0 5 0" FontSize="14" Visibility="Collapsed" x:Name="gbInfoManager" Header="Статистика" Background="White" Grid.Row="0" Grid.Column="1" >
+            <StackPanel Orientation="Vertical">
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 5">
+                            <TextBlock x:Name="tbCountProject" VerticalAlignment="Center" Text="Проектов всего: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 5">
+                            <TextBlock x:Name="tbCountCurrent" VerticalAlignment="Center" Text="Текущие проекты: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <Image x:Name="imgStatus07" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/lightblue.15.png"/>
+                            <TextBlock x:Name="tbStatus07" VerticalAlignment="Center" Text="Завершено: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <Image x:Name="imgStatus08" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/red.15.png"/>
+                            <TextBlock x:Name="tbStatus08" VerticalAlignment="Center" Text="Отложено: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <Image x:Name="imgStatus09" Margin="0 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/gray.15.png"/>
+                            <TextBlock x:Name="tbStatus09" VerticalAlignment="Center" Text="Закрыто: "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                            <TextBlock VerticalAlignment="Center" Text="Создал задач: "/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <TextBlock VerticalAlignment="Center" Text="Выполнено: "/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="tbAllProject" Margin="5 10 0 0" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tbCurrent" Margin="5 15 0 0" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb07" Margin="5 5 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb08" Margin="5 0 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tb09" Margin="5 0 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tbCountCreateTask" Margin="5 5 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                        <TextBlock x:Name="tbCountApplyTask" Margin="5 0 0 5" VerticalAlignment="Center" Text="На проверке: "/>
+                    </StackPanel>
+                </StackPanel>
+
+                
+            </StackPanel>
+        </dxlc:GroupBox>
+
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10">
             <dx:SimpleButton x:Name="sbCancel" Content="Отменить" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" IsCancel="True" Click="sbCancel_Click"/>
             <dx:SimpleButton x:Name="sbSelect" Content="Выбрать" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSelect_Click"/>
         </StackPanel>

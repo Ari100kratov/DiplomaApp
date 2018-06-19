@@ -70,5 +70,11 @@ namespace StankoServiceApp.ServiceReference
         public List<HistoryTask> History => App.Service.GetHistoryTasks().Where(x => x.TaskId == this.Id).ToList();
 
         public List<TaskFile> Files => App.Service.GetTaskFiles().Where(x => x.TaskId == this.Id).ToList();
+
+        public Task Parent => App.Service.GetTasks().FirstOrDefault(x => x.Id == this.ParentId);
+
+        public List<Task> Childs => App.Service.GetTasks().Where(x => x.ParentId == this.Id).ToList();
+
+        public Solution Solution => App.Service.GetSolutions().FirstOrDefault(x => x.Id == this.SolutionId);
     }
 }

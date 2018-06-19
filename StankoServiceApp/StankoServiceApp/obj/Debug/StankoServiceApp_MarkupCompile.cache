@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\App.xaml
-131201168114
+15-1392399341
 
-29-1876827495
-50-24202205
-Pages\ProjectPage.xaml;Pages\TaskPage.xaml;Pages\WorkerPage.xaml;Windows\DirectorWindow.xaml;Windows\EditProjectWindow.xaml;Windows\EditStatusWindow.xaml;Windows\EditTaskWindow.xaml;Windows\EditWorkerWindow.xaml;Windows\SelectWorkerWindow.xaml;Windows\ShowProjectWindow.xaml;Windows\ShowTaskWindow.xaml;Windows\StartWindow.xaml;Windows\StatProjectWindow.xaml;
+33-1708242480
+73-796061359
+Pages\ProjectPage.xaml;Pages\TaskPage.xaml;Pages\WorkerPage.xaml;Windows\DirectorWindow.xaml;Windows\EditProjectWindow.xaml;Windows\EditStatusWindow.xaml;Windows\EditTaskWindow.xaml;Windows\EditWorkerWindow.xaml;Windows\ManagerWindow.xaml;Windows\ProfileWindow.xaml;Windows\SelectWorkerWindow.xaml;Windows\ShowProjectWindow.xaml;Windows\ShowTaskWindow.xaml;Windows\StartWindow.xaml;Windows\StatProjectWindow.xaml;
 
 False
 

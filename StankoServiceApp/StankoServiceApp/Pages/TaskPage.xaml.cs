@@ -1,8 +1,12 @@
-﻿using StankoServiceApp.ServiceReference;
+﻿using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Printing;
+using StankoServiceApp.ServiceReference;
 using StankoServiceApp.Windows;
 using StankoserviceEnums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +30,20 @@ namespace StankoServiceApp.Pages
     {
         private List<ServiceReference.Task> ListTask = new List<ServiceReference.Task>();
         private ServiceReference.Task Task = null;
+        private bool IsDirector => App.CurrentUser.Worker == null;
 
         public TaskPage()
         {
             InitializeComponent();
         }
 
-        private async void FillListDirector()
+        private async void FillList()
         {
-            this.ListTask = await App.Service.GetTasksAsync();
+            if (this.IsDirector)
+                this.ListTask = await App.Service.GetTasksAsync();
+            else
+                this.ListTask = App.Service.GetTasks().Where(x => x.ManagerId == App.CurrentUser.Id).ToList();
+
             this.FillGc();
         }
 
@@ -83,7 +92,7 @@ namespace StankoServiceApp.Pages
                 this.bbiEditTask.IsEnabled = false;
                 this.bbiDeleteTask.IsEnabled = false;
                 this.bbiShowTask.IsEnabled = false;
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -128,28 +137,39 @@ namespace StankoServiceApp.Pages
             }
         }
 
+        private void SelectRow()
+        {
+            if (this.Task == null)
+            {
+                this.rpgPriority.IsEnabled = false;
+                this.rpgStatus.IsEnabled = false;
+                this.bbiEditTask.IsEnabled = false;
+                this.bbiDeleteTask.IsEnabled = false;
+                this.bbiShowTask.IsEnabled = false;
+            }
+            else
+            {
+                this.bbiEditTask.IsEnabled = true;
+                this.bbiDeleteTask.IsEnabled = true;
+                this.bbiShowTask.IsEnabled = true;
+                this.rpgStatus.IsEnabled = true;
+                this.rpgPriority.IsEnabled = true;
+
+                if (this.Task.Childs.Count() == 0)
+                {
+                    return;
+                }
+
+                //for(var i =0;i<this.Task.Cil)
+            }
+        }
+
         private void gcTask_CurrentItemChanged(object sender, DevExpress.Xpf.Grid.CurrentItemChangedEventArgs e)
         {
             try
             {
                 this.Task = this.gcTask.CurrentItem as ServiceReference.Task;
-
-                if (this.Task == null)
-                {
-                    this.rpgPriority.IsEnabled = false;
-                    this.rpgStatus.IsEnabled = false;
-                    this.bbiEditTask.IsEnabled = false;
-                    this.bbiDeleteTask.IsEnabled = false;
-                    this.bbiShowTask.IsEnabled = false;
-                }
-                else
-                {
-                    this.bbiEditTask.IsEnabled = true;
-                    this.bbiDeleteTask.IsEnabled = true;
-                    this.bbiShowTask.IsEnabled = true;
-                    this.rpgStatus.IsEnabled = true;
-                    this.rpgPriority.IsEnabled = true;
-                }
+                this.SelectRow();
             }
             catch (Exception ex)
             {
@@ -163,7 +183,7 @@ namespace StankoServiceApp.Pages
             {
                 var addTask = new EditTaskWindow();
                 addTask.ShowDialog();
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -177,7 +197,7 @@ namespace StankoServiceApp.Pages
             {
                 var editTask = new EditTaskWindow(this.Task);
                 editTask.ShowDialog();
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -189,7 +209,7 @@ namespace StankoServiceApp.Pages
         {
             try
             {
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -201,21 +221,24 @@ namespace StankoServiceApp.Pages
         {
             try
             {
+                await App.Service.DeleteTaskAsync(this.Task);
+                this.FillList();
+
                 if (MessageBox.Show($"Вы действительно хотите удалить задачу: {this.Task.TaskName}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 {
                     return;
                 }
 
-                if (this.Task.Worker != null)
+                if (this.Task.Worker == null)
                 {
-                    if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                    {
-                        Methods.SendMessageFromMainMail("Задача удалена", $"Задача '{this.Task.TaskName}', исполнителем которой вы являлись, была удалена из базы данных\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Worker.User.Email);
-                    }
+                    return;
                 }
 
-                await App.Service.DeleteTaskAsync(this.Task);
-                this.FillListDirector();
+                if (MessageBox.Show("Хотите отправить сотруднику письмо уведомления на почту?", "Отправка", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    Methods.SendMessageFromMainMail("Задача удалена", $"Задача '{this.Task.TaskName}', исполнителем которой вы являлись, была удалена из базы данных\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Worker.User.Email);
+                }
+
             }
             catch (Exception ex)
             {
@@ -246,9 +269,18 @@ namespace StankoServiceApp.Pages
                     return;
                 }
 
+                for (var i = 0; i < this.Task.Childs.Count(); i++)
+                {
+                    if (this.Task.Childs[i].StatusId != (int)StatusTask.Выполнена)
+                    {
+                        MessageBox.Show("Необходимо выполнить все подзадачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+
                 var editStatus = new EditStatusWindow(this.Task, status);
                 editStatus.ShowDialog();
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -272,7 +304,7 @@ namespace StankoServiceApp.Pages
                 }
 
                 App.Service.EditPriorityTask(this.Task, (int)prior);
-                this.FillListDirector();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -338,6 +370,22 @@ namespace StankoServiceApp.Pages
         private void prior1_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             this.Editpriority(PriorityTask.Неотложный);
+        }
+
+        private void bbiStandartPrint_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            this.columnStatus.Visible = true;
+            this.columnTask.Visible = true;
+
+            PrintableControlLink link = new PrintableControlLink((TreeListView)this.gcTask.View);
+            link.PageHeaderData = "Задачи";
+            var window = new DocumentPreviewWindow();
+            window.PreviewControl.DocumentSource = link;
+            link.CreateDocument();
+            window.ShowDialog();
+
+            this.columnStatus.Visible = false;
+            this.columnTask.Visible = false;
         }
     }
 }

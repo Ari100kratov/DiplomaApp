@@ -10,11 +10,11 @@
         xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
         xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-        dx:ThemeManager.ThemeName="none"
+        dx:ThemeManager.ThemeName="Office2010Blue"
         mc:Ignorable="d"
-        Title="" Height="700" Width="500" ScrollViewer.HorizontalScrollBarVisibility="Auto" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+        Title="" Height="750" Width="500" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel>
                 <dxlc:GroupBox Header="Информация о задаче" Background="White">
                     <dxlc:LayoutControl Orientation="Vertical">
@@ -23,8 +23,93 @@
                             <dxe:TextEdit x:Name="teNameTask" NullText="Введите рабочее название задачи"/>
                         </dxlc:LayoutItem>
 
+                        <dxlc:LayoutItem Label="Родительская задача">
+                            <dxg:LookUpEdit x:Name="lueParentTask"
+                        AutoComplete="True"
+                        IncrementalFiltering="True"
+                        ImmediatePopup="True"
+                        IsPopupAutoWidth="False" AutoPopulateColumns="False" NullText="Выберите частью какой задачи является" DisplayMember="TaskName" ValueMember="Id">
+
+                                <dxg:LookUpEdit.PopupContentTemplate>
+                                    <ControlTemplate>
+                                        <dxg:GridControl Name="PART_GridControl"  AutoGenerateColumns="None" SelectionMode="Row">
+                                            <dxg:GridControl.View >
+                                                <dxg:TreeListView AutoExpandAllNodes="True"  AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default" AutoWidth="True" ParentFieldName="ParentId" KeyFieldName="Id" TreeDerivationMode="Selfreference"/>
+                                            </dxg:GridControl.View>
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                                <dxg:GridColumn Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                                <dxg:GridColumn Header="Исполнитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="2" HeaderToolTip="ФИО испольнителя задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                                <dxg:GridColumn Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                                <dxg:GridColumn Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                                <dxg:GridColumn Header="Завершено" FieldName="CompletionDate" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Фактическая дата завершения" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+
+                                                <dxg:GridColumn Header="Приоритет" FieldName="Task" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" AutoFilterCondition="Contains" ColumnFilterMode="DisplayText" >
+                                                    <dxg:GridColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                                <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                                                <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </dxg:GridColumn.CellTemplate>
+
+                                                </dxg:GridColumn>
+
+                                                <dxg:GridColumn Header="Статус" FieldName="Task" SortOrder="Ascending" SortIndex="7" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                                                    <dxg:GridColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                                <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                                                <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </dxg:GridColumn.CellTemplate>
+                                                </dxg:GridColumn>
+
+                                            </dxg:GridControl.Columns>
+                                        </dxg:GridControl>
+                                    </ControlTemplate>
+                                </dxg:LookUpEdit.PopupContentTemplate>
+
+                            </dxg:LookUpEdit>
+                        </dxlc:LayoutItem>
+
                         <dxlc:LayoutItem Label="Проект">
-                            <dxe:ComboBoxEdit x:Name="ceProject" NullText="Выберите проект для задачи"/>
+                            <dxg:LookUpEdit  AutoComplete="True"
+                        IncrementalFiltering="True"
+                        ImmediatePopup="True"
+                        IsPopupAutoWidth="False" AutoPopulateColumns="False" x:Name="ceProject" NullText="Выберите проект для задачи" DisplayMember="Name" ValueMember="Id">
+
+                                <dxg:LookUpEdit.PopupContentTemplate>
+                                    <ControlTemplate>
+                                        <dxg:GridControl AllowInitiallyFocusedRow="False" Name="PART_GridControl" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row">
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView AllowPerPixelScrolling="True" AutoWidth="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
+                                            </dxg:GridControl.View>
+                                            <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+                                            <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+                                            <dxg:GridColumn Header="Сроки " FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+                                            <dxg:GridColumn FieldName="CompletionDate" Header="Завершено" SortIndex="3" HeaderToolTip="Реальная дата завершения" ReadOnly="True" UnboundType="DateTime"/>
+                                            <dxg:GridColumn Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Ответственный за проект" AutoFilterCondition="Contains"/>
+                                            <dxg:GridColumn Header="Тип" FieldName="TypeProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Продолжительность" AllowBestFit="True"/>
+
+                                            <dxg:GridColumn Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                                                <dxg:GridColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                            <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                                                            <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.CellTemplate>
+                                            </dxg:GridColumn>
+
+                                        </dxg:GridControl>
+                                    </ControlTemplate>
+                                </dxg:LookUpEdit.PopupContentTemplate>
+
+                            </dxg:LookUpEdit>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem Label="Сроки завершения">
@@ -58,14 +143,23 @@
 
                 <dxlc:GroupBox Header="Вложения задачи" Background="White">
                     <StackPanel Orientation="Horizontal" MaxHeight="200" HorizontalAlignment="Stretch">
-                        <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True" CurrentItemChanged="gcFiles_CurrentItemChanged">
+                        <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True" CurrentItemChanged="gcFiles_CurrentItemChanged" ItemsSourceChanged="gcFiles_ItemsSourceChanged">
                             <dxg:GridControl.View>
-                                <dxg:TableView AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False"/>
+                                <dxg:TableView x:Name="tvFile" AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False"/>
                             </dxg:GridControl.View>
 
-                            <dxg:GridColumn Header="Файл" FieldName="FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
-                            <dxg:GridColumn Header="Расширение" FieldName="Title" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Расширение файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
-                            <dxg:GridColumn Header="Дата изменения" FieldName="ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2"/>
+                            <dxg:GridColumn FieldName="TaskFile.File" Header="Иконка" SortOrder="Ascending"  HeaderToolTip="Иконка файла" VisibleIndex="0" BestFitMode="AllRows">
+                                <dxg:GridColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Image Width="25" Height="25" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.FileIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </dxg:GridColumn.CellTemplate>
+                            </dxg:GridColumn>
+
+                            <dxg:GridColumn Header="Файл" FieldName="FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
+                            <dxg:GridColumn Header="Дата изменения" FieldName="ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2" AllowBestFit="True" BestFitArea="All"/>
 
                         </dxg:GridControl>
 
@@ -79,8 +173,8 @@
 
                 <dxlc:GroupBox Header="Исполнитель" Background="White">
                     <dxlc:LayoutControl>
-                        <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                            <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                        <dxlc:LayoutItem HorizontalAlignment="Left">
+                            <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutGroup Orientation="Vertical">

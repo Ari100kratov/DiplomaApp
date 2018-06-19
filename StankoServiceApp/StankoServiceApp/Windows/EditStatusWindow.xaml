@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StankoServiceApp.Windows"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-        dx:ThemeManager.ThemeName="none"
-        mc:Ignorable="d"
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        mc:Ignorable="d" Title="Изменение статуса"
         Height="130" Width="400" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" WindowStyle="None">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">

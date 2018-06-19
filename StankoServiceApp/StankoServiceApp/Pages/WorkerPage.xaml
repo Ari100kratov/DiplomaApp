@@ -10,9 +10,9 @@
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums" x:Class="StankoServiceApp.Pages.WorkerPage"
       mc:Ignorable="d"
-    dx:ThemeManager.ThemeName="none"
+    dx:ThemeManager.ThemeName="Office2010Blue"
       d:DesignHeight="700" d:DesignWidth="800"
-      Title="WorkerPage" Background="White" Loaded="Page_Loaded" KeepAlive="True">
+      Title="WorkerPage" Background="White" Loaded="Page_Loaded" KeepAlive="True" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -24,13 +24,14 @@
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
                 <dxr:RibbonPage Caption="Главная">
                     <dxr:RibbonPageGroup Caption="Управление">
-                        <dxb:BarButtonItem x:Name="bbiNewWorker" Content="Новый сотрудник" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewWorker_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiNewWorker" Content="Новый сотрудник" Glyph="{dx:DXImage Image=Add_16x16.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditWorker" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDeleteWorker" Content="Удалить" Glyph="{dx:DXImage Image=Remove_16x16.png}" LargeGlyph="{dx:DXImage Image=Remove_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick" RibbonStyle="All"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать резюме" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" RibbonStyle="Default" ItemClick="bbiDownload_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiTasks" Content="Задачи сотрудника" Glyph="{dx:DXImage Image=BOTask_16x16.png}" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" RibbonStyle="Default"/>
                         <dxb:BarButtonItem x:Name="bbiProjects" Content="Проекты сотрудника" Glyph="{dx:DXImage Image=Project_16x16.png}" LargeGlyph="{dx:DXImage Image=Project_32x32.png}" RibbonStyle="Default"/>
@@ -69,13 +70,13 @@
 
             <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
-                    <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased"/>
+                    <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>
             <dxg:GridColumn Header="Фамилия" FieldName="Surname" ReadOnly="True"/>
             <dxg:GridColumn Header="Отчество" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
-            <dxg:GridColumn Header="Возраст" FieldName="Age" ReadOnly="True"/>
+            <dxg:GridColumn Header="Дата рожд" FieldName="DateOfBirth" ReadOnly="True"/>
             <dxg:GridColumn Header="Работает с" FieldName="DateOfEmploy" ReadOnly="True"/>
             <dxg:GridColumn Header="Телефон" FieldName="Phone" UnboundType="DateTime" ReadOnly="True"/>
             <dxg:GridColumn Header="Должность" FieldName="Position.PositionName" ReadOnly="True"/>

@@ -51,6 +51,8 @@
     <Compile Include="Entities\HistoryTask.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Project.cs" />
+    <Compile Include="Entities\Solution.cs" />
+    <Compile Include="Entities\SolutionFile.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\TaskFile.cs" />
     <Compile Include="Entities\User.cs" />
@@ -67,6 +69,8 @@
     <Compile Include="Repositories\HistoryTaskRepository.cs" />
     <Compile Include="Repositories\PositionRepository.cs" />
     <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Repositories\SolutionFileRepository.cs" />
+    <Compile Include="Repositories\SolutionRepository.cs" />
     <Compile Include="Repositories\TaskFileRepository.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

@@ -15,3 +15,4 @@ C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrar
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.csproj.CoreCompileInputs.cache
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.dll
 C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.pdb
+C:\Users\vlads\Desktop\Диплом\ModelParametersLibrary\ModelParametersLibrary\obj\Debug\ModelParametersLibrary.csprojResolveAssemblyReference.cache

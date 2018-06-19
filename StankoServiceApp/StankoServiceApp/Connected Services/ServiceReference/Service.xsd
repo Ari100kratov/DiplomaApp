@@ -57,8 +57,10 @@
       <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="ManagerId" type="xs:int" />
+      <xs:element minOccurs="0" name="ParentId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="PriorityId" type="xs:int" />
       <xs:element minOccurs="0" name="ProjectId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SolutionId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="StatusId" type="xs:int" />
       <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkerId" nillable="true" type="xs:int" />
@@ -172,4 +174,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TaskFile" nillable="true" type="tns:TaskFile" />
+  <xs:complexType name="ArrayOfSolution">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Solution" nillable="true" type="tns:Solution" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSolution" nillable="true" type="tns:ArrayOfSolution" />
+  <xs:complexType name="Solution">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Solution" nillable="true" type="tns:Solution" />
+  <xs:complexType name="ArrayOfSolutionFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SolutionFile" nillable="true" type="tns:SolutionFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSolutionFile" nillable="true" type="tns:ArrayOfSolutionFile" />
+  <xs:complexType name="SolutionFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="SolutionId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SolutionFile" nillable="true" type="tns:SolutionFile" />
 </xs:schema>

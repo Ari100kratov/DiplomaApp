@@ -9,10 +9,10 @@
         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
         xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
         mc:Ignorable="d"
-        dx:ThemeManager.ThemeName="none"
-        Title="" Height="600" Width="500" WindowStartupLocation="CenterScreen" SizeToContent="Height" Loaded="Window_Loaded" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        Title="" Height="600" Width="500" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel>
                 <dxlc:GroupBox Header="Информация о проекте" Background="White">
                     <dxlc:LayoutControl Orientation="Vertical">
@@ -42,6 +42,7 @@
 
                         <TextBlock Text="Техническое задание проекта" Margin="0 10 0 3"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <Image Visibility="Collapsed" Width="30" Height="30" x:Name="imgIcon" VerticalAlignment="Center"></Image>
                             <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center"/>
                             <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Загрузить..." Glyph="{dx:DXImage Image=Download_16x16.png}" Click="sbDownLoad_Click"/>
                         </StackPanel>
@@ -52,8 +53,8 @@
 
                 <dxlc:GroupBox Header="Информация о руководителе" Background="White">
                     <dxlc:LayoutControl>
-                        <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                            <Image RenderOptions.EdgeMode="Unspecified" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                        <dxlc:LayoutItem HorizontalAlignment="Left">
+                            <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutGroup Orientation="Vertical">

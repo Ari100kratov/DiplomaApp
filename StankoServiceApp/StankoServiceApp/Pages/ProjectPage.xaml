@@ -10,7 +10,7 @@
       xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
       x:Class="StankoServiceApp.ProjectPage"
-      dx:ThemeManager.ThemeName="none"
+      dx:ThemeManager.ThemeName="Office2010Blue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1100" Background="White"
       Title="ProjectPage" Loaded="Page_Loaded" KeepAlive="True">
@@ -23,7 +23,7 @@
 
         <dxg:GridControl AllowInitiallyFocusedRow="False" x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
             <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
+                <dxg:TableView AllowPerPixelScrolling="True" x:Name="tvProjects" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>
             <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
@@ -31,12 +31,13 @@
             <dxg:GridColumn FieldName="CompletionDate" Header="Завершено" SortIndex="3" HeaderToolTip="Реальная дата завершения" ReadOnly="True" UnboundType="DateTime"/>
             <dxg:GridColumn Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Ответственный за проект" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Тип" FieldName="TypeProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Продолжительность" AllowBestFit="True"/>
+            <dxg:GridColumn Header="Статус" x:Name="columnStatus" Visible="False" FieldName="GetStatusProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус проекта" AllowBestFit="True"/>
 
-            <dxg:GridColumn Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+            <dxg:GridColumn AllowPrinting="False" Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
+                            <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0"/>
                             <TextBlock Text="{Binding RowData.Row.GetStatusProject}"/>
                         </StackPanel>
                     </DataTemplate>
@@ -46,15 +47,16 @@
         </dxg:GridControl>
         <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                <dxr:RibbonPage Caption="Главная">
+                <dxr:RibbonPage>
                     <dxr:RibbonPageGroup Caption="Управление">
-                        <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewProject_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_16x16.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditProject" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDeleteProject" Content="Удалить" Glyph="{dx:DXImage Image=Remove_32x32.png}" LargeGlyph="{dx:DXImage Image=Remove_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать ТЗ" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" ItemClick="bbiDownload_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiShowProject" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowProject_ItemClick"/>
                     </dxr:RibbonPageGroup>
@@ -91,8 +93,6 @@
                         </dxb:BarEditItem>
                         <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
                     </dxr:RibbonPageGroup>
-                    
-
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>

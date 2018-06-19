@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Printing;
+using Microsoft.Win32;
 using StankoServiceApp.ServiceReference;
 using StankoServiceApp.Windows;
 using StankoserviceEnums;
@@ -26,6 +28,7 @@ namespace StankoServiceApp.Pages
     {
         private Worker Worker = null;
         private List<Worker> ListWorkers = new List<Worker>();
+        private bool IsDirector => App.CurrentUser.Worker == null;
 
         public WorkerPage()
         {
@@ -34,7 +37,11 @@ namespace StankoServiceApp.Pages
 
         private async System.Threading.Tasks.Task FillList()
         {
-            this.ListWorkers = await App.Service.GetWorkersAsync();
+            if (this.IsDirector)
+                this.ListWorkers = await App.Service.GetWorkersAsync();
+            else
+                this.ListWorkers = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Исполнитель).ToList();
+
             this.FillGc();
         }
 
@@ -65,6 +72,11 @@ namespace StankoServiceApp.Pages
         {
             try
             {
+                if (!this.IsDirector)
+                {
+                    this.bbiFilterRole.IsVisible = false;
+                    this.bbiDeleteWorker.IsVisible = false;
+                }
 
                 this.cbFilterPosition.ItemsSource = await App.Service.GetPositionsAsync();
                 this.cbFilterPosition.DisplayMember = "PositionName";
@@ -242,6 +254,15 @@ namespace StankoServiceApp.Pages
             {
                 MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void bbiStandartPrint_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            PrintableControlLink link = new PrintableControlLink((CardView)this.gcWorker.View);
+            var window = new DocumentPreviewWindow();
+            window.PreviewControl.DocumentSource = link;
+            link.CreateDocument();
+            window.ShowDialog();
         }
     }
 }

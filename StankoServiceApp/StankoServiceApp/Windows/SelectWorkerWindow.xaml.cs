@@ -43,13 +43,99 @@ namespace StankoServiceApp.Windows
         {
             if (this.EditTask != null)
             {
+                this.seriesSimple.Points.Clear();
                 this.gbTask.Visibility = Visibility.Visible;
-                this.gcTask.ItemsSource = App.Service.GetTasks().Where(x => x.WorkerId == this.Worker.Id && (x.StatusId != (int)StatusTask.Выполнена && x.StatusId != (int)StatusTask.Отложена && x.StatusId != (int)StatusTask.Отменена)).ToList();
+
+                var list = App.Service.GetTasks().Where(x => x.WorkerId == this.Worker.Id).ToList();
+                this.gcTask.ItemsSource = list.Where(x => x.StatusId != (int)StatusTask.Выполнена && x.StatusId != (int)StatusTask.Отложена && x.StatusId != (int)StatusTask.Отменена).ToList();
+
+                this.gbInfoWorker.Visibility = Visibility.Visible;
+
+                this.tbCountTask.Text = $"{list.Count().ToString()}";
+                this.tb02.Text = $"{list.Where(x => x.StatusId == (int)StatusTask.Выполняется).Count()}";
+                this.tb03.Text = $"{list.Where(x => x.StatusId == (int)StatusTask.Отменена).Count()}";
+                this.tb04.Text = $"{list.Where(x => x.StatusId == (int)StatusTask.Отложена).Count()}";
+                this.tb05.Text = $"{list.Where(x => x.StatusId == (int)StatusTask.Выполнена).Count()}";
+                this.tb06.Text = $"{list.Where(x => x.StatusId == (int)StatusTask.Подтверждается).Count()}";
+
+                var stat = list.Where(x => x.EndDate != null).ToList();
+                var plus = 0;
+                var minus = 0;
+
+                for (var i = 0; i < stat.Count(); i++)
+                {
+                    if (stat[i].CompletionDate == null)
+                    {
+                        if (DateTime.Now > stat[i].EndDate)
+                        {
+                            minus++;
+                        }
+                    }
+                    else
+                    {
+                        if (stat[i].CompletionDate <= stat[i].EndDate)
+                        {
+                            plus++;
+                        }
+                        else
+                        {
+                            minus++;
+                        }
+                    }
+                }
+
+                this.seriesSimple.AddPoint("Заврешенные в срок", plus);
+                this.seriesSimple.AddPoint("С опозданием", minus);
             }
             else
             {
+                this.seriesSimple.Points.Clear();
+                this.gbInfoManager.Visibility = Visibility.Visible;
                 this.gbProject.Visibility = Visibility.Visible;
-                this.gcProject.ItemsSource = App.Service.GetProjects().Where(x => x.WorkerId == this.Worker.Id && (x.StatusId != (int)StatusProject.Завершен && x.StatusId != (int)StatusProject.Закрыт && x.StatusId != (int)StatusProject.Отложен)).ToList();
+                var list = App.Service.GetProjects().Where(x => x.WorkerId == this.Worker.Id).ToList();
+
+                this.gcProject.ItemsSource = list.Where(x => x.StatusId != (int)StatusProject.Завершен && x.StatusId != (int)StatusProject.Закрыт && x.StatusId != (int)StatusProject.Отложен).ToList();
+
+                this.tbAllProject.Text = list.Count().ToString();
+                this.tbCurrent.Text = list.Where(x => x.StatusId != (int)StatusProject.Завершен && x.StatusId != (int)StatusProject.Закрыт && x.StatusId != (int)StatusProject.Отложен).Count().ToString();
+                this.tb07.Text = list.Where(x => x.StatusId == (int)StatusProject.Завершен).Count().ToString();
+                this.tb08.Text = list.Where(x => x.StatusId == (int)StatusProject.Отложен).Count().ToString();
+                this.tb09.Text = list.Where(x => x.StatusId == (int)StatusProject.Закрыт).Count().ToString();
+
+                var listTask = App.Service.GetTasks().Where(x => x.ManagerId == this.Worker.User.Id).ToList();
+                this.tbCountCreateTask.Text = listTask.Count().ToString();
+                var countApply = listTask.Where(x => x.StatusId == (int)StatusTask.Выполнена).Count();
+                this.tbCountApplyTask.Text = $"{Math.Round((double)((listTask.Count() / 100) * countApply), 2)}";
+
+
+                var stat = list.Where(x => x.EndDate != null).ToList();
+                var plus = 0;
+                var minus = 0;
+
+                for (var i = 0; i < stat.Count(); i++)
+                {
+                    if (stat[i].CompletionDate == null)
+                    {
+                        if (DateTime.Now > stat[i].EndDate)
+                        {
+                            minus++;
+                        }
+                    }
+                    else
+                    {
+                        if (stat[i].CompletionDate <= stat[i].EndDate)
+                        {
+                            plus++;
+                        }
+                        else
+                        {
+                            minus++;
+                        }
+                    }
+                }
+
+                this.seriesSimple.AddPoint("Заврешенные в срок", plus);
+                this.seriesSimple.AddPoint("С опозданием", minus);
             }
         }
 

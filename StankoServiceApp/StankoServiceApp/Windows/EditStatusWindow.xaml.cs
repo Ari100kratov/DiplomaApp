@@ -25,6 +25,7 @@ namespace StankoServiceApp.Windows
         StatusProject StatusP;
         ServiceReference.Task Task = new ServiceReference.Task();
         StatusTask StatusT;
+        private bool IsDirector = App.CurrentUser.Worker == null;
 
         public EditStatusWindow(Project project, StatusProject status, ServiceReference.Task task = null)
         {
@@ -57,7 +58,13 @@ namespace StankoServiceApp.Windows
 
                     if (this.tsSend.IsChecked == true)
                     {
-                        Methods.SendMessageFromMainMail("Изменился статус проекта", $"Статус проекта '{this.Project.Name}' был изменен.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Project.Worker.User.Email);
+                        var to = "";
+                        if (this.IsDirector)
+                            to = this.Project.Worker.User.Email;
+                        else
+                            to = App.Service.GetUsers().FirstOrDefault(x => x.Worker == null).Email;
+
+                        Methods.SendMessageFromMainMail("Изменился статус проекта", $"Статус проекта '{this.Project.Name}' был изменен на '{this.StatusP}'.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", to);
                     }
                 }
                 else
@@ -68,12 +75,15 @@ namespace StankoServiceApp.Windows
                     {
                         if (this.Task.Worker != null)
                         {
-                            Methods.SendMessageFromMainMail("Изменился статус задачи", $"Статус задачи '{this.Task.TaskName}' был изменен.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Worker.User.Email);
+                            Methods.SendMessageFromMainMail("Изменился статус задачи", $"Статус задачи '{this.Task.TaskName}' был изменен на '{this.StatusT}'.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Worker.User.Email);
                         }
 
-                        if (this.Task.Manager != null && this.Task.Manager.Worker != null)
+                        if (this.IsDirector)
                         {
-                            Methods.SendMessageFromMainMail("Изменился статус задачи", $"Статус задачи '{this.Task.TaskName}' был изменен.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                            if (this.Task.Manager != null && this.Task.Manager.Worker != null)
+                            {
+                                Methods.SendMessageFromMainMail("Изменился статус задачи", $"Статус задачи '{this.Task.TaskName}' был изменен.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                            }
                         }
                     }
                 }

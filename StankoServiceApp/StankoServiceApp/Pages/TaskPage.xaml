@@ -10,10 +10,10 @@
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.TaskPage"
-    dx:ThemeManager.ThemeName="none"
+    dx:ThemeManager.ThemeName="Office2010Blue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000" Background="White"
-      Title="TaskPage" Loaded="Page_Loaded" KeepAlive="True">
+      Title="TaskPage" Loaded="Page_Loaded" KeepAlive="True" UseLayoutRounding="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,19 +21,33 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <dxg:GridControl  AllowInitiallyFocusedRow="False" x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcTask_CurrentItemChanged">
-            <dxg:GridControl.View>
-                <dxg:TableView  AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
+        <dxg:GridControl  AllowInitiallyFocusedRow="False" x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="KeepOld" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcTask_CurrentItemChanged">
+            <dxg:GridControl.View >
+                <dxg:TreeListView AutoExpandAllNodes="True" x:Name="tbTask"  AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ParentFieldName="ParentId" KeyFieldName="Id" TreeDerivationMode="Selfreference" ShowSearchPanelMode="Default" AutoWidth="False"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn Header="Наименование" FieldName="TaskName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn Header="Наименование" Binding="{Binding TaskName, Mode=TwoWay}" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Исполнитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="2" HeaderToolTip="ФИО испольнителя задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
             <dxg:GridColumn Header="Завершено" FieldName="CompletionDate" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Фактическая дата завершения" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            
+            <dxg:GridColumn Header="Приоритет" x:Name="columnTask" Visible="False" FieldName="GetPriorityTask" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn Header="Статус" x:Name="columnStatus" Visible="False" FieldName="GetStatusTask" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
 
-            <dxg:GridColumn Header="Статус" FieldName="Task" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+            <dxg:GridColumn Header="Приоритет" AllowPrinting="False" FieldName="Task" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" AutoFilterCondition="Contains" ColumnFilterMode="DisplayText" >
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Image Width="20" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+
+            <dxg:GridColumn Header="Статус" AllowPrinting="False" FieldName="Task" SortOrder="Ascending" SortIndex="7" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -43,40 +57,31 @@
                     </DataTemplate>
                 </dxg:GridColumn.CellTemplate>
             </dxg:GridColumn>
-
-            <dxg:GridColumn Header="Приоритет" FieldName="Task" SortOrder="Ascending" SortIndex="7" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
-                <dxg:GridColumn.CellTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </dxg:GridColumn.CellTemplate>
-            </dxg:GridColumn>
         </dxg:GridControl>
+
 
         <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
                 <dxr:RibbonPage Caption="Главная">
                     <dxr:RibbonPageGroup Caption="Управление">
-                        <dxb:BarButtonItem x:Name="bbiNewTask" Content="Новая задача" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewTask_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiNewTask" Content="Новая задача" Glyph="{dx:DXImage Image=Add_16x16.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewTask_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditTask" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditTask_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDeleteTask" Content="Удалить" Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Remove_32x32.png}" RibbonStyle="Default" ItemClick="bbiDeleteTask_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiShowTask" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowTask_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     
                     <dxr:RibbonPageGroup x:Name="rpgStatus" Caption="Статус задачи" ShowCaptionButton="False">
-                        <dxb:BarButtonItem x:Name="status1" Content="Новая" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task01.png" ItemClick="status1_ItemClick" />
-                        <dxb:BarButtonItem x:Name="status2" Content="В работе" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task02.png" ItemClick="status2_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="status6" Content="Подтверждается" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task06.png" ItemClick="status6_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="status5" Content="Выполнена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task05.png" ItemClick="status5_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="status4" Content="Отложена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task04.png" ItemClick="status4_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="status3" Content="Отменена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task03.png" ItemClick="status3_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status1" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Content="Новая" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task01.png" ItemClick="status1_ItemClick" />
+                        <dxb:BarButtonItem x:Name="status2" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Content="В работе" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task02.png" ItemClick="status2_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status6" RenderOptions.BitmapScalingMode = "NearestNeighbor" Content="Подтверждается" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task06.png" ItemClick="status6_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status5" RenderOptions.BitmapScalingMode = "NearestNeighbor" Content="Выполнена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task05.png" ItemClick="status5_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status4" RenderOptions.BitmapScalingMode = "Fant" Content="Отложена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task04.png" ItemClick="status4_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="status3" RenderOptions.BitmapScalingMode = "NearestNeighbor" Content="Отменена" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task03.png" ItemClick="status3_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                     <dxr:RibbonPageGroup x:Name="rpgPriority" Caption="Приоритет задачи" ShowCaptionButton="False">

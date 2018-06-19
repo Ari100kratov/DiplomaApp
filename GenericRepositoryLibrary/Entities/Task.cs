@@ -55,6 +55,16 @@ namespace GenericRepositoryLibrary.Entities
         [FieldDb]
         public int ManagerId { get; set; }
 
+        [DataMember]
+        [FieldDb]
+        public int? ParentId { get; set; }
+
+        [DataMember]
+        [FieldDb]
+        public int? SolutionId { get; set; }
+
+        public Solution Solution => Dm.Solution.GetList().FirstOrDefault(x => x.Id == this.SolutionId);
+
         public User Manager => Dm.User.GetList().FirstOrDefault(x => x.Id == this.ManagerId);
 
         public Worker Worker => Dm.Worker.GetList().FirstOrDefault(x => x.Id == this.WorkerId);

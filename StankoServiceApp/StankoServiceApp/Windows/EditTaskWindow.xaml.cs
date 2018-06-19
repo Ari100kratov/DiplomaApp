@@ -28,6 +28,7 @@ namespace StankoServiceApp.Windows
         private File CurrentFile = null;
         private StatusTask StartStatus;
         private List<File> ListDelete = new List<File>();
+        private bool IsDirector => App.CurrentUser.Worker == null;
 
         private bool IsAdd => this.Task == null;
 
@@ -90,31 +91,44 @@ namespace StankoServiceApp.Windows
             this.deEndDate.EditValue = this.Task.EndDate;
             this.cePriority.EditValue = this.Task.PriorityId;
             this.ceStatus.EditValue = this.Task.StatusId;
+            this.lueParentTask.EditValue = this.Task.ParentId;
             this.deCompletionDate.EditValue = this.Task.CompletionDate;
             this.meDescription.Text = this.Task.Description;
         }
 
         private void FillCe()
         {
-            this.ceProject.ItemsSource = App.Service.GetProjects();
-            this.ceProject.DisplayMember = "Name";
-            this.ceProject.ValueMember = "Id";
+            if (this.IsDirector)
+                this.ceProject.ItemsSource = App.Service.GetProjects();
+            else
+                this.ceProject.ItemsSource = App.Service.GetProjects().Where(x => x.WorkerId == App.CurrentUser.Worker.Id).ToList();
+        }
+
+        private void FillLue()
+        {
+            if (this.IsDirector)
+                this.lueParentTask.ItemsSource = App.Service.GetTasks();
+            else
+                this.lueParentTask.ItemsSource = App.Service.GetTasks().Where(x => x.ManagerId == App.CurrentUser.Id).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
+                this.FillLue();
                 this.FillCe();
 
                 if (this.IsAdd)
                 {
+                    this.Title = "Создание новой задачи";
                     this.liStatus.Visibility = Visibility.Collapsed;
                     this.liCompletionDate.Visibility = Visibility.Collapsed;
                     this.ceStatus.EditValue = (int)StatusTask.Новая;
                     return;
                 }
 
+                this.Title = "Редактирование задачи";
                 this.StartStatus = (StatusTask)this.Task.GetStatusTask;
                 var taskFile = App.Service.GetTaskFiles().Where(x => x.TaskId == this.Task.Id).ToList();
 
@@ -261,6 +275,36 @@ namespace StankoServiceApp.Windows
                     return;
                 }
 
+                if (!this.IsAdd)
+                {
+                    if ((int)this.ceStatus.EditValue == (int)StatusTask.Выполнена)
+                    {
+                        if (this.Task.Childs.Count() != 0)
+                        {
+                            for (var i = 0; i < this.Task.Childs.Count(); i++)
+                            {
+                                if (this.Task.Childs[0].StatusId != (int)StatusTask.Выполнена)
+                                {
+                                    this.lblError.Text = "Некоторые связанные задачи не выполнены";
+                                    this.lblError.Visibility = Visibility.Visible;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                if ((int)this.ceStatus.EditValue == (int)StatusTask.Выполнена)
+                {
+                    if (this.deCompletionDate.EditValue == null)
+                    {
+                        this.lblError.Text = "Выберите дату для выполненной задачи";
+                        this.lblError.Visibility = Visibility.Visible;
+                        return;
+                    }
+                }
+
                 if (this.IsAdd)
                 {
                     var task = new ServiceReference.Task
@@ -273,7 +317,8 @@ namespace StankoServiceApp.Windows
                         PriorityId = (int)this.cePriority.EditValue,
                         Description = this.meDescription.Text,
                         CompletionDate = (DateTime?)this.deCompletionDate.EditValue,
-                        ManagerId = App.CurrentUser.Id
+                        ManagerId = App.CurrentUser.Id,
+                        ParentId = (int?)this.lueParentTask.EditValue
                     };
 
                     await App.Service.AddNewTaskAsync(task, this.ListFile, App.CurrentUser, this.meComment.Text);
@@ -288,6 +333,7 @@ namespace StankoServiceApp.Windows
                 }
                 else
                 {
+
                     this.Task.TaskName = this.teNameTask.Text;
                     this.Task.WorkerId = this.Worker?.Id;
                     this.Task.ProjectId = (int?)this.ceProject.EditValue;
@@ -296,7 +342,7 @@ namespace StankoServiceApp.Windows
                     this.Task.PriorityId = (int)this.cePriority.EditValue;
                     this.Task.Description = this.meDescription.Text;
                     this.Task.CompletionDate = (DateTime?)this.deCompletionDate.EditValue;
-                    this.Task.ManagerId = App.CurrentUser.Id;
+                    this.Task.ParentId = (int?)this.lueParentTask.EditValue;
 
                     if (this.StartStatus == this.Task.GetStatusTask)
                     {
@@ -323,6 +369,11 @@ namespace StankoServiceApp.Windows
             {
                 MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void gcFiles_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)
+        {
+            this.tvFile.BestFitColumns();
         }
     }
 }

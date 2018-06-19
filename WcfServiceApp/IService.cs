@@ -50,6 +50,9 @@ namespace WcfServiceApp
         [OperationContract]
         void EditPriorityTask(Task task, int priority);
 
+        [OperationContract]
+        void EditLogin(User user, string mail, string password);
+
         #region //Возвращение List всех моделей
 
         [OperationContract]
@@ -81,6 +84,12 @@ namespace WcfServiceApp
 
         [OperationContract]
         List<TaskFile> GetTaskFiles();
+
+        [OperationContract]
+        List<Solution> GetSolutions();
+
+        [OperationContract]
+        List<SolutionFile> GetSolutionFiles();
         #endregion 
     }
 }

@@ -1,0 +1,113 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Windows.ProfileWindow"
+        mc:Ignorable="d"
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        
+        Title="Профиль пользователя" Height="700" Width="500" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+
+        <dxlc:GroupBox Header="Личная инфомормация" Background="White">
+            <dxlc:LayoutControl>
+                <dxlc:LayoutItem MaxWidth="200" HorizontalAlignment="Left">
+                    <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgPhoto" MaxHeight="200"/>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="ФИО:">
+                        <TextBlock x:Name="tbFIO"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Дата рождения:">
+                        <TextBlock x:Name="tbDateOfBirth"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Телефон:">
+                        <TextBlock x:Name="tbPhone"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Работает с:">
+                        <TextBlock x:Name="tbDateOfEmploy"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Должность:">
+                        <TextBlock x:Name="tbPosition"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="E-mail:">
+                        <TextBlock x:Name="tbEmail"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dx:SimpleButton HorizontalAlignment="Left" Content="Показать статистику..." x:Name="sbStatWorker" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" />
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutControl>
+
+        </dxlc:GroupBox>
+
+
+        <dxlc:GroupBox Header="Параметры входа" Background="White" Grid.Row="1" >
+            <dxlc:LayoutControl Orientation="Vertical" ScrollBars="Auto">
+
+                <dxlc:LayoutItem Label="Электронная почта:">
+                    <dxe:TextEdit x:Name="teMail" NullText="Введите новый адрес электронной почты" Mask="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" MaskType="RegEx" MaskAutoComplete="Optimistic"/>
+                </dxlc:LayoutItem>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible">
+                    <dx:SimpleButton HorizontalAlignment="Right" Margin="0 0 5 0" Content="Изменить" x:Name="sbEditMail" Glyph="{dx:DXImage Image=Edit_16x16.png}" Click="sbEditMail_Click" />
+                    <dx:SimpleButton x:Name="sbNext" Visibility="Collapsed" Content="ОК" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=IconSetSymbols3_16x16.png}" Click="sbNext_Click"></dx:SimpleButton>
+                </StackPanel>
+
+                <dxlc:LayoutItem x:Name="liCode" Label="Код подтверждения" IsRequired="True" Visibility="Collapsed">
+                    <dxe:TextEdit x:Name="teCode" NullText="Код подтверждения выслан на почту"/>
+                </dxlc:LayoutItem>
+
+                <StackPanel x:Name="spButtons" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Collapsed">
+                    <dx:SimpleButton x:Name="sbRepeat" Margin="0 0 5 0" Content="Выслать еще раз" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=Reset2_16x16.png}" Click="sbRepeat_Click"></dx:SimpleButton>
+                    <dx:SimpleButton x:Name="sbOK"  Content="ОК" HorizontalAlignment="Right" Glyph="{dx:DXImage Image=IconSetSymbols3_16x16.png}" Click="sbOK_Click" ></dx:SimpleButton>
+                </StackPanel>
+
+                <TextBlock x:Name="tbMessage" Margin="5" Visibility="Collapsed" Text="Почта успешно подтверждена" TextAlignment="Center" FontSize="14" Foreground="Green"></TextBlock>
+
+
+                <dxlc:LayoutItem x:Name="liCurrentPassword" Label="Текущий пароль"  Visibility="Visible" Margin="0 10 0 0">
+                    <dxe:PasswordBoxEdit x:Name="pbCurrentPassword"/>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem x:Name="liNewPassword" Label="Новый пароль"  Visibility="Visible">
+                    <dxe:PasswordBoxEdit x:Name="pbNewPassword"/>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem x:Name="liRepeatPassword" Label="Подтвердите пароль"  Visibility="Visible">
+                    <dxe:PasswordBoxEdit x:Name="pbRepeatPassword"/>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutControl>
+
+        </dxlc:GroupBox>
+
+        <TextBlock Grid.Row="2" Margin="5" x:Name="tbMessageError" Visibility="Collapsed" Text="Заполните обязательные поля" FontSize="14" TextAlignment="Center" Background="IndianRed" Foreground="White"></TextBlock>
+        <StackPanel Grid.Row="3" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 0 10 10">
+            <dx:SimpleButton x:Name="sbCancel" Content="Закрыть" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" IsCancel="True" Click="sbCancel_Click"/>
+            <dx:SimpleButton x:Name="sbSave" Content="Сохранить" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -19,6 +19,8 @@ namespace GenericRepositoryLibrary
         public HistoryProjectRepository HistoryProject => new HistoryProjectRepository();
         public HistoryTaskRepository HistoryTask => new HistoryTaskRepository();
         public TaskFileRepository TaskFile => new TaskFileRepository();
+        public SolutionRepository Solution => new SolutionRepository();
+        public SolutionFileRepository SolutionFile => new SolutionFileRepository();
 
         static DataManager _active = null;
         static object _syncRoot = new object();

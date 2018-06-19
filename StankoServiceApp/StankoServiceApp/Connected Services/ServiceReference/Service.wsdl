@@ -85,6 +85,12 @@
   <wsdl:message name="IService_EditPriorityTask_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditPriorityTaskResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_EditLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditLogin" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditLoginResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
@@ -145,6 +151,18 @@
   <wsdl:message name="IService_GetTaskFiles_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTaskFilesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetSolutions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolutions" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetSolutions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolutionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetSolutionFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolutionFiles" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetSolutionFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolutionFilesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="Authorization">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Authorization" message="tns:IService_Authorization_InputMessage" />
@@ -198,6 +216,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/EditPriorityTask" message="tns:IService_EditPriorityTask_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/EditPriorityTaskResponse" message="tns:IService_EditPriorityTask_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EditLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditLogin" message="tns:IService_EditLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditLoginResponse" message="tns:IService_EditLogin_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetCustomers" message="tns:IService_GetCustomers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetCustomersResponse" message="tns:IService_GetCustomers_OutputMessage" />
@@ -237,6 +259,14 @@
     <wsdl:operation name="GetTaskFiles">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetTaskFiles" message="tns:IService_GetTaskFiles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetTaskFilesResponse" message="tns:IService_GetTaskFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSolutions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetSolutions" message="tns:IService_GetSolutions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetSolutionsResponse" message="tns:IService_GetSolutions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSolutionFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetSolutionFiles" message="tns:IService_GetSolutionFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetSolutionFilesResponse" message="tns:IService_GetSolutionFiles_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -358,6 +388,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EditLogin">
+      <soap:operation soapAction="http://tempuri.org/IService/EditLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <soap:operation soapAction="http://tempuri.org/IService/GetCustomers" style="document" />
       <wsdl:input>
@@ -441,6 +480,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetTaskFiles">
       <soap:operation soapAction="http://tempuri.org/IService/GetTaskFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSolutions">
+      <soap:operation soapAction="http://tempuri.org/IService/GetSolutions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSolutionFiles">
+      <soap:operation soapAction="http://tempuri.org/IService/GetSolutionFiles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

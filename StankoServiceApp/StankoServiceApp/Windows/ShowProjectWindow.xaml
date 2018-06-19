@@ -6,19 +6,21 @@
         xmlns:local="clr-namespace:StankoServiceApp.Windows"
         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-        dx:ThemeManager.ThemeName="none"
+        dx:ThemeManager.ThemeName="Office2010Blue"
         mc:Ignorable="d"
-        Title="" Height="450" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" MinWidth="500" SizeToContent="WidthAndHeight">
+        Title="Подробная информация о проекте" Height="450" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" MinWidth="500" SizeToContent="WidthAndHeight" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto" ></ColumnDefinition>
+            <ColumnDefinition Width="auto" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+       
         <dxlc:GroupBox Header="Информация о проекте" Background="White" Grid.Column="0" Grid.Row="0">
             <dxlc:LayoutControl>
 
@@ -51,7 +53,9 @@
                     </dxlc:LayoutItem>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                        
                         <TextBlock Text="ТЗ проекта:" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium"/>
+                        <Image Visibility="Collapsed" Width="30" Height="30" x:Name="imgFile" VerticalAlignment="Center"></Image>
                         <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                         <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Скачать..." Glyph="{dx:DXImage Image=ExportFile_16x16.png}" HorizontalAlignment="Right" Click="sbDownLoad_Click"/>
                     </StackPanel>
@@ -60,10 +64,10 @@
         </dxlc:GroupBox>
 
 
-        <dxlc:GroupBox Header="Информация о руководителе" Background="White" Grid.Column="1" Grid.Row="0">
+        <dxlc:GroupBox x:Name="gbManager" Header="Информация о руководителе" Background="White" Grid.Column="1" Grid.Row="0">
             <dxlc:LayoutControl>
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                    <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -99,7 +103,7 @@
 
             <dxg:GridControl x:Name="gcHistory" AutoGenerateColumns="None" SelectionMode="None" AllowInitiallyFocusedRow="False" Focusable="False">
                 <dxg:GridControl.View>
-                    <dxg:TableView AllowEditing="False" NavigationStyle="None"/>
+                    <dxg:TableView ShowGroupPanel="False" AllowEditing="False" NavigationStyle="None"/>
                 </dxg:GridControl.View>
 
                 <dxg:GridColumn Header="Кто изменил" FieldName="FullName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>

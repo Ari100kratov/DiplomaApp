@@ -44,12 +44,15 @@ namespace StankoServiceApp.Windows
             {
                 this.tbDownloadFile.Text = $"{this.Project.File.FileName} ({this.Project.File.ChangeDate.Value.ToLongDateString()})";
                 this.tbDownloadFile.Foreground = Brushes.Green;
+                this.imgFile.Source = this.Project.File.FileIcon;
+                this.imgFile.Visibility = Visibility.Visible;
             }
             else
             {
                 this.tbDownloadFile.Text = "Файл отсутствует";
                 this.tbDownloadFile.Foreground = Brushes.IndianRed;
                 this.sbDownLoad.IsEnabled = false;
+                this.imgFile.Visibility = Visibility.Collapsed;
             }
         }
 

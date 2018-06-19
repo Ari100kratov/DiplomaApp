@@ -100,6 +100,7 @@ namespace StankoServiceApp.Windows
             else
             {
                 this.gbFiles.Header = "Вложения отсутствуют";
+                this.gcFiles.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -132,7 +133,19 @@ namespace StankoServiceApp.Windows
             }
         }
 
-        private void gcFiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void gcFiles_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)
+        {
+            this.tvFiles.BestFitColumn(columnDownload);
+            this.tvFiles.BestFitColumn(columnIcon);
+            this.tvFiles.BestFitColumn(columnDate);
+        }
+
+        private void gcHistory_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)
+        {
+            this.tvHistory.BestFitColumn(columnStatus);
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var taskFile = this.gcFiles.CurrentItem as TaskFile;
 

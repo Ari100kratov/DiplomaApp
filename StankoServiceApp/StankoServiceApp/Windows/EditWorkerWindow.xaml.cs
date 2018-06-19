@@ -29,6 +29,7 @@ namespace StankoServiceApp.Windows
         private Worker Worker = null;
         private File Resume = new File();
         private bool IsAdd => this.Worker == null;
+        private bool IsDirector => App.CurrentUser.Worker == null;
 
         public EditWorkerWindow(Worker worker = null)
         {
@@ -237,17 +238,23 @@ namespace StankoServiceApp.Windows
         {
             try
             {
+                if (!this.IsDirector)
+                {
+                    this.cheRole.Visibility = Visibility.Collapsed;
+                }
+
                 this.cePosition.ItemsSource = App.Service.GetPositions();
                 this.cePosition.DisplayMember = "PositionName";
                 this.cePosition.ValueMember = "Id";
 
                 if (this.IsAdd)
                 {
+                    this.Title = "Добавление нового сотрудника";
                     return;
                 }
 
                 this.lgLogin.Visibility = Visibility.Collapsed;
-
+                this.Title = "Редактирование информации о сотруднике";
                 this.teName.Text = this.Worker.Name;
                 this.teSurname.Text = this.Worker.Surname;
                 this.tePatronymic.Text = this.Worker.Patronymic;
@@ -263,10 +270,13 @@ namespace StankoServiceApp.Windows
 
                 if (this.Worker.Resume == null)
                 {
+                    this.imgIcon.Visibility = Visibility.Collapsed;
                     this.tbDownloadFile.Foreground = Brushes.IndianRed;
                     return;
                 }
 
+                this.imgIcon.Visibility = Visibility.Visible;
+                this.imgIcon.Source = this.Worker.Resume.FileIcon;
                 this.tbDownloadFile.Foreground = Brushes.DarkGreen;
                 this.tbDownloadFile.Text = $"{this.Worker.Resume.FileName} ({this.Worker.Resume.ChangeDate.Value.ToLongDateString()})";
             }
@@ -304,6 +314,8 @@ namespace StankoServiceApp.Windows
                         this.Resume.ChangeDate = DateTime.Now;
                     }
 
+                    this.imgIcon.Visibility = Visibility.Visible;
+                    this.imgIcon.Source = this.Resume.FileIcon;
                     this.tbDownloadFile.Text = $"{System.IO.Path.GetFileName(openFile.FileName)} ({DateTime.Now.ToLongDateString()})";
                     this.tbDownloadFile.Foreground = Brushes.DarkGreen;
                 }

@@ -634,10 +634,16 @@ namespace StankoServiceApp.ServiceReference {
         private int ManagerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ParentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PriorityIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ProjectIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SolutionIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StatusIdField;
@@ -724,6 +730,19 @@ namespace StankoServiceApp.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ParentId {
+            get {
+                return this.ParentIdField;
+            }
+            set {
+                if ((this.ParentIdField.Equals(value) != true)) {
+                    this.ParentIdField = value;
+                    this.RaisePropertyChanged("ParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int PriorityId {
             get {
                 return this.PriorityIdField;
@@ -745,6 +764,19 @@ namespace StankoServiceApp.ServiceReference {
                 if ((this.ProjectIdField.Equals(value) != true)) {
                     this.ProjectIdField = value;
                     this.RaisePropertyChanged("ProjectId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SolutionId {
+            get {
+                return this.SolutionIdField;
+            }
+            set {
+                if ((this.SolutionIdField.Equals(value) != true)) {
+                    this.SolutionIdField = value;
+                    this.RaisePropertyChanged("SolutionId");
                 }
             }
         }
@@ -1295,6 +1327,160 @@ namespace StankoServiceApp.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Solution", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
+    [System.SerializableAttribute()]
+    public partial class Solution : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Comment {
+            get {
+                return this.CommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CommentField, value) != true)) {
+                    this.CommentField = value;
+                    this.RaisePropertyChanged("Comment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateTime {
+            get {
+                return this.DateTimeField;
+            }
+            set {
+                if ((this.DateTimeField.Equals(value) != true)) {
+                    this.DateTimeField = value;
+                    this.RaisePropertyChanged("DateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SolutionFile", Namespace="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities")]
+    [System.SerializableAttribute()]
+    public partial class SolutionFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FileIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SolutionIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FileId {
+            get {
+                return this.FileIdField;
+            }
+            set {
+                if ((this.FileIdField.Equals(value) != true)) {
+                    this.FileIdField = value;
+                    this.RaisePropertyChanged("FileId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SolutionId {
+            get {
+                return this.SolutionIdField;
+            }
+            set {
+                if ((this.SolutionIdField.Equals(value) != true)) {
+                    this.SolutionIdField = value;
+                    this.RaisePropertyChanged("SolutionId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
@@ -1377,6 +1563,12 @@ namespace StankoServiceApp.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditPriorityTask", ReplyAction="http://tempuri.org/IService/EditPriorityTaskResponse")]
         System.Threading.Tasks.Task EditPriorityTaskAsync(StankoServiceApp.ServiceReference.Task task, int priority);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditLogin", ReplyAction="http://tempuri.org/IService/EditLoginResponse")]
+        void EditLogin(StankoServiceApp.ServiceReference.User user, string mail, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditLogin", ReplyAction="http://tempuri.org/IService/EditLoginResponse")]
+        System.Threading.Tasks.Task EditLoginAsync(StankoServiceApp.ServiceReference.User user, string mail, string password);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetCustomers", ReplyAction="http://tempuri.org/IService/GetCustomersResponse")]
         System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers();
         
@@ -1436,6 +1628,18 @@ namespace StankoServiceApp.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetTaskFiles", ReplyAction="http://tempuri.org/IService/GetTaskFilesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile>> GetTaskFilesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetSolutions", ReplyAction="http://tempuri.org/IService/GetSolutionsResponse")]
+        System.Collections.Generic.List<StankoServiceApp.ServiceReference.Solution> GetSolutions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetSolutions", ReplyAction="http://tempuri.org/IService/GetSolutionsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.Solution>> GetSolutionsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetSolutionFiles", ReplyAction="http://tempuri.org/IService/GetSolutionFilesResponse")]
+        System.Collections.Generic.List<StankoServiceApp.ServiceReference.SolutionFile> GetSolutionFiles();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetSolutionFiles", ReplyAction="http://tempuri.org/IService/GetSolutionFilesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.SolutionFile>> GetSolutionFilesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1569,6 +1773,14 @@ namespace StankoServiceApp.ServiceReference {
             return base.Channel.EditPriorityTaskAsync(task, priority);
         }
         
+        public void EditLogin(StankoServiceApp.ServiceReference.User user, string mail, string password) {
+            base.Channel.EditLogin(user, mail, password);
+        }
+        
+        public System.Threading.Tasks.Task EditLoginAsync(StankoServiceApp.ServiceReference.User user, string mail, string password) {
+            return base.Channel.EditLoginAsync(user, mail, password);
+        }
+        
         public System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers() {
             return base.Channel.GetCustomers();
         }
@@ -1647,6 +1859,22 @@ namespace StankoServiceApp.ServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.TaskFile>> GetTaskFilesAsync() {
             return base.Channel.GetTaskFilesAsync();
+        }
+        
+        public System.Collections.Generic.List<StankoServiceApp.ServiceReference.Solution> GetSolutions() {
+            return base.Channel.GetSolutions();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.Solution>> GetSolutionsAsync() {
+            return base.Channel.GetSolutionsAsync();
+        }
+        
+        public System.Collections.Generic.List<StankoServiceApp.ServiceReference.SolutionFile> GetSolutionFiles() {
+            return base.Channel.GetSolutionFiles();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<StankoServiceApp.ServiceReference.SolutionFile>> GetSolutionFilesAsync() {
+            return base.Channel.GetSolutionFilesAsync();
         }
     }
 }

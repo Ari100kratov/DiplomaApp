@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GenericRepositoryLibrary;
 using GenericRepositoryLibrary.Entities;
+using StankoserviceEnums;
 
 namespace WcfServiceApp
 {
@@ -122,7 +123,7 @@ namespace WcfServiceApp
                     worker.PhotoId = null;
                     DataManager.Instance.Worker.Update(worker);
                     DataManager.Instance.File.Delete(deletePhoto);
-                    
+
                 }
             }
             else
@@ -247,6 +248,11 @@ namespace WcfServiceApp
                 }
             }
 
+            if (task.StatusId == (int)StatusTask.Отменена)
+            {
+                task.ParentId = null;
+            }
+
             Dm.Task.Update(task);
 
             if (user != null)
@@ -314,6 +320,12 @@ namespace WcfServiceApp
             Dm.HistoryTask.Add(history);
 
             task.StatusId = status;
+
+            if (task.StatusId == (int)StatusTask.Отменена)
+            {
+                task.ParentId = null;
+            }
+
             Dm.Task.Update(task);
         }
 
@@ -321,6 +333,17 @@ namespace WcfServiceApp
         {
             task.PriorityId = priority;
             Dm.Task.Update(task);
+        }
+
+        public void EditLogin(User user, string mail, string password)
+        {
+            if (mail != "")
+                user.Email = mail;
+
+            if (password != "")
+                user.Password = password;
+
+            Dm.User.Update(user);
         }
 
         #region //Реализация получения List всех моделей
@@ -372,6 +395,16 @@ namespace WcfServiceApp
         public List<Worker> GetWorkers()
         {
             return Dm.Worker.GetList();
+        }
+
+        public List<Solution> GetSolutions()
+        {
+            return Dm.Solution.GetList();
+        }
+
+        public List<SolutionFile> GetSolutionFiles()
+        {
+            return Dm.SolutionFile.GetList();
         }
 
 

@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:StankoServiceApp"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-        dx:ThemeManager.ThemeName="none"
+        dx:ThemeManager.ThemeName="Office2010Blue"
         mc:Ignorable="d"
-        Title="" Height="350" Width="400" WindowStartupLocation="CenterScreen" Visibility="Visible" Loaded="Window_Loaded">
+        Title="Авторизация в системе" MinHeight="360" Height="360" Width="400" MinWidth="400" WindowStartupLocation="CenterScreen" Visibility="Visible" Loaded="Window_Loaded">
     <Grid>
-        <Border HorizontalAlignment="Center" Width="300" Margin="0 20 0 20">
+        <Border HorizontalAlignment="Center" Width="300" Margin="0 20 0 20" VerticalAlignment="Center">
             <StackPanel>
                 <Image StretchDirection="DownOnly" Stretch="None" Margin="0 0 0 10" Source="/StankoServiceApp;component/Resources/logo.png" />
                 <TextBlock FontSize="18"><Run Text="E-mail"/></TextBlock>

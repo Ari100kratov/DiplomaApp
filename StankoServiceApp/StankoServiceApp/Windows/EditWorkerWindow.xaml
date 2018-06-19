@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:StankoServiceApp.Windows"
         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Serialization="clr-namespace:DevExpress.Xpf.LayoutControl.Serialization;assembly=DevExpress.Xpf.LayoutControl.v17.1" xmlns:Custom="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient" x:Class="StankoServiceApp.Windows.EditWorkerWindow"
         mc:Ignorable="d"
-    dx:ThemeManager.ThemeName="none"
+    dx:ThemeManager.ThemeName="Office2010Blue"
     
-        Title="" Height="550" Width="400" Loaded="Window_Loaded">
+        Title="" Height="550" Width="400" MinWidth="400" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" >
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel>
 
                 <dxlc:LayoutGroup x:Name="LayoutGroup" Header="LayoutGroup" View="Tabs" SelectedTabIndex="0">
@@ -18,7 +18,7 @@
                         <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                             <dxlc:LayoutItem>
-                                <dxe:ImageEdit x:Name="iePhoto" MaxWidth="300" MaxHeight="300" RenderOptions.EdgeMode="Aliased" TabIndex="8"/>
+                                <dxe:ImageEdit  x:Name="iePhoto" MaxWidth="300" MaxHeight="300" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" TabIndex="8"/>
                             </dxlc:LayoutItem>
 
                             <dxlc:LayoutItem Label="Фамилия*" IsRequired="True">
@@ -59,6 +59,7 @@
 
                             <TextBlock Text="Резюме сотрудника" Margin="0 5 0 3"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                <Image Visibility="Collapsed" Width="30" Height="30" x:Name="imgIcon" VerticalAlignment="Center"></Image>
                                 <TextBlock x:Name="tbDownloadFile" Foreground="IndianRed" Text="Файл отсутствует" VerticalAlignment="Center"/>
                                 <dx:SimpleButton VerticalAlignment="Center" x:Name="sbDownLoad" Margin="10 0 0 0" Content="Загрузить..." Glyph="{dx:DXImage Image=Download_16x16.png}" Click="sbDownLoad_Click"/>
                             </StackPanel>
@@ -101,8 +102,8 @@
                 <TextBlock x:Name="tbMessageError" Visibility="Collapsed" Text="Заполните обязательные поля" FontSize="14" TextAlignment="Center" Background="IndianRed" Foreground="White"></TextBlock>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 0 10">
-                    <dx:SimpleButton x:Name="sbCancel" Margin="0 5 10 0" Content="Отменить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Cancel_32x32.png}" TabIndex="10" IsCancel="True"/>
-                    <dx:SimpleButton x:Name="sbSave" Margin="0 5 10 0" Content="Сохранить" dx:ThemeManager.ThemeName="None" Glyph="{dx:DXImage Image=Apply_32x32.png}" TabIndex="9" IsDefault="True" Click="sbSave_Click"/>
+                    <dx:SimpleButton x:Name="sbCancel" Margin="0 5 10 0" Content="Отменить"  Glyph="{dx:DXImage Image=Cancel_32x32.png}" TabIndex="10" IsCancel="True"/>
+                    <dx:SimpleButton x:Name="sbSave" Margin="0 5 10 0" Content="Сохранить" Glyph="{dx:DXImage Image=Apply_32x32.png}" TabIndex="9" IsDefault="True" Click="sbSave_Click"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

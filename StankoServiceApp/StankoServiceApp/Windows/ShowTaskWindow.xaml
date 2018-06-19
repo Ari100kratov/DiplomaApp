@@ -8,18 +8,18 @@
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-        dx:ThemeManager.ThemeName="none"
-        mc:Ignorable="d"
-        Height="450" Width="1000" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        mc:Ignorable="d" Title="Подробная информация о задаче"
+        Height="450" Width="1000" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <dxlc:GroupBox Header="Информация о задаче" Background="White" Grid.Column="0" Grid.Row="0">
@@ -65,7 +65,7 @@
         <dxlc:GroupBox x:Name="gbWorker" Header="Исполнитель" Background="White" Grid.Column="1" Grid.Row="0">
             <dxlc:LayoutControl x:Name="lcWorker">
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image RenderOptions.EdgeMode="Aliased" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
+                    <Image RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgPhoto" MaxHeight="150" MaxWidth="150"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -100,7 +100,7 @@
 
             <dxlc:LayoutControl x:Name="lcManager">
                 <dxlc:LayoutItem MaxWidth="150" HorizontalAlignment="Left">
-                    <Image x:Name="imgPhotoM" MaxHeight="150" MaxWidth="150" RenderOptions.EdgeMode="Aliased"/>
+                    <Image x:Name="imgPhotoM"  MaxHeight="150" MaxWidth="150" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
@@ -132,23 +132,42 @@
         </dxlc:GroupBox>
 
         <dxlc:GroupBox x:Name="gbFiles" Header="Вложения задачи" Background="White" Grid.Column="0" Grid.Row="1">
-            <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True"  MouseDoubleClick="gcFiles_MouseDoubleClick">
+            <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True" ItemsSourceChanged="gcFiles_ItemsSourceChanged">
                 <dxg:GridControl.View>
-                    <dxg:TableView AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False" />
+                    <dxg:TableView x:Name="tvFiles" AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False" />
                 </dxg:GridControl.View>
 
-                <dxg:GridColumn Header="Файл" FieldName="File.FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
-                <dxg:GridColumn Header="Расширение" FieldName="File.Title" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Расширение файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
-                <dxg:GridColumn Header="Дата изменения" FieldName="File.ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2"/>
+                <dxg:GridColumn x:Name="columnIcon" FieldName="TaskFile" Header="Иконка" SortOrder="Ascending"  HeaderToolTip="Иконка файла" VisibleIndex="0" BestFitMode="AllRows">
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Width="25" Height="25" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.File.FileIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Файл" FieldName="File.FileName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
+                <dxg:GridColumn x:Name="columnDate" Header="Дата" FieldName="File.ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2"/>
+
+                <dxg:GridColumn x:Name="columnDownload"  Header="Скачать" SortOrder="Ascending"  HeaderToolTip="Иконка файла" VisibleIndex="3" BestFitMode="AllRows">
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Width="25" Height="25" RenderOptions.EdgeMode="Aliased" Margin="5 0 5 0" VerticalAlignment="Center" Source="/StankoServiceApp;component/Resources/SaveTo_32x32.png" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
 
             </dxg:GridControl>
         </dxlc:GroupBox>
 
         <dxlc:GroupBox x:Name="gbHistory" Header="История изменения статусов задачи" Background="White" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
 
-            <dxg:GridControl x:Name="gcHistory" AutoGenerateColumns="None" SelectionMode="None" AllowInitiallyFocusedRow="False" Focusable="False">
+            <dxg:GridControl x:Name="gcHistory" AutoGenerateColumns="None" SelectionMode="None" AllowInitiallyFocusedRow="False" Focusable="False" ItemsSourceChanged="gcHistory_ItemsSourceChanged">
                 <dxg:GridControl.View>
-                    <dxg:TableView AllowEditing="False" NavigationStyle="None"/>
+                    <dxg:TableView ShowGroupPanel="False" x:Name="tvHistory" AllowEditing="False" NavigationStyle="None"/>
                 </dxg:GridControl.View>
 
                 <dxg:GridColumn Header="Кто изменил" FieldName="FullName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="0"/>
@@ -160,7 +179,7 @@
                 </dxg:GridColumn>
                 <dxg:GridColumn Header="Комментарий" FieldName="Comment" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Оставленный комментарий" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
 
-                <dxg:GridColumn Header="Изменил статус на" FieldName="HistoryTask" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Статус на который изменил" AllowAutoFilter="False" VisibleIndex="2" >
+                <dxg:GridColumn Header="Изменил статус на" x:Name="columnStatus" FieldName="HistoryTask" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Статус на который изменил" AllowAutoFilter="False" VisibleIndex="2" >
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">

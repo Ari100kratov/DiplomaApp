@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Editors;
+using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Printing;
 using Microsoft.Win32;
 using StankoServiceApp.ServiceReference;
 using StankoServiceApp.Windows;
@@ -29,6 +31,7 @@ namespace StankoServiceApp
     {
         List<Project> ProjectList = new List<Project>();
         Project SelectProject = null;
+        private bool IsDirector => App.CurrentUser.Worker == null;
 
         public ProjectPage()
         {
@@ -37,7 +40,11 @@ namespace StankoServiceApp
 
         private async void FillList()
         {
-            this.ProjectList = await App.Service.GetProjectsAsync();
+            if (this.IsDirector)
+                this.ProjectList = await App.Service.GetProjectsAsync();
+            else
+                this.ProjectList = App.Service.GetProjects().Where(x => x.WorkerId == App.CurrentUser.Worker.Id).ToList();
+
             this.FillGc();
         }
 
@@ -82,6 +89,13 @@ namespace StankoServiceApp
         {
             try
             {
+                if (!this.IsDirector)
+                {
+                    this.bbiNewProject.IsVisible = false;
+                    this.bbiEditProject.IsVisible = false;
+                    this.bbiDeleteProject.IsVisible = false;
+                }
+
                 this.rbStatus.IsEnabled = false;
                 this.bbiEditProject.IsEnabled = false;
                 this.bbiDeleteProject.IsEnabled = false;
@@ -369,6 +383,17 @@ namespace StankoServiceApp
         private void status8_ItemClick(object sender, ItemClickEventArgs e)
         {
             this.EditStatus(StatusProject.Закрыт);
+        }
+
+        private void bbiStandartPrint_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.columnStatus.Visible = true;
+            PrintableControlLink link = new PrintableControlLink((TableView)this.gcProject.View);
+            var window = new DocumentPreviewWindow();
+            window.PreviewControl.DocumentSource = link;
+            link.CreateDocument();
+            window.ShowDialog();
+            this.columnStatus.Visible = false;
         }
     }
 }

@@ -58,8 +58,11 @@ namespace StankoServiceApp.Windows
             {
                 if (this.IsAdd)
                 {
+                    this.Title = "Создание нового проекта";
                     return;
                 }
+
+                this.Title = "Редактирование информации о проекте";
                 this.StartStatus = (StatusProject)this.Project.GetStatusProject;
                 this.FillWorker();
                 this.teName.Text = this.Project.Name;
@@ -72,9 +75,12 @@ namespace StankoServiceApp.Windows
                 if (this.Project.File == null)
                 {
                     this.tbDownloadFile.Foreground = Brushes.IndianRed;
+                    this.imgIcon.Visibility = Visibility.Collapsed;
                     return;
                 }
 
+                this.imgIcon.Visibility = Visibility.Visible;
+                this.imgIcon.Source = this.Project.File.FileIcon;
                 this.tbDownloadFile.Foreground = Brushes.DarkGreen;
                 this.tbDownloadFile.Text = $"{this.Project.File.FileName} ({this.Project.File.ChangeDate.Value.ToLongDateString()})";
             }
@@ -104,6 +110,8 @@ namespace StankoServiceApp.Windows
 
                     this.tbDownloadFile.Text = $"{System.IO.Path.GetFileName(openFile.FileName)} ({DateTime.Now.ToLongDateString()})";
                     this.tbDownloadFile.Foreground = Brushes.DarkGreen;
+                    this.imgIcon.Source = this.File.FileIcon;
+                    this.imgIcon.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
@@ -236,7 +244,7 @@ namespace StankoServiceApp.Windows
 
         private void deCompletionDate_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            
+
         }
     }
 }
