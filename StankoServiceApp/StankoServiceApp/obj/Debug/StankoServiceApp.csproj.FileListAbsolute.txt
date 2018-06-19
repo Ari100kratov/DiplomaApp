@@ -203,3 +203,5 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ManagerWindow.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ProfileWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ProfileWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\BeforePrintWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\BeforePrintWindow.baml

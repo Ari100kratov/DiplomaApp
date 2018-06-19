@@ -29,6 +29,7 @@ namespace StankoServiceApp.Pages
         private Worker Worker = null;
         private List<Worker> ListWorkers = new List<Worker>();
         private bool IsDirector => App.CurrentUser.Worker == null;
+        public bool IsPrint;
 
         public WorkerPage()
         {
@@ -258,11 +259,17 @@ namespace StankoServiceApp.Pages
 
         private void bbiStandartPrint_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            PrintableControlLink link = new PrintableControlLink((CardView)this.gcWorker.View);
-            var window = new DocumentPreviewWindow();
-            window.PreviewControl.DocumentSource = link;
-            link.CreateDocument();
-            window.ShowDialog();
+            var print = new BeforePrintWindow(this);
+            print.ShowDialog();
+
+            if (this.IsPrint)
+            {
+                PrintableControlLink link = new PrintableControlLink((CardView)this.gcWorker.View);
+                var window = new DocumentPreviewWindow();
+                window.PreviewControl.DocumentSource = link;
+                link.CreateDocument();
+                window.ShowDialog();
+            }
         }
     }
 }

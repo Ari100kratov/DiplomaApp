@@ -166,6 +166,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Windows\BeforePrintWindow.xaml.cs">
+      <DependentUpon>BeforePrintWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DirectorWindow.xaml.cs">
       <DependentUpon>DirectorWindow.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WorkerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BeforePrintWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

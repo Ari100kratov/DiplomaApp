@@ -10,5 +10,9 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESKTOP-9A67565\SQLEXPRESS;Initial Catalog=Stankoservice;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="Colledge" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)" />
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

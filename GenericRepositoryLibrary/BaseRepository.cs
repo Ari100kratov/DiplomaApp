@@ -14,7 +14,7 @@ namespace GenericRepositoryLibrary
     {
         private string TableName { get; }
         private List<T> ListEntities = new List<T>();
-        private string ConnectionString => Properties.Settings.Default.ConnectionString;
+        public string ConnectionString => DataManager.Connection;
 
         public BaseRepository()
         {

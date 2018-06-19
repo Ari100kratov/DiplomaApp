@@ -25,13 +25,13 @@
             <dxg:GridControl.View>
                 <dxg:TableView AllowPerPixelScrolling="True" x:Name="tvProjects" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>
-            <dxg:GridColumn Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
-            <dxg:GridColumn Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
-            <dxg:GridColumn Header="Сроки " FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
-            <dxg:GridColumn FieldName="CompletionDate" Header="Завершено" SortIndex="3" HeaderToolTip="Реальная дата завершения" ReadOnly="True" UnboundType="DateTime"/>
-            <dxg:GridColumn Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Ответственный за проект" AutoFilterCondition="Contains"/>
-            <dxg:GridColumn Header="Тип" FieldName="TypeProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Продолжительность" AllowBestFit="True"/>
-            <dxg:GridColumn Header="Статус" x:Name="columnStatus" Visible="False" FieldName="GetStatusProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус проекта" AllowBestFit="True"/>
+            <dxg:GridColumn x:Name="column1" Header="Наименование" FieldName="Name" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column2"  Header="Дата начала" FieldName="StartDate" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Дата старта работы над проектом" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+            <dxg:GridColumn x:Name="column3"  Header="Сроки " FieldName="EndDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Предварительная дата завершения" AllowResizing="True" AllowMoving="True" UnboundType="DateTime"/>
+            <dxg:GridColumn x:Name="column4"  FieldName="CompletionDate" Header="Завершено" SortIndex="3" HeaderToolTip="Реальная дата завершения" ReadOnly="True" UnboundType="DateTime"/>
+            <dxg:GridColumn x:Name="column5"  Header="Руководитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Ответственный за проект" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column6"  Header="Тип" FieldName="TypeProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Продолжительность" AllowBestFit="True"/>
+            <dxg:GridColumn x:Name="column7"   Header="Статус" Visible="False" FieldName="GetStatusProject" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус проекта" AllowBestFit="True"/>
 
             <dxg:GridColumn AllowPrinting="False" Header="Статус" FieldName="Project" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
                 <dxg:GridColumn.CellTemplate>
@@ -47,7 +47,7 @@
         </dxg:GridControl>
         <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                <dxr:RibbonPage>
+                <dxr:RibbonPage Caption="{x:Null}">
                     <dxr:RibbonPageGroup Caption="Управление">
                         <dxb:BarButtonItem x:Name="bbiNewProject" Content="Новый проект" Glyph="{dx:DXImage Image=Add_16x16.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewProject_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditProject" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditProject_ItemClick"/>

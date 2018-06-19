@@ -32,6 +32,7 @@ namespace StankoServiceApp
         List<Project> ProjectList = new List<Project>();
         Project SelectProject = null;
         private bool IsDirector => App.CurrentUser.Worker == null;
+        public bool IsPrint;
 
         public ProjectPage()
         {
@@ -387,13 +388,25 @@ namespace StankoServiceApp
 
         private void bbiStandartPrint_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.columnStatus.Visible = true;
-            PrintableControlLink link = new PrintableControlLink((TableView)this.gcProject.View);
-            var window = new DocumentPreviewWindow();
-            window.PreviewControl.DocumentSource = link;
-            link.CreateDocument();
-            window.ShowDialog();
-            this.columnStatus.Visible = false;
+            var print = new BeforePrintWindow(this);
+            print.ShowDialog();
+
+            if (this.IsPrint)
+            {
+                if (this.column7.AllowPrinting)
+                {
+                    this.tvProjects.BestFitColumn(this.column7);
+                    this.column7.Visible = true;
+                }
+
+                PrintableControlLink link = new PrintableControlLink((TableView)this.gcProject.View);
+                var window = new DocumentPreviewWindow();
+                window.PreviewControl.DocumentSource = link;
+                link.CreateDocument();
+                window.ShowDialog();
+
+                this.column7.Visible = false;
+            }
         }
     }
 }

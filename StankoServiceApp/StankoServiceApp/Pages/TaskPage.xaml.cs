@@ -31,6 +31,7 @@ namespace StankoServiceApp.Pages
         private List<ServiceReference.Task> ListTask = new List<ServiceReference.Task>();
         private ServiceReference.Task Task = null;
         private bool IsDirector => App.CurrentUser.Worker == null;
+        public bool IsPrint;
 
         public TaskPage()
         {
@@ -374,18 +375,32 @@ namespace StankoServiceApp.Pages
 
         private void bbiStandartPrint_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            this.columnStatus.Visible = true;
-            this.columnTask.Visible = true;
+            var print = new BeforePrintWindow(this);
+            print.ShowDialog();
 
-            PrintableControlLink link = new PrintableControlLink((TreeListView)this.gcTask.View);
-            link.PageHeaderData = "Задачи";
-            var window = new DocumentPreviewWindow();
-            window.PreviewControl.DocumentSource = link;
-            link.CreateDocument();
-            window.ShowDialog();
+            if (this.IsPrint)
+            {
+                if (this.column7.AllowPrinting)
+                {
+                    this.tbTask.BestFitColumn(this.column7);
+                    this.column7.Visible = true;
+                }
 
-            this.columnStatus.Visible = false;
-            this.columnTask.Visible = false;
+                if (this.column8.AllowPrinting)
+                {
+                    this.tbTask.BestFitColumn(this.column8);
+                    this.column8.Visible = true;
+                }
+
+                PrintableControlLink link = new PrintableControlLink((TreeListView)this.gcTask.View);
+                var window = new DocumentPreviewWindow();
+                window.PreviewControl.DocumentSource = link;
+                link.CreateDocument();
+                window.ShowDialog();
+
+                this.column7.Visible = false;
+                this.column8.Visible = false;
+            }
         }
     }
 }

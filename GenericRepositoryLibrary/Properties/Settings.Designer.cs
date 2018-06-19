@@ -33,5 +33,14 @@ namespace GenericRepositoryLibrary.Properties {
                 return ((string)(this["ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        public string Colledge {
+            get {
+                return ((string)(this["Colledge"]));
+            }
+        }
     }
 }

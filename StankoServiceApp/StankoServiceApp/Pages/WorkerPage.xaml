@@ -22,7 +22,7 @@
 
         <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                <dxr:RibbonPage Caption="Главная">
+                <dxr:RibbonPage Caption="{x:Null}">
                     <dxr:RibbonPageGroup Caption="Управление">
                         <dxb:BarButtonItem x:Name="bbiNewWorker" Content="Новый сотрудник" Glyph="{dx:DXImage Image=Add_16x16.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}" RibbonStyle="Default" ItemClick="bbiNewWorker_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiEditWorker" Content="Редактировать" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" RibbonStyle="Default" ItemClick="bbiEditWorker_ItemClick"/>
@@ -68,19 +68,19 @@
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
+            <dxg:GridColumn x:Name="column1" Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
                     <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
-            <dxg:GridColumn Header="Имя" FieldName="Name" ReadOnly="True"/>
-            <dxg:GridColumn Header="Фамилия" FieldName="Surname" ReadOnly="True"/>
-            <dxg:GridColumn Header="Отчество" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
-            <dxg:GridColumn Header="Дата рожд" FieldName="DateOfBirth" ReadOnly="True"/>
-            <dxg:GridColumn Header="Работает с" FieldName="DateOfEmploy" ReadOnly="True"/>
-            <dxg:GridColumn Header="Телефон" FieldName="Phone" UnboundType="DateTime" ReadOnly="True"/>
-            <dxg:GridColumn Header="Должность" FieldName="Position.PositionName" ReadOnly="True"/>
-            <dxg:GridColumn Header="Эл. адрес" FieldName="User.Email" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column2" Header="Имя" FieldName="Name" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column3" Header="Фамилия" FieldName="Surname" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column4" Header="Отчество" FieldName="Patronymic" AllowMoving="True" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column5" Header="Дата рожд" FieldName="DateOfBirth" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column6" Header="Работает с" FieldName="DateOfEmploy" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column7" Header="Телефон" FieldName="Phone" UnboundType="DateTime" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column8" Header="Должность" FieldName="Position.PositionName" ReadOnly="True"/>
+            <dxg:GridColumn x:Name="column9" Header="Эл. адрес" FieldName="User.Email" ReadOnly="True"/>
         </dxg:GridControl>
 
     </Grid>

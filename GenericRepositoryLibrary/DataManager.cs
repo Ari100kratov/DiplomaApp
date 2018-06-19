@@ -24,6 +24,7 @@ namespace GenericRepositoryLibrary
 
         static DataManager _active = null;
         static object _syncRoot = new object();
+        public static string Connection;
 
         public static DataManager Instance
         {
