@@ -9,7 +9,7 @@
         dx:ThemeManager.ThemeName="Office2010Blue"
         x:Class="StankoServiceApp.Windows.StatProjectWindow"
         mc:Ignorable="d"
-        Title="Статистическая информация о проектах" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Статистика по проектам" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -17,10 +17,13 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <dx:DXTabControl Grid.Row="1">
-            <dx:DXTabItem Header="Общая информация">
+        <dx:DXTabControl Grid.Row="1" x:Name="dxTab">
+            <dx:DXTabItem x:Name="dx1" Header="Общая информация" TabIndex="0">
                 <Grid Background="Transparent">
-                    <dxc:ChartControl AnimationMode="OnLoad" x:Name="charControl">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="charCommon">
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
                         <dxc:ChartControl.Titles>
                             <dxc:Title Content="Количесто проектов по статусам" HorizontalAlignment="Center"/>
                         </dxc:ChartControl.Titles>
@@ -41,9 +44,12 @@
                     </dxc:ChartControl>
                 </Grid>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="Успеваемость">
+            <dx:DXTabItem Header="Успеваемость" x:Name="dx2" TabIndex="1">
                 <Grid Background="Transparent">
-                    <dxc:ChartControl AnimationMode="OnLoad">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="chartTerm">
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
                         <dxc:ChartControl.Titles>
                             <dxc:Title Content="Диаграмма успеваемости в заявленные сроки" HorizontalAlignment="Center"/>
                         </dxc:ChartControl.Titles>
@@ -69,42 +75,58 @@
                     </dxc:ChartControl>
                 </Grid>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="Время">
-                <Grid Background="Transparent"/>
+
+            <dx:DXTabItem Header="Активность" x:Name="dx3" TabIndex="2">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="chartActivity">
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Активность за последний год" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D>
+                            <dxc:LineSeries2D x:Name="SeriesActvity"  DisplayName="Завершены" LabelsVisibility="True">
+                                <dxc:SeriesPoint Argument="1" Value="6.5"/>
+                                <dxc:SeriesPoint Argument="2" Value="5.5"/>
+                                <dxc:SeriesPoint Argument="3" Value="12.5"/>
+                                <dxc:SeriesPoint Argument="4" Value="11.5"/>
+                                <dxc:SeriesPoint Argument="5" Value="18.5"/>
+                            </dxc:LineSeries2D>
+
+                            <dxc:LineSeries2D x:Name="SeriesFalse"  DisplayName="Закрыты" LabelsVisibility="True">
+                                <dxc:SeriesPoint Argument="1" Value="7"/>
+                                <dxc:SeriesPoint Argument="2" Value="10"/>
+                                <dxc:SeriesPoint Argument="3" Value="2"/>
+                                <dxc:SeriesPoint Argument="4" Value="3"/>
+                                <dxc:SeriesPoint Argument="5" Value="1"/>
+                            </dxc:LineSeries2D>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+
+                </Grid>
             </dx:DXTabItem>
         </dx:DXTabControl>
 
         <dxr:RibbonControl Grid.Row="0" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                <dxr:RibbonPage Caption="Главная">
+                <dxr:RibbonPage Caption="{x:Null}">
                     <dxr:RibbonPageGroup Caption="Печать">
-                        <dxb:BarButtonItem Content="Текущий" LargeGlyph="{dx:DXImage Image=Print_32x32.png}" Glyph="{dx:DXImage Image=Print_16x16.png}" RibbonStyle="Default"/>
-                        <dxb:BarButtonItem Content="Все" LargeGlyph="{dx:DXImage Image=PrintArea_32x32.png}" Glyph="{dx:DXImage Image=PrintArea_16x16.png}"/>
+                        <dxb:BarButtonItem x:Name="bbiPrintCurrent" Content="Текущий" LargeGlyph="{dx:DXImage Image=Print_32x32.png}" Glyph="{dx:DXImage Image=Print_16x16.png}" RibbonStyle="Default" ItemClick="bbiPrintCurrent_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiprintAll" Content="Все" LargeGlyph="{dx:DXImage Image=PrintArea_32x32.png}" Glyph="{dx:DXImage Image=PrintArea_16x16.png}" ItemClick="bbiprintAll_ItemClick"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Экспорт">
-                        <dxb:BarButtonItem Content="HTML" Glyph="{dx:DXImage Image=ExportToHTML_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToHTML_32x32.png}"/>
-                        <dxb:BarButtonItem Content="IMG" Glyph="{dx:DXImage Image=ExportToIMG_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToIMG_32x32.png}"/>
-                        <dxb:BarButtonItem Content="MHT" Glyph="{dx:DXImage Image=ExportToMHT_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToMHT_32x32.png}"/>
-                        <dxb:BarButtonItem Content="PDF" Glyph="{dx:DXImage Image=ExportToPDF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToPDF_32x32.png}"/>
-                        <dxb:BarButtonItem Content="RTF" Glyph="{dx:DXImage Image=ExportToRTF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToRTF_32x32.png}"/>
-                        <dxb:BarButtonItem Content="XLS" Glyph="{dx:DXImage Image=ExportToXLS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLS_32x32.png}"/>
-                        <dxb:BarButtonItem Content="XLSX" Glyph="{dx:DXImage Image=ExportToXLSX_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLSX_32x32.png}"/>
-                        <dxb:BarButtonItem Content="XPS" Glyph="{dx:DXImage Image=ExportToXPS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXPS_32x32.png}"/>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="Фильтрация">
-                        <dxb:BarEditItem Content="Менеджер">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:LookUpEditSettingsBase>
-
-                                    
-                                        
-                                           
-                                        
-                                    
-
-                                </dxe:LookUpEditSettingsBase>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
+                        <dxb:BarButtonItem x:Name="html" Content="HTML" Glyph="{dx:DXImage Image=ExportToHTML_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToHTML_32x32.png}" ItemClick="html_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="img" Content="IMG" Glyph="{dx:DXImage Image=ExportToIMG_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToIMG_32x32.png}" ItemClick="img_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="mht" Content="MHT" Glyph="{dx:DXImage Image=ExportToMHT_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToMHT_32x32.png}" ItemClick="mht_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="pdf" Content="PDF" Glyph="{dx:DXImage Image=ExportToPDF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToPDF_32x32.png}" ItemClick="pdf_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="rtf" Content="RTF" Glyph="{dx:DXImage Image=ExportToRTF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToRTF_32x32.png}" ItemClick="rtf_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xls" Content="XLS" Glyph="{dx:DXImage Image=ExportToXLS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLS_32x32.png}" ItemClick="xls_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xlsx" Content="XLSX" Glyph="{dx:DXImage Image=ExportToXLSX_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLSX_32x32.png}" ItemClick="xlsx_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xps" Content="XPS" Glyph="{dx:DXImage Image=ExportToXPS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXPS_32x32.png}" ItemClick="xps_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
                 </dxr:RibbonPage>

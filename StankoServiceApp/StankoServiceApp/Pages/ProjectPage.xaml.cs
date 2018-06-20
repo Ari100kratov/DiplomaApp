@@ -277,6 +277,7 @@ namespace StankoServiceApp
             try
             {
                 var statAll = new StatProjectWindow(GetDataRowHandles());
+                
                 statAll.ShowDialog();
             }
             catch (Exception ex)
@@ -290,8 +291,34 @@ namespace StankoServiceApp
             List<Project> rowHandles = new List<Project>();
             for (int i = 0; i < this.gcProject.VisibleRowCount; i++)
             {
-                var rowHandle = this.gcProject.GetRowByListIndex(i) as Project;
-                rowHandles.Add(rowHandle);
+                int rowHandle = this.gcProject.GetRowHandleByVisibleIndex(i);
+                var item = this.gcProject.GetRow(rowHandle) as Project;
+                if (this.gcProject.IsGroupRowHandle(rowHandle))
+                {
+                    if (!this.gcProject.IsGroupRowExpanded(rowHandle))
+                    {
+                        rowHandles.AddRange(GetDataRowHandlesInGroup(rowHandle));
+                    }
+                }
+                else
+                    rowHandles.Add(item);
+            }
+            return rowHandles;
+        }
+        private List<Project> GetDataRowHandlesInGroup(int groupRowHandle)
+        {
+            List<Project> rowHandles = new List<Project>();
+            for (int i = 0; i < this.gcProject.GetChildRowCount(groupRowHandle); i++)
+            {
+                int rowHandle = this.gcProject.GetChildRowHandle(groupRowHandle, i);
+                var item = this.gcProject.GetRow(rowHandle) as Project;
+
+                if (this.gcProject.IsGroupRowHandle(rowHandle))
+                {
+                    rowHandles.AddRange(GetDataRowHandlesInGroup(rowHandle));
+                }
+                else
+                    rowHandles.Add(item);
             }
             return rowHandles;
         }

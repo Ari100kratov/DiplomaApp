@@ -182,7 +182,7 @@
                                 <TextBlock x:Name="tbFIO"/>
                             </dxlc:LayoutItem>
 
-                            <dxlc:LayoutItem Label="Дата рождения:">
+                            <dxlc:LayoutItem Label="Дата рожд:">
                                 <TextBlock x:Name="tbDateOfBirth"/>
                             </dxlc:LayoutItem>
 

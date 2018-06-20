@@ -29,32 +29,35 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutItem Label="ФИО:">
+                    <dxlc:LayoutItem Label="ФИО:" IsRequired="True">
                         <TextBlock x:Name="tbFIO"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Дата рожд:">
+                    <dxlc:LayoutItem Label="Дата рожд:" IsRequired="True">
                         <TextBlock x:Name="tbDateOfBirth"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Телефон:">
+                    <dxlc:LayoutItem Label="Телефон:" IsRequired="True">
                         <TextBlock x:Name="tbPhone"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Работает с:">
+                    <dxlc:LayoutItem Label="Работает с:" IsRequired="True">
                         <TextBlock x:Name="tbDateOfEmploy"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Должность:">
+                    <dxlc:LayoutItem Label="Должность:" IsRequired="True">
                         <TextBlock x:Name="tbPosition"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="E-mail:">
+                    <dxlc:LayoutItem Label="E-mail:" IsRequired="True">
                         <TextBlock x:Name="tbEmail"/>
                     </dxlc:LayoutItem>
 
                     <dxlc:LayoutItem>
-                        <dx:SimpleButton HorizontalAlignment="Left" Content="Показать статистику..." x:Name="sbStatWorker" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" />
+                        <dx:SimpleButton HorizontalAlignment="Right" Width="200" HorizontalContentAlignment="Left" Content="Статистика по проектам..." x:Name="sbStatProject" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" Click="sbStatProject_Click" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem>
+                        <dx:SimpleButton HorizontalAlignment="Right" Width="200" HorizontalContentAlignment="Left" Content="Статистика по задачам..." x:Name="sbStatTask" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" Click="sbStatTask_Click" />
                     </dxlc:LayoutItem>
 
                 </dxlc:LayoutGroup>

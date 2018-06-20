@@ -271,5 +271,54 @@ namespace StankoServiceApp.Pages
                 window.ShowDialog();
             }
         }
+
+        private List<Worker> GetDataRowHandles()
+        {
+            List<Worker> rowHandles = new List<Worker>();
+            for (int i = 0; i < this.gcWorker.VisibleRowCount; i++)
+            {
+                int rowHandle = this.gcWorker.GetRowHandleByVisibleIndex(i);
+                var item = this.gcWorker.GetRow(rowHandle) as Worker;
+                if (this.gcWorker.IsGroupRowHandle(rowHandle))
+                {
+                    if (!this.gcWorker.IsGroupRowExpanded(rowHandle))
+                    {
+                        rowHandles.AddRange(GetDataRowHandlesInGroup(rowHandle));
+                    }
+                }
+                else
+                    rowHandles.Add(item);
+            }
+            return rowHandles;
+        }
+        private List<Worker> GetDataRowHandlesInGroup(int groupRowHandle)
+        {
+            List<Worker> rowHandles = new List<Worker>();
+            for (int i = 0; i < this.gcWorker.GetChildRowCount(groupRowHandle); i++)
+            {
+                int rowHandle = this.gcWorker.GetChildRowHandle(groupRowHandle, i);
+                var item = this.gcWorker.GetRow(rowHandle) as Worker;
+
+                if (this.gcWorker.IsGroupRowHandle(rowHandle))
+                {
+                    rowHandles.AddRange(GetDataRowHandlesInGroup(rowHandle));
+                }
+                else
+                    rowHandles.Add(item);
+            }
+            return rowHandles;
+        }
+
+        private void bbiStatAll_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            var statAll = new StatWorkerWindow(this.ListWorkers);
+            statAll.ShowDialog();
+        }
+
+        private void bbiStatFilter_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            var statFilter = new StatWorkerWindow(this.GetDataRowHandles());
+            statFilter.ShowDialog();
+        }
     }
 }

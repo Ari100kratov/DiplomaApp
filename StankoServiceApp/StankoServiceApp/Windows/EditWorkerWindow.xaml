@@ -33,7 +33,7 @@
                                 <dxe:TextEdit x:Name="tePatronymic" TabIndex="3" NullText="Введите отчество"/>
                             </dxlc:LayoutItem>
 
-                            <dxlc:LayoutItem Label="Дата рождения*" IsRequired="True">
+                            <dxlc:LayoutItem Label="Дата рожд*" IsRequired="True">
                                 <dxe:DateEdit x:Name="deDateOfBirth" MinValue="1/1/1900" Mask="D" MaskType="DateTime" TabIndex="4" NullText="Выберите дату рождения"/>
                             </dxlc:LayoutItem>
 

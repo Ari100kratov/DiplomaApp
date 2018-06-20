@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StankoServiceApp.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -216,6 +217,21 @@ namespace StankoServiceApp.Windows
             this.tbEmail.Text = worker.User.Email;
             this.imgPhoto.Source = worker.ImgPhoto;
             this.teMail.Text = worker.User.Email;
+        }
+
+        private void sbStatProject_Click(object sender, RoutedEventArgs e)
+        {
+            var project = App.Service.GetProjects().Where(x=>x.WorkerId == App.CurrentUser.Worker.Id).ToList();
+            var stat = new StatProjectWindow(project);
+            stat.ShowDialog();
+        }
+
+        private void sbStatTask_Click(object sender, RoutedEventArgs e)
+        {
+            var worker = new List<Worker>();
+            worker.Add(App.CurrentUser.Worker);
+            var stat = new StatWorkerWindow(worker);
+            stat.ShowDialog();
         }
     }
 }

@@ -37,8 +37,8 @@
                         <dxb:BarButtonItem x:Name="bbiProjects" Content="Проекты сотрудника" Glyph="{dx:DXImage Image=Project_16x16.png}" LargeGlyph="{dx:DXImage Image=Project_32x32.png}" RibbonStyle="Default"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Статистика">
-                        <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" RibbonStyle="Default"/>
-                        <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем сотрудникам" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}"/>
+                        <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" RibbonStyle="Default" ItemClick="bbiStatFilter_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiStatAll" Content="По всем сотрудникам" Glyph="{dx:DXImage Image=3DColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DColumn_32x32.png}" ItemClick="bbiStatAll_ItemClick"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Фильтрация">
                         <dxb:BarEditItem x:Name="bbiFilterPosition" Content="Должность:" EditValueChanged="bbiFilterPosition_EditValueChanged">

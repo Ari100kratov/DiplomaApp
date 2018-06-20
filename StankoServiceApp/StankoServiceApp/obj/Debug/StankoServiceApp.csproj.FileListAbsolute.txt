@@ -205,3 +205,5 @@ C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\ProfileWindow.baml
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\BeforePrintWindow.g.cs
 C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\BeforePrintWindow.baml
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\StatWorkerWindow.g.cs
+C:\Users\vlads\Desktop\Диплом\StankoServiceApp\StankoServiceApp\obj\Debug\Windows\StatWorkerWindow.baml

@@ -22,11 +22,11 @@
                         <dxlc:LayoutItem Label="Дата начала*" IsRequired="True">
                             <dxe:DateEdit x:Name="deStartDate" Mask="D" NullText="Выберите дату начала работы"/>
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="Сроки завершения">
+                        <dxlc:LayoutItem Label="Срок до">
                             <dxe:DateEdit x:Name="deEndDate" Mask="D" NullText="Выберите запланированную дату окончания"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Завершен">
-                            <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания проекта" EditValueChanged="deCompletionDate_EditValueChanged"/>
+                            <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания" EditValueChanged="deCompletionDate_EditValueChanged"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Тип проекта*" IsRequired="True">
                             <dxe:ComboBoxEdit x:Name="ceTypePeriod" NullText="Выберите тип проекта по продолжительности" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:TypePeriod,UseNumericEnumValue=True}"/>
@@ -62,7 +62,7 @@
                                 <TextBlock x:Name="tbFIO"/>
                             </dxlc:LayoutItem>
 
-                            <dxlc:LayoutItem Label="Дата рождения:">
+                            <dxlc:LayoutItem Label="Дата рожд:">
                                 <TextBlock x:Name="tbDateOfBirth"/>
                             </dxlc:LayoutItem>
 

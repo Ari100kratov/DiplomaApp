@@ -75,7 +75,7 @@
                         <TextBlock x:Name="tbFIO"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Дата рождения:" IsRequired="True">
+                    <dxlc:LayoutItem Label="Дата рожд:" IsRequired="True">
                         <TextBlock x:Name="tbDateOfBirth"/>
                     </dxlc:LayoutItem>
 

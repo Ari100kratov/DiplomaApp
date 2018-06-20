@@ -1,0 +1,142 @@
+﻿<Window x:Class="StankoServiceApp.Windows.StatWorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        mc:Ignorable="d"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        Title="Статистика по сотрудникам" Height="600" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <dx:DXTabControl Grid.Row="1" x:Name="dxTab">
+
+
+            <dx:DXTabItem x:Name="dx1" Header="Общая информация" TabIndex="0">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="chartCommon">
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Количество задач по статусам" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:XYDiagram2D x:Name="diagrammCommon">
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus1" DisplayName="Новая" Brush="#FF1B53CB"/>
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus2" Brush="#FFEC1111" DisplayName="В работе"/>
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus3" Brush="#FFCFD3C3" DisplayName="Отменена"/>
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus4" Brush="#FFFFB900" DisplayName="Отложена"/>
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus5" Brush="#FF44C51E" DisplayName="Выполнена"/>
+                            <dxc:BarSideBySideSeries2D LabelsVisibility="True" x:Name="seriesStatus6" Brush="#FFFDFD2D" DisplayName="Подтверждается"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                </Grid>
+            </dx:DXTabItem>
+
+            <dx:DXTabItem Header="Успеваемость" TabIndex="1">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="chartTerm">
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Успеваемость в заявленные сроки" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend UseCheckBoxes="False"/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:SimpleDiagram2D Dimension="1">
+                            <dxc:PieSeries2D LabelsVisibility="True" x:Name="seriesSimple" HoleRadiusPercent="0" LegendTextPattern="{}{A}:{VP}{V:%}">
+
+                                <dxc:PieSeries2D.LegendPointOptions>
+                                    <dxc:PointOptions Pattern="{}{A}:" />
+                                </dxc:PieSeries2D.LegendPointOptions>
+
+                                <dxc:PieSeries2D.PointOptions>
+                                    <dxc:PointOptions>
+                                        <dxc:PointOptions.ValueNumericOptions>
+                                            <dxc:NumericOptions Format="Percent" Precision="0" />
+                                        </dxc:PointOptions.ValueNumericOptions>
+                                    </dxc:PointOptions>
+                                </dxc:PieSeries2D.PointOptions>
+                            </dxc:PieSeries2D>
+                        </dxc:SimpleDiagram2D>
+                        
+                    </dxc:ChartControl>
+                </Grid>
+            </dx:DXTabItem>
+
+            <dx:DXTabItem Header="Активность" x:Name="dx3" TabIndex="2">
+                <Grid Background="Transparent">
+                    <dxc:ChartControl AnimationMode="OnDataChanged" x:Name="chartActivity">
+                        <dxc:ChartControl.Legends>
+                            <dxc:Legend/>
+                        </dxc:ChartControl.Legends>
+                        <dxc:ChartControl.PrintOptions>
+                            <dxc:ChartPrintOptions SizeMode="NonProportionalZoom"/>
+                        </dxc:ChartControl.PrintOptions>
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="Активность за последний год" HorizontalAlignment="Center"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D>
+                            <dxc:LineSeries2D x:Name="SeriesActvity"  DisplayName="Выполнено" LabelsVisibility="True">
+                                <dxc:SeriesPoint Argument="1" Value="6.5"/>
+                                <dxc:SeriesPoint Argument="2" Value="5.5"/>
+                                <dxc:SeriesPoint Argument="3" Value="12.5"/>
+                                <dxc:SeriesPoint Argument="4" Value="11.5"/>
+                                <dxc:SeriesPoint Argument="5" Value="18.5"/>
+                            </dxc:LineSeries2D>
+                            <dxc:LineSeries2D x:Name="SeriesFalse"  DisplayName="Отменено" LabelsVisibility="True">
+                                <dxc:SeriesPoint Argument="1" Value="6.5"/>
+                                <dxc:SeriesPoint Argument="2" Value="5.5"/>
+                                <dxc:SeriesPoint Argument="3" Value="12.5"/>
+                                <dxc:SeriesPoint Argument="4" Value="11.5"/>
+                                <dxc:SeriesPoint Argument="5" Value="18.5"/>
+                            </dxc:LineSeries2D>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                </Grid>
+            </dx:DXTabItem>
+
+        </dx:DXTabControl>
+
+
+        <dxr:RibbonControl Grid.Row="0" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="{x:Null}">
+                    <dxr:RibbonPageGroup Caption="Печать">
+                        <dxb:BarButtonItem x:Name="bbiPrintCurrent" Content="Текущий" LargeGlyph="{dx:DXImage Image=Print_32x32.png}" Glyph="{dx:DXImage Image=Print_16x16.png}" RibbonStyle="Default" ItemClick="bbiPrintCurrent_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiprintAll" Content="Все" LargeGlyph="{dx:DXImage Image=PrintArea_32x32.png}" Glyph="{dx:DXImage Image=PrintArea_16x16.png}"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Экспорт">
+                        <dxb:BarButtonItem x:Name="html" Content="HTML" Glyph="{dx:DXImage Image=ExportToHTML_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToHTML_32x32.png}" ItemClick="html_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="img" Content="IMG" Glyph="{dx:DXImage Image=ExportToIMG_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToIMG_32x32.png}" ItemClick="img_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="mht" Content="MHT" Glyph="{dx:DXImage Image=ExportToMHT_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToMHT_32x32.png}" ItemClick="mht_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="pdf" Content="PDF" Glyph="{dx:DXImage Image=ExportToPDF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToPDF_32x32.png}" ItemClick="pdf_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="rtf" Content="RTF" Glyph="{dx:DXImage Image=ExportToRTF_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToRTF_32x32.png}" ItemClick="rtf_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xls" Content="XLS" Glyph="{dx:DXImage Image=ExportToXLS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLS_32x32.png}" ItemClick="xls_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xlsx" Content="XLSX" Glyph="{dx:DXImage Image=ExportToXLSX_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXLSX_32x32.png}" ItemClick="xlsx_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="xps" Content="XPS" Glyph="{dx:DXImage Image=ExportToXPS_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToXPS_32x32.png}" ItemClick="xps_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Сотрудники" x:Name="rpg">
+                        <dxb:BarCheckItem x:Name="bbiWorker" Content="Исполнители" IsChecked="True" Glyph="{dx:DXImageOffice2013 Image=Employee_16x16.png}" LargeGlyph="{dx:DXImageOffice2013 Image=Employee_32x32.png}" ItemClick="bbiWorker_ItemClick"/>
+                        <dxb:BarCheckItem x:Name="bbiManager" Content="Менеджеры" IsChecked="False" Glyph="{dx:DXImageOffice2013 Image=Customer_16x16.png}" LargeGlyph="{dx:DXImageOffice2013 Image=Customer_32x32.png}" ItemClick="bbiManager_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+
+        <TextBlock Grid.Row="2" x:Name="tbTotalTaskEnd" Margin="0 5 0 5" Foreground="DarkSlateGray" FontSize="22" HorizontalAlignment="Center" Text="Среднее количество дней на проект: "/>
+    </Grid>
+</Window>

@@ -29,7 +29,7 @@
 
             
         </StackPanel>
-        <Button Content="Мой профиль" x:Name="btnProfile" Grid.Column="1" FontSize="18" Width="150" Height="50" Background="{x:Null}"  Foreground="#6286BB" HorizontalAlignment="Right" Click="btnProfile_Click" ></Button>
+        <Button Content="Мой профиль" x:Name="btnProfile" Grid.Column="1" FontSize="18" Width="150" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#6286BB" HorizontalAlignment="Right" Click="btnProfile_Click" ></Button>
         
         <Grid Margin="10 0" x:Name="GridCursor" Width="150" Height="5" Background="#6286BB" HorizontalAlignment="Left" VerticalAlignment="Bottom"></Grid>
         <Frame Margin="0 10 0 0" x:Name="MainFrame" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden"/>
