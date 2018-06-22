@@ -21,25 +21,23 @@ namespace StankoServiceApp.Windows
     /// </summary>
     public partial class EditStatusWindow : Window
     {
-        Project Project = new Project();
+        Project Project = null;
         StatusProject StatusP;
-        ServiceReference.Task Task = new ServiceReference.Task();
+        ServiceReference.Task Task = null;
         StatusTask StatusT;
         private bool IsDirector = App.CurrentUser.Worker == null;
 
-        public EditStatusWindow(Project project, StatusProject status, ServiceReference.Task task = null)
+        public EditStatusWindow(Project project, StatusProject status)
         {
             InitializeComponent();
             this.StatusP = status;
             this.Project = project;
-            this.Task = task;
         }
 
-        public EditStatusWindow(ServiceReference.Task task, StatusTask status, Project project = null)
+        public EditStatusWindow(ServiceReference.Task task, StatusTask status)
         {
             InitializeComponent();
             this.StatusT = status;
-            this.Project = project;
             this.Task = task;
         }
 
@@ -83,6 +81,18 @@ namespace StankoServiceApp.Windows
                             if (this.Task.Manager != null && this.Task.Manager.Worker != null)
                             {
                                 Methods.SendMessageFromMainMail("Изменился статус задачи", $"Статус задачи '{this.Task.TaskName}' был изменен.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                            }
+                        }
+
+                        if (App.CurrentUser.RoleId == (int)Role.Исполнитель)
+                        {
+                            if (this.StatusT == StatusTask.Выполняется)
+                            {
+                                Methods.SendMessageFromMainMail("Задача в работе", $"Задача '{this.Task.TaskName}' перешла на стадию 'Выполняется'.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                            }
+                            if(this.StatusT == StatusTask.Подтверждается)
+                            {
+                                Methods.SendMessageFromMainMail("Задача на подтверждении", $"Задача '{this.Task.TaskName}' ожидает вашего подтверждения.\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
                             }
                         }
                     }

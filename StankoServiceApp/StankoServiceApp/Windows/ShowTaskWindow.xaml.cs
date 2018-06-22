@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using StankoServiceApp.ServiceReference;
+using StankoserviceEnums;
 
 namespace StankoServiceApp.Windows
 {
@@ -121,8 +122,8 @@ namespace StankoServiceApp.Windows
                 this.ListFiles = App.Service.GetTaskFiles().Where(x => x.TaskId == this.Task.Id).ToList();
                 this.ListHistory = App.Service.GetHistoryTasks().Where(x => x.TaskId == this.Task.Id).ToList();
 
-                this.FillFiles();
                 this.FillWorker();
+                this.FillFiles();
                 this.FillManager();
                 this.FillHistory();
                 this.FillTask();

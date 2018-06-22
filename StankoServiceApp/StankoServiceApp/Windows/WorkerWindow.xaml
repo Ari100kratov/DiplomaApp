@@ -1,0 +1,97 @@
+﻿<Window x:Class="StankoServiceApp.Windows.WorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+         xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        mc:Ignorable="d"
+        Title="Форма управления сотрудника" Height="450" Width="800" MinHeight="400" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <dxg:GridControl  AllowInitiallyFocusedRow="False" x:Name="gcTask" Grid.Row="1" AutoGenerateColumns="KeepOld" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcTask_CurrentItemChanged">
+            <dxg:GridControl.View >
+                <dxg:TreeListView AutoExpandAllNodes="True" x:Name="tbTask"  AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ParentFieldName="ParentId" KeyFieldName="Id" TreeDerivationMode="Selfreference" ShowSearchPanelMode="Default" AutoWidth="False"/>
+            </dxg:GridControl.View>
+
+            <dxg:GridColumn x:Name="column1" Header="Наименование" Binding="{Binding TaskName, Mode=TwoWay}" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column2" Header="Менеджер" FieldName="Manager.FullName" SortOrder="Ascending" SortIndex="1" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column3" Header="Исполнитель" FieldName="Worker.FullName" SortOrder="Ascending" SortIndex="2" HeaderToolTip="ФИО испольнителя задачи" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column4" Header="Проект" FieldName="Project.Name" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Наименование проекта" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column5" Header="Срок до" FieldName="EndDate" SortOrder="Ascending" SortIndex="4" HeaderToolTip="Сроки завершения работы над задачей" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column6" Header="Завершено" FieldName="CompletionDate" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Фактическая дата завершения" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+
+            <dxg:GridColumn x:Name="column7" Header="Приоритет" Visible="False" FieldName="GetPriorityTask" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+            <dxg:GridColumn x:Name="column8" Header="Статус" Visible="False" FieldName="GetStatusTask" SortOrder="Ascending" SortIndex="5" HeaderToolTip="Статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains"/>
+
+            <dxg:GridColumn Header="Приоритет" AllowPrinting="False" FieldName="Task" SortOrder="Ascending" SortIndex="6" HeaderToolTip="Текущий статус" AllowAutoFilter="False" AutoFilterCondition="Contains" ColumnFilterMode="DisplayText" >
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Image Width="20" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding RowData.Row.PriorityIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding RowData.Row.GetPriorityTask}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+
+            <dxg:GridColumn Header="Статус" AllowPrinting="False" FieldName="Task" SortOrder="Ascending" SortIndex="7" HeaderToolTip="Текущий статус" AllowAutoFilter="False" >
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Image Width="20" Height="20" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding RowData.Row.GetStatusTask}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+        </dxg:GridControl>
+
+        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="{x:Null}">
+                    <dxr:RibbonPageGroup Caption="Управление">
+                        <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiTakeTask" Content="Стать исполнителем" LargeGlyph="{dx:DXImage Image=EditTask_32x32.png}" Glyph="{dx:DXImage Image=EditTask_16x16.png}" ItemClick="bbiTakeTask_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiInWork" Content="Выполняется" LargeGlyph="{dx:DXImage Image=NewTask_32x32.png}" Glyph="{dx:DXImage Image=EditTask_16x16.png}" ItemClick="bbiInWork_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiSend" Content="Выполнена" LargeGlyph="{dx:DXImage Image=Task_32x32.png}" Glyph="{dx:DXImage Image=Task_16x16.png}" ItemClick="bbiSend_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Обозреватель">
+                        <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiShow" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShow_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiSolution" Content="Мое решение" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" Glyph="{dx:DXImage Image=BOTask_16x16.png}" ItemClick="bbiSolution_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Фильтрация и поиск">
+                        <dxb:BarEditItem x:Name="bbiFilterStatus" Content="Статус задачи:" EditValueChanged="bbiFilterStatus_EditValueChanged">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterStatus" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type StankoserviceEnums:StatusTask}, UseNumericEnumValue=True}"/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarEditItem x:Name="bbiFilterPriority" Content="Приоритет задачи:" EditValueChanged="bbiFilterPriority_EditValueChanged">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterPriority" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type StankoserviceEnums:PriorityTask}, UseNumericEnumValue=True}"/>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                        <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Личная информация">
+                        <dxb:BarButtonItem x:Name="bbiProfile" Content="Профиль" LargeGlyph="{dx:DXImage Image=Customer_32x32.png}" Glyph="{dx:DXImage Image=Customer_16x16.png}" ItemClick="bbiProfile_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiStat" Content="Статистика" LargeGlyph="{dx:DXImage Image=Statistical_32x32.png}" Glyph="{dx:DXImage Image=Statistical_16x16.png}" ItemClick="bbiStat_ItemClick"/>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+
+    </Grid>
+</Window>

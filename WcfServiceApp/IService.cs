@@ -53,6 +53,11 @@ namespace WcfServiceApp
         [OperationContract]
         void EditLogin(User user, string mail, string password);
 
+        [OperationContract]
+        void EditSolution(Task task, List<File> listFile, List<File> listDelete, string comment, bool send);
+
+        [OperationContract]
+        void TakeTask(Task task, User user);
         #region //Возвращение List всех моделей
 
         [OperationContract]

@@ -1569,6 +1569,18 @@ namespace StankoServiceApp.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditLogin", ReplyAction="http://tempuri.org/IService/EditLoginResponse")]
         System.Threading.Tasks.Task EditLoginAsync(StankoServiceApp.ServiceReference.User user, string mail, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditSolution", ReplyAction="http://tempuri.org/IService/EditSolutionResponse")]
+        void EditSolution(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listFile, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listDelete, string comment, bool send);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/EditSolution", ReplyAction="http://tempuri.org/IService/EditSolutionResponse")]
+        System.Threading.Tasks.Task EditSolutionAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listFile, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listDelete, string comment, bool send);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TakeTask", ReplyAction="http://tempuri.org/IService/TakeTaskResponse")]
+        void TakeTask(StankoServiceApp.ServiceReference.Task task, StankoServiceApp.ServiceReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/TakeTask", ReplyAction="http://tempuri.org/IService/TakeTaskResponse")]
+        System.Threading.Tasks.Task TakeTaskAsync(StankoServiceApp.ServiceReference.Task task, StankoServiceApp.ServiceReference.User user);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetCustomers", ReplyAction="http://tempuri.org/IService/GetCustomersResponse")]
         System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers();
         
@@ -1779,6 +1791,22 @@ namespace StankoServiceApp.ServiceReference {
         
         public System.Threading.Tasks.Task EditLoginAsync(StankoServiceApp.ServiceReference.User user, string mail, string password) {
             return base.Channel.EditLoginAsync(user, mail, password);
+        }
+        
+        public void EditSolution(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listFile, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listDelete, string comment, bool send) {
+            base.Channel.EditSolution(task, listFile, listDelete, comment, send);
+        }
+        
+        public System.Threading.Tasks.Task EditSolutionAsync(StankoServiceApp.ServiceReference.Task task, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listFile, System.Collections.Generic.List<StankoServiceApp.ServiceReference.File> listDelete, string comment, bool send) {
+            return base.Channel.EditSolutionAsync(task, listFile, listDelete, comment, send);
+        }
+        
+        public void TakeTask(StankoServiceApp.ServiceReference.Task task, StankoServiceApp.ServiceReference.User user) {
+            base.Channel.TakeTask(task, user);
+        }
+        
+        public System.Threading.Tasks.Task TakeTaskAsync(StankoServiceApp.ServiceReference.Task task, StankoServiceApp.ServiceReference.User user) {
+            return base.Channel.TakeTaskAsync(task, user);
         }
         
         public System.Collections.Generic.List<StankoServiceApp.ServiceReference.Customer> GetCustomers() {

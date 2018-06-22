@@ -36,10 +36,10 @@ namespace StankoServiceApp.Pages
             InitializeComponent();
         }
 
-        private async System.Threading.Tasks.Task FillList()
+        private void FillList()
         {
             if (this.IsDirector)
-                this.ListWorkers = await App.Service.GetWorkersAsync();
+                this.ListWorkers = App.Service.GetWorkers();
             else
                 this.ListWorkers = App.Service.GetWorkers().Where(x => x.User.RoleId == (int)Role.Исполнитель).ToList();
 
@@ -48,6 +48,7 @@ namespace StankoServiceApp.Pages
 
         private void FillGc()
         {
+            this.gcWorker.BeginDataUpdate();
             if (this.bbiFilterRole.EditValue == null && this.bbiFilterPosition.EditValue == null)
             {
                 this.gcWorker.ItemsSource = this.ListWorkers;
@@ -67,9 +68,10 @@ namespace StankoServiceApp.Pages
             {
                 this.gcWorker.ItemsSource = this.ListWorkers.Where(x => x.PositionId == (int)this.bbiFilterPosition.EditValue && x.User.RoleUser == (Role)this.bbiFilterRole.EditValue).ToList();
             }
+            this.gcWorker.EndDataUpdate();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -79,7 +81,7 @@ namespace StankoServiceApp.Pages
                     this.bbiDeleteWorker.IsVisible = false;
                 }
 
-                this.cbFilterPosition.ItemsSource = await App.Service.GetPositionsAsync();
+                this.cbFilterPosition.ItemsSource = App.Service.GetPositions();
                 this.cbFilterPosition.DisplayMember = "PositionName";
                 this.cbFilterPosition.ValueMember = "Id";
 
@@ -89,7 +91,7 @@ namespace StankoServiceApp.Pages
                 this.bbiProjects.IsEnabled = false;
                 this.bbiDownload.IsEnabled = false;
 
-                await this.FillList();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -97,13 +99,13 @@ namespace StankoServiceApp.Pages
             }
         }
 
-        private async void bbiNewWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        private void bbiNewWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             try
             {
                 var newWorker = new EditWorkerWindow();
                 newWorker.ShowDialog();
-                await this.FillList();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -150,13 +152,13 @@ namespace StankoServiceApp.Pages
             }
         }
 
-        private async void bbiEditWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        private void bbiEditWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             try
             {
                 var editWorker = new EditWorkerWindow(this.Worker);
                 editWorker.ShowDialog();
-                await this.FillList();
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -164,7 +166,7 @@ namespace StankoServiceApp.Pages
             }
         }
 
-        private async void bbiDeleteWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        private void bbiDeleteWorker_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             try
             {
@@ -173,8 +175,8 @@ namespace StankoServiceApp.Pages
                     return;
                 }
 
-                await App.Service.DeleteWorkerAsync(this.Worker);
-                await this.FillList();
+                App.Service.DeleteWorker(this.Worker);
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -245,11 +247,11 @@ namespace StankoServiceApp.Pages
             }
         }
 
-        private async void bbiRefresh_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        private void bbiRefresh_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             try
             {
-                await this.FillList();
+                this.FillList();
             }
             catch (Exception ex)
             {

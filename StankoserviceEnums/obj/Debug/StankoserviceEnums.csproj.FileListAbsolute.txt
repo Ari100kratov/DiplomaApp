@@ -1,5 +1,6 @@
 C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\bin\Debug\StankoserviceEnums.dll
 C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\bin\Debug\StankoserviceEnums.pdb
+C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\obj\Debug\StankoserviceEnums.csprojResolveAssemblyReference.cache
 C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\obj\Debug\StankoserviceEnums.csproj.CoreCompileInputs.cache
 C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\obj\Debug\StankoserviceEnums.dll
 C:\Users\vlads\Desktop\Диплом\StankoserviceEnums\obj\Debug\StankoserviceEnums.pdb

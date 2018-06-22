@@ -23,6 +23,7 @@ namespace StankoServiceApp.Windows
         private ProjectPage ProjectPage = null;
         private TaskPage TaskPage = null;
         private WorkerPage WorkerPage = null;
+        private WorkerWindow WorkerWindow = null;
 
         public BeforePrintWindow(ProjectPage projectPage)
         {
@@ -34,6 +35,12 @@ namespace StankoServiceApp.Windows
         {
             InitializeComponent();
             this.TaskPage = taskPage;
+        }
+
+        public BeforePrintWindow(WorkerWindow worker)
+        {
+            InitializeComponent();
+            this.WorkerWindow = worker;
         }
 
         public BeforePrintWindow(WorkerPage workerPage)
@@ -71,7 +78,7 @@ namespace StankoServiceApp.Windows
                 this.column9.Visibility = Visibility.Collapsed;
             }
 
-            if (this.TaskPage != null)
+            if (this.TaskPage != null || this.WorkerWindow!=null)
             {
                 this.column1.CheckedStateContent = "Наименование";
                 this.column1.UncheckedStateContent = "Наименование";
@@ -150,6 +157,12 @@ namespace StankoServiceApp.Windows
                 this.ProjectPage.IsPrint = false;
                 this.Close();
             }
+
+            if (this.WorkerWindow != null)
+            {
+                this.WorkerWindow.IsPrint = false;
+                this.Close();
+            }
         }
 
         private void sbSave_Click(object sender, RoutedEventArgs e)
@@ -178,6 +191,20 @@ namespace StankoServiceApp.Windows
                 this.TaskPage.column7.AllowPrinting = (bool)this.column7.IsChecked;
                 this.TaskPage.column8.AllowPrinting = (bool)this.column8.IsChecked;
                 this.TaskPage.IsPrint = true;
+                this.Close();
+            }
+
+            if (this.WorkerWindow != null)
+            {
+                this.WorkerWindow.column1.AllowPrinting = (bool)this.column1.IsChecked;
+                this.WorkerWindow.column2.AllowPrinting = (bool)this.column2.IsChecked;
+                this.WorkerWindow.column3.AllowPrinting = (bool)this.column3.IsChecked;
+                this.WorkerWindow.column4.AllowPrinting = (bool)this.column4.IsChecked;
+                this.WorkerWindow.column5.AllowPrinting = (bool)this.column5.IsChecked;
+                this.WorkerWindow.column6.AllowPrinting = (bool)this.column6.IsChecked;
+                this.WorkerWindow.column7.AllowPrinting = (bool)this.column7.IsChecked;
+                this.WorkerWindow.column8.AllowPrinting = (bool)this.column8.IsChecked;
+                this.WorkerWindow.IsPrint = true;
                 this.Close();
             }
 

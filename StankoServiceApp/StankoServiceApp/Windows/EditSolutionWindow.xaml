@@ -1,0 +1,68 @@
+﻿<Window x:Class="StankoServiceApp.Windows.EditSolutionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StankoServiceApp.Windows"
+        mc:Ignorable="d"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
+        xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        dx:ThemeManager.ThemeName="Office2010Blue"
+        Title="Решение исполнителя" Height="450" Width="500" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <dxlc:LayoutControl Orientation="Vertical">
+                <dxlc:LayoutItem Label="Комментарий выполнения" Margin="0 0 10 5">
+                    <dxe:MemoEdit x:Name="meComment" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Label="Отправить на подтверждение" Margin="0 0 10 5">
+                    <dxe:ToggleSwitch Content="Отправить на подтверждение" x:Name="tsSend" Click="tsSend_Click" Checked="tsSend_Checked" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Visibility="Collapsed" x:Name="liMail" Label="Отправить уведомление" Margin="0 0 10 5">
+                    <dxe:ToggleSwitch Content="Отправить на подтверждение" x:Name="tsMail" />
+                </dxlc:LayoutItem>
+
+                <StackPanel Orientation="Horizontal" MaxHeight="200" HorizontalAlignment="Stretch">
+                    <dxg:GridControl x:Name="gcFiles" AutoGenerateColumns="None" SelectionMode="Row" AllowInitiallyFocusedRow="False" Focusable="True" CurrentItemChanged="gcFiles_CurrentItemChanged" ItemsSourceChanged="gcFiles_ItemsSourceChanged">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="tvFile" AllowEditing="False" NavigationStyle="Row" ShowGroupPanel="False"/>
+                        </dxg:GridControl.View>
+
+                        <dxg:GridColumn FieldName="TaskFile.File" Header="Иконка" SortOrder="Ascending"  HeaderToolTip="Иконка файла" VisibleIndex="0" BestFitMode="AllRows">
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image Width="25" Height="25" RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.FileIcon}" Margin="5 0 5 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+
+                        <dxg:GridColumn Header="Файл" FieldName="FileName" SortOrder="Ascending" SortIndex="0" HeaderToolTip="Наименование файла" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="1"/>
+                        <dxg:GridColumn Header="Дата" FieldName="ChangeDate" SortOrder="Ascending" SortIndex="2" HeaderToolTip="Пользователь, изменивший статус" AllowResizing="True" AllowMoving="True" AutoFilterCondition="Contains" VisibleIndex="2" AllowBestFit="True" BestFitArea="All"/>
+
+                    </dxg:GridControl>
+
+                    <StackPanel Orientation="Vertical" Margin="5 0 5 0" HorizontalAlignment="Right">
+                        <dx:SimpleButton IsEnabled="False" x:Name="sbDeleteFile" Content="" Margin="0 0 0 5" Glyph="{dx:DXImage Image=Delete_16x16.png}" Click="sbDeleteFile_Click"/>
+                        <dx:SimpleButton IsEnabled="False" x:Name="sbEditFile" Content="" Margin="0 0 0 5" Glyph="{dx:DXImage Image=Edit_16x16.png}" Click="sbEditFile_Click"/>
+                        <dx:SimpleButton x:Name="sbAddFile" Content="" Glyph="{dx:DXImage Image=AddFile_16x16.png}" Click="sbAddFile_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock x:Name="lblError" Visibility="Collapsed" Height="26" Padding="3" Text="Необходимо выбрать менеджера проекта" Background="IndianRed" Foreground="White" TextAlignment="Center" FontSize="14"></TextBlock>
+                
+                <StackPanel Orientation="Horizontal" Height="46"  HorizontalAlignment="Right" Margin="0 0 10 10">
+                    <dx:SimpleButton x:Name="sbCancel" Content="Закрыть" Glyph="{dx:DXImage Image=Cancel_32x32.png}" Margin="10 10 0 0" GlyphAlignment="Left" Click="sbCancel_Click"/>
+                    <dx:SimpleButton x:Name="sbSave" Content="Принять" Glyph="{dx:DXImage Image=Apply_32x32.png}" Margin="10 10 0 0" IsDefault="True" Click="sbSave_Click"/>
+                </StackPanel>
+            </dxlc:LayoutControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -53,10 +53,10 @@
                         <TextBlock x:Name="tbEmail"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem>
+                    <dxlc:LayoutItem x:Name="li1">
                         <dx:SimpleButton HorizontalAlignment="Right" Width="200" HorizontalContentAlignment="Left" Content="Статистика по проектам..." x:Name="sbStatProject" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" Click="sbStatProject_Click" />
                     </dxlc:LayoutItem>
-                    <dxlc:LayoutItem>
+                    <dxlc:LayoutItem x:Name="li2">
                         <dx:SimpleButton HorizontalAlignment="Right" Width="200" HorizontalContentAlignment="Left" Content="Статистика по задачам..." x:Name="sbStatTask" Glyph="{dx:DXImageOffice2013 Image=Chart_16x16.png}" Click="sbStatTask_Click" />
                     </dxlc:LayoutItem>
 

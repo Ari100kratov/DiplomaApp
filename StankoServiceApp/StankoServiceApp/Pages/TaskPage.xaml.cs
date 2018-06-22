@@ -155,13 +155,6 @@ namespace StankoServiceApp.Pages
                 this.bbiShowTask.IsEnabled = true;
                 this.rpgStatus.IsEnabled = true;
                 this.rpgPriority.IsEnabled = true;
-
-                if (this.Task.Childs.Count() == 0)
-                {
-                    return;
-                }
-
-                //for(var i =0;i<this.Task.Cil)
             }
         }
 

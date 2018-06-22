@@ -1,4 +1,5 @@
 ﻿using StankoServiceApp.ServiceReference;
+using StankoserviceEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -207,6 +208,12 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (App.CurrentUser.RoleId == (int)Role.Исполнитель)
+            {
+                this.li1.Visibility = Visibility.Collapsed;
+                this.li2.Visibility = Visibility.Collapsed;
+            }
+
             this.teMail.IsEnabled = false;
             var worker = App.CurrentUser.Worker;
             this.tbFIO.Text = $"{worker.Surname} {worker.Name} {worker.Patronymic}";
@@ -221,7 +228,7 @@ namespace StankoServiceApp.Windows
 
         private void sbStatProject_Click(object sender, RoutedEventArgs e)
         {
-            var project = App.Service.GetProjects().Where(x=>x.WorkerId == App.CurrentUser.Worker.Id).ToList();
+            var project = App.Service.GetProjects().Where(x => x.WorkerId == App.CurrentUser.Worker.Id).ToList();
             var stat = new StatProjectWindow(project);
             stat.ShowDialog();
         }

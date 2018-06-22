@@ -59,8 +59,13 @@ namespace StankoServiceApp.Windows
 
         public void FillStat()
         {
-            this.SeriesActvity.Points.Clear();
-            this.SeriesFalse.Points.Clear();
+            this.seriesStatus1.Points.Clear();
+            this.seriesStatus2.Points.Clear();
+            this.seriesStatus3.Points.Clear();
+            this.seriesStatus4.Points.Clear();
+            this.seriesStatus5.Points.Clear();
+            this.seriesStatus6.Points.Clear();
+
             this.seriesSimple.Points.Clear();
             this.SeriesActvity.Points.Clear();
             this.SeriesFalse.Points.Clear();

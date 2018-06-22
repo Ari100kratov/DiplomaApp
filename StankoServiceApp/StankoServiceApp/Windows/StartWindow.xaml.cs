@@ -69,6 +69,11 @@ namespace StankoServiceApp
                         var manWin = new ManagerWindow();
                         manWin.Show();
                         break;
+
+                    case (Role.Исполнитель):
+                        var worWin = new WorkerWindow();
+                        worWin.Show();
+                        break;
                 }
             }
             catch (Exception ex)

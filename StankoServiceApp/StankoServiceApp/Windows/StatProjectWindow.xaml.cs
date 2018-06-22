@@ -36,6 +36,18 @@ namespace StankoServiceApp.Windows
         {
             try
             {
+                this.series1.Points.Clear();
+                this.series2.Points.Clear();
+                this.series3.Points.Clear();
+                this.series4.Points.Clear();
+                this.series5.Points.Clear();
+                this.series6.Points.Clear();
+                this.series7.Points.Clear();
+                this.series8.Points.Clear();
+                this.series9.Points.Clear();
+                this.SeriesActvity.Points.Clear();
+                this.SeriesFalse.Points.Clear();
+
                 //
                 this.series1.AddPoint("Подготовка", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Подготовка).Count());
                 this.series2.AddPoint("Проектирование", this.ListProject.Where(x => x.GetStatusProject == StatusProject.Проектирование).Count());
@@ -99,8 +111,7 @@ namespace StankoServiceApp.Windows
                 }
 
                 //
-                this.SeriesActvity.Points.Clear();
-                this.SeriesFalse.Points.Clear();
+
                 var listComp = this.ListProject.Where(x => x.CompletionDate != null).ToList();
                 if (listComp.Count() != 0)
                 {
@@ -108,10 +119,10 @@ namespace StankoServiceApp.Windows
 
                     foreach (var item in EachDay(lastYear, DateTime.Now))
                     {
-                        var countProject = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && x.GetStatusProject == StatusProject.Завершен).Count();
+                        var countProject = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && (x.GetStatusProject == StatusProject.Завершен && x.GetStatusProject == StatusProject.Внедрение)).Count();
                         this.SeriesActvity.AddPoint(item.ToShortDateString(), countProject);
 
-                        var countFalse = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && (x.GetStatusProject == StatusProject.Закрыт || x.GetStatusProject == StatusProject.Внедрение)).Count();
+                        var countFalse = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && x.GetStatusProject == StatusProject.Закрыт).Count();
                         this.SeriesFalse.AddPoint(item.ToShortDateString(), countFalse);
                     }
                 }

@@ -175,6 +175,9 @@
     <Compile Include="Windows\EditProjectWindow.xaml.cs">
       <DependentUpon>EditProjectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EditSolutionWindow.xaml.cs">
+      <DependentUpon>EditSolutionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditStatusWindow.xaml.cs">
       <DependentUpon>EditStatusWindow.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,9 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Windows\StatWorkerWindow.xaml.cs">
       <DependentUpon>StatWorkerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WorkerWindow.xaml.cs">
+      <DependentUpon>WorkerWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\EditSolutionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\EditStatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,6 +359,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StatWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WorkerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

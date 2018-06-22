@@ -9,7 +9,7 @@
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Pages.TaskPage"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:StankoServiceApp="clr-namespace:StankoServiceApp" x:Class="StankoServiceApp.Pages.TaskPage"
     dx:ThemeManager.ThemeName="Office2010Blue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000" Background="White"
@@ -60,7 +60,8 @@
         </dxg:GridControl>
 
 
-        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True">
+        <dxr:RibbonControl Grid.RowSpan="1" RibbonStyle="Office2010" ShowApplicationButton="False" IsHiddenRibbonCollapsed="False" ToolbarShowCustomizationButton="True" ButtonGroupsIndent="0">
+            
             <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
                 <dxr:RibbonPage Caption="{x:Null}">
                     <dxr:RibbonPageGroup Caption="Управление">
@@ -74,7 +75,7 @@
                         <dxb:BarButtonItem x:Name="bbiShowTask" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowTask_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
-                    
+
                     <dxr:RibbonPageGroup x:Name="rpgStatus" Caption="Статус задачи" ShowCaptionButton="False">
                         <dxb:BarButtonItem x:Name="status1" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Content="Новая" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task01.png" ItemClick="status1_ItemClick" />
                         <dxb:BarButtonItem x:Name="status2" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" Content="В работе" Glyph="pack://application:,,,/StankoServiceApp;component/Resources/task02.png" ItemClick="status2_ItemClick"/>
@@ -96,18 +97,17 @@
                     <dxr:RibbonPageGroup Caption="Фильтрация и поиск">
                         <dxb:BarEditItem x:Name="bbiFilterStatus" Content="Статус задачи:" EditValueChanged="bbiFilterStatus_EditValueChanged">
                             <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings x:Name="cbFilterStatus" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusTask,UseNumericEnumValue=True}">
-                                </dxe:ComboBoxEditSettings>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterStatus" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type StankoserviceEnums:StatusTask}, UseNumericEnumValue=True}"/>
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
                         <dxb:BarEditItem x:Name="bbiFilterPriority" Content="Приоритет задачи:" EditValueChanged="bbiFilterPriority_EditValueChanged">
                             <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings x:Name="cbFilterPriority" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:PriorityTask,UseNumericEnumValue=True}"/>
+                                <dxe:ComboBoxEditSettings x:Name="cbFilterPriority" IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type StankoserviceEnums:PriorityTask}, UseNumericEnumValue=True}"/>
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
                         <dxb:BarButtonItem x:Name="bbiClearFilter" Content="Очистить фильтр" LargeGlyph="{dx:DXImage Image=ClearFilter_32x32.png}" Glyph="{dx:DXImage Image=ClearFilter_16x16.png}" RibbonStyle="SmallWithText" ItemClick="bbiClearFilter_ItemClick"/>
                     </dxr:RibbonPageGroup>
-                    
+
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>

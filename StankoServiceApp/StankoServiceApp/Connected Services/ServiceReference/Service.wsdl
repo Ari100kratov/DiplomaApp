@@ -91,6 +91,18 @@
   <wsdl:message name="IService_EditLogin_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditLoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_EditSolution_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditSolution" />
+  </wsdl:message>
+  <wsdl:message name="IService_EditSolution_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditSolutionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_TakeTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:TakeTask" />
+  </wsdl:message>
+  <wsdl:message name="IService_TakeTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TakeTaskResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
@@ -219,6 +231,14 @@
     <wsdl:operation name="EditLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/EditLogin" message="tns:IService_EditLogin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/EditLoginResponse" message="tns:IService_EditLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditSolution">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/EditSolution" message="tns:IService_EditSolution_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/EditSolutionResponse" message="tns:IService_EditSolution_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TakeTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/TakeTask" message="tns:IService_TakeTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/TakeTaskResponse" message="tns:IService_TakeTask_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetCustomers" message="tns:IService_GetCustomers_InputMessage" />
@@ -390,6 +410,24 @@
     </wsdl:operation>
     <wsdl:operation name="EditLogin">
       <soap:operation soapAction="http://tempuri.org/IService/EditLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditSolution">
+      <soap:operation soapAction="http://tempuri.org/IService/EditSolution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TakeTask">
+      <soap:operation soapAction="http://tempuri.org/IService/TakeTask" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -200,6 +200,35 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="EditSolution">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="task" nillable="true" type="q32:Task" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="listFile" nillable="true" type="q33:ArrayOfFile" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="listDelete" nillable="true" type="q34:ArrayOfFile" />
+        <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="send" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditSolutionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TakeTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="task" nillable="true" type="q35:Task" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="user" nillable="true" type="q36:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TakeTaskResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCustomers">
     <xs:complexType>
       <xs:sequence />
@@ -208,7 +237,7 @@
   <xs:element name="GetCustomersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetCustomersResult" nillable="true" type="q32:ArrayOfCustomer" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetCustomersResult" nillable="true" type="q37:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -220,7 +249,7 @@
   <xs:element name="GetFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetFilesResult" nillable="true" type="q33:ArrayOfFile" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetFilesResult" nillable="true" type="q38:ArrayOfFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -232,7 +261,7 @@
   <xs:element name="GetHistoryProjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetHistoryProjectsResult" nillable="true" type="q34:ArrayOfHistoryProject" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetHistoryProjectsResult" nillable="true" type="q39:ArrayOfHistoryProject" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -244,7 +273,7 @@
   <xs:element name="GetHistoryTasksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetHistoryTasksResult" nillable="true" type="q35:ArrayOfHistoryTask" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetHistoryTasksResult" nillable="true" type="q40:ArrayOfHistoryTask" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -256,7 +285,7 @@
   <xs:element name="GetPositionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetPositionsResult" nillable="true" type="q36:ArrayOfPosition" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetPositionsResult" nillable="true" type="q41:ArrayOfPosition" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -268,7 +297,7 @@
   <xs:element name="GetProjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetProjectsResult" nillable="true" type="q37:ArrayOfProject" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetProjectsResult" nillable="true" type="q42:ArrayOfProject" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -280,7 +309,7 @@
   <xs:element name="GetTasksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetTasksResult" nillable="true" type="q38:ArrayOfTask" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetTasksResult" nillable="true" type="q43:ArrayOfTask" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -292,7 +321,7 @@
   <xs:element name="GetUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetUsersResult" nillable="true" type="q39:ArrayOfUser" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetUsersResult" nillable="true" type="q44:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -304,7 +333,7 @@
   <xs:element name="GetWorkersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetWorkersResult" nillable="true" type="q40:ArrayOfWorker" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetWorkersResult" nillable="true" type="q45:ArrayOfWorker" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -316,7 +345,7 @@
   <xs:element name="GetTaskFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetTaskFilesResult" nillable="true" type="q41:ArrayOfTaskFile" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetTaskFilesResult" nillable="true" type="q46:ArrayOfTaskFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -328,7 +357,7 @@
   <xs:element name="GetSolutionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetSolutionsResult" nillable="true" type="q42:ArrayOfSolution" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetSolutionsResult" nillable="true" type="q47:ArrayOfSolution" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -340,7 +369,7 @@
   <xs:element name="GetSolutionFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetSolutionFilesResult" nillable="true" type="q43:ArrayOfSolutionFile" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/GenericRepositoryLibrary.Entities" minOccurs="0" name="GetSolutionFilesResult" nillable="true" type="q48:ArrayOfSolutionFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

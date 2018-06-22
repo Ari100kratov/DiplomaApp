@@ -73,22 +73,24 @@ namespace WcfServiceApp
                 Dm.HistoryProject.Add(history);
             }
 
+            if (project.StatusId == (int)StatusProject.Закрыт)
+                project.CompletionDate = DateTime.Now;
+
             Dm.Project.Update(project);
 
         }
 
         public void DeleteProject(Project project)
         {
-            var file = Dm.File.GetList().FirstOrDefault(x => x.Id == project.FileId);
             var histroy = Dm.HistoryProject.GetList().Where(x => x.ProjectId == project.Id).ToList();
             foreach (var item in histroy)
             {
                 Dm.HistoryProject.Delete(item);
             }
 
-            if (file != null)
+            if (project.File != null)
             {
-                Dm.File.Delete(file);
+                Dm.File.Delete(project.File);
             }
 
             Dm.Project.Delete(project);
@@ -178,8 +180,26 @@ namespace WcfServiceApp
                 Dm.File.Delete(worker.Resume);
             }
 
-            Dm.User.Delete(worker.User);
+            var listHistoryTask = Dm.HistoryTask.GetList().Where(x => x.UserId == worker.UserId).ToList();
+            var listHistoryProject = Dm.HistoryProject.GetList().Where(x => x.UserId == worker.UserId).ToList();
+
+            foreach (var item in listHistoryProject)
+            {
+                Dm.HistoryProject.Delete(item);
+            }
+
+            foreach (var item in listHistoryTask)
+            {
+                Dm.HistoryTask.Delete(item);
+            }
+
+            foreach (var item in worker.Projects)
+            {
+                Dm.Project.Delete(item);
+            }
+
             Dm.Worker.Delete(worker);
+            Dm.User.Delete(worker.User);
         }
 
         public void AddNewTask(Task task, List<File> lstFiles, User user, string comment)
@@ -206,67 +226,6 @@ namespace WcfServiceApp
                     TaskId = lastIdTask
                 };
                 Dm.TaskFile.Add(taskFile);
-            }
-        }
-
-        public void EditTask(Task task, List<File> lstFiles, List<File> lstDelete, User user = null, string comment = null)
-        {
-            var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
-
-            foreach (var item in taskFiles)
-            {
-                var deleteRow = lstDelete.FirstOrDefault(x => x.Id == item.Id);
-
-                if (deleteRow != null)
-                {
-                    Dm.TaskFile.Delete(item);
-                }
-            }
-
-            foreach (var item in lstDelete)
-            {
-                Dm.File.Delete(item);
-            }
-
-            foreach (var item in lstFiles)
-            {
-                if (item.Id == 0)
-                {
-                    var lastIdFile = Dm.File.Add(item);
-
-                    var taskFile = new TaskFile
-                    {
-                        TaskId = task.Id,
-                        FileId = lastIdFile
-                    };
-
-                    Dm.TaskFile.Add(taskFile);
-                }
-                else
-                {
-                    Dm.File.Update(item);
-                }
-            }
-
-            if (task.StatusId == (int)StatusTask.Отменена)
-            {
-                task.ParentId = null;
-            }
-
-            Dm.Task.Update(task);
-
-            if (user != null)
-            {
-                var history = new HistoryTask
-                {
-                    DateTime = DateTime.Now,
-                    TaskId = task.Id,
-                    UserId = user.Id,
-                    StatusId = task.StatusId,
-                    Comment = comment
-                };
-
-                Dm.HistoryTask.Add(history);
             }
         }
 
@@ -344,6 +303,148 @@ namespace WcfServiceApp
                 user.Password = password;
 
             Dm.User.Update(user);
+        }
+
+        public void EditTask(Task task, List<File> lstFiles, List<File> lstDelete, User user = null, string comment = null)
+        {
+            var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
+
+            foreach (var item in taskFiles)
+            {
+                var deleteRow = lstDelete.FirstOrDefault(x => x.Id == item.Id);
+
+                if (deleteRow != null)
+                {
+                    Dm.TaskFile.Delete(item);
+                }
+            }
+
+            foreach (var item in lstDelete)
+            {
+                Dm.File.Delete(item);
+            }
+
+            foreach (var item in lstFiles)
+            {
+                if (item.Id == 0)
+                {
+                    var lastIdFile = Dm.File.Add(item);
+
+                    var taskFile = new TaskFile
+                    {
+                        TaskId = task.Id,
+                        FileId = lastIdFile
+                    };
+
+                    Dm.TaskFile.Add(taskFile);
+                }
+                else
+                {
+                    Dm.File.Update(item);
+                }
+            }
+
+            if (task.StatusId == (int)StatusTask.Отменена)
+            {
+                task.CompletionDate = DateTime.Now;
+                task.ParentId = null;
+            }
+
+            Dm.Task.Update(task);
+
+            if (user != null)
+            {
+                var history = new HistoryTask
+                {
+                    DateTime = DateTime.Now,
+                    TaskId = task.Id,
+                    UserId = user.Id,
+                    StatusId = task.StatusId,
+                    Comment = comment
+                };
+
+                Dm.HistoryTask.Add(history);
+            }
+        }
+
+
+        public void EditSolution(Task task, List<File> listFile, List<File> listDelete, string comment, bool send)
+        {
+            if (task.Solution == null)
+            {
+                var solution = new Solution();
+                solution.DateTime = DateTime.Now;
+                solution.Comment = comment;
+
+                var lastIdSol = Dm.Solution.Add(solution);
+
+                foreach (var file in listFile)
+                {
+                    var lastIdFile = Dm.File.Add(file);
+
+                    var solFile = new SolutionFile
+                    {
+                        SolutionId = lastIdSol,
+                        FileId = lastIdFile
+                    };
+
+                    Dm.SolutionFile.Add(solFile);
+                }
+
+                task.SolutionId = lastIdSol;
+                Dm.Task.Update(task);
+            }
+            else
+            {
+                var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
+
+                foreach (var item in taskFiles)
+                {
+                    var deleteRow = listDelete.FirstOrDefault(x => x.Id == item.Id);
+
+                    if (deleteRow != null)
+                    {
+                        Dm.TaskFile.Delete(item);
+                    }
+                }
+
+                foreach (var item in listDelete)
+                {
+                    Dm.File.Delete(item);
+                }
+
+                foreach (var item in listFile)
+                {
+                    if (item.Id == 0)
+                    {
+                        var lastIdFile = Dm.File.Add(item);
+
+                        var solFile = new SolutionFile
+                        {
+                            SolutionId = (int)task.SolutionId,
+                            FileId = lastIdFile
+                        };
+
+                        Dm.SolutionFile.Add(solFile);
+                    }
+                    else
+                    {
+                        Dm.File.Update(item);
+                    }
+                }
+            }
+
+            if (send)
+            {
+                var str = "";
+                this.EditStatusTask(task, (int)StatusTask.Подтверждается, task.Worker.User, str);
+            }
+        }
+
+        public void TakeTask(Task task, User user)
+        {
+            task.WorkerId = user.Worker.Id;
+            Dm.Task.Update(task);
         }
 
         #region //Реализация получения List всех моделей

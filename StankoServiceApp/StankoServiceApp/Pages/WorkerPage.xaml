@@ -68,7 +68,7 @@
                 <dxg:CardView x:Name="cvWorker" ShowTotalSummary="True" CardLayout="Rows" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Always" ShowGroupPanel="False"/>
             </dxg:GridControl.View>
 
-            <dxg:GridColumn x:Name="column1" Header="Фото" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
+            <dxg:GridColumn x:Name="column1" Header="Фото" Visible="True" FieldName="PhotoShow"  AllowMoving="True" ReadOnly="True" FixedWidth="True" AllowSearchPanel="False">
                 <dxg:GridColumn.EditSettings>
                     <dxe:ImageEditSettings MaxWidth="150" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </dxg:GridColumn.EditSettings>
