@@ -73,7 +73,7 @@ namespace WcfServiceApp
                 Dm.HistoryProject.Add(history);
             }
 
-            if (project.StatusId == (int)StatusProject.Закрыт)
+            if ((project.StatusId == (int)StatusProject.Закрыт && project.CompletionDate == null) || (project.StatusId == (int)StatusProject.Завершен && project.CompletionDate == null))
                 project.CompletionDate = DateTime.Now;
 
             Dm.Project.Update(project);
@@ -260,8 +260,13 @@ namespace WcfServiceApp
             };
 
             Dm.HistoryProject.Add(history);
-
             project.StatusId = status;
+
+            if ((project.StatusId == (int)StatusProject.Закрыт && project.CompletionDate == null) || (project.StatusId == (int)StatusProject.Завершен && project.CompletionDate == null))
+            {
+                project.CompletionDate = DateTime.Now;
+            }
+
             Dm.Project.Update(project);
         }
 
@@ -279,6 +284,11 @@ namespace WcfServiceApp
             Dm.HistoryTask.Add(history);
 
             task.StatusId = status;
+
+            if ((task.StatusId == (int)StatusTask.Отменена && task.CompletionDate == null) || (task.StatusId == (int)StatusTask.Выполнена && task.CompletionDate == null))
+            {
+                task.CompletionDate = DateTime.Now;
+            }
 
             if (task.StatusId == (int)StatusTask.Отменена)
             {
@@ -344,9 +354,13 @@ namespace WcfServiceApp
                 }
             }
 
-            if (task.StatusId == (int)StatusTask.Отменена)
+            if ((task.StatusId == (int)StatusTask.Отменена && task.CompletionDate == null) || (task.StatusId == (int)StatusTask.Выполнена && task.CompletionDate == null))
             {
                 task.CompletionDate = DateTime.Now;
+            }
+
+            if (task.StatusId == (int)StatusTask.Отменена)
+            {
                 task.ParentId = null;
             }
 

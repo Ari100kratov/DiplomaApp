@@ -8,6 +8,7 @@ namespace StankoServiceApp.ServiceReference
 {
     public partial class Solution
     {
+
         public List<SolutionFile> SolutionFiles => App.Service.GetSolutionFiles().Where(x => x.SolutionId == this.Id).ToList();
     }
 }

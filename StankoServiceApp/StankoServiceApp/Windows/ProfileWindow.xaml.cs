@@ -148,6 +148,7 @@ namespace StankoServiceApp.Windows
                 {
                     this.tbMessageError.Text = "Подтвердите почту";
                     this.tbMessageError.Background = Brushes.IndianRed;
+                    this.tbMessageError.Foreground = Brushes.White;
                     this.tbMessageError.Visibility = Visibility.Visible;
                     return;
                 }
@@ -195,7 +196,8 @@ namespace StankoServiceApp.Windows
             App.Service.EditLogin(App.CurrentUser, this.newMail, this.newPass);
 
             this.tbMessageError.Text = "Данные успешно сохранены";
-            this.tbMessageError.Background = Brushes.Green;
+            this.tbMessageError.Background = Brushes.White;
+            this.tbMessageError.Foreground = Brushes.Green;
             this.tbMessageError.Visibility = Visibility.Visible;
 
             this.SizeToContent = SizeToContent.WidthAndHeight;

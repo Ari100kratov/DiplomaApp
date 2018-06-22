@@ -5,6 +5,7 @@ using StankoserviceEnums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,16 +118,15 @@ namespace StankoServiceApp.Windows
                 {
                     var lastYear = DateTime.Now.AddYears(-1);
 
-                    foreach (var item in EachDay(lastYear, DateTime.Now))
+                    foreach (var item in EachDay(lastYear.AddMonths(1), DateTime.Now.AddMonths(1)))
                     {
-                        var countProject = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && (x.GetStatusProject == StatusProject.Завершен && x.GetStatusProject == StatusProject.Внедрение)).Count();
-                        this.SeriesActvity.AddPoint(item.ToShortDateString(), countProject);
+                        var countProject = listComp.Where(x => x.CompletionDate.Value.Month == item.Month && (x.GetStatusProject == StatusProject.Завершен || x.GetStatusProject == StatusProject.Внедрение)).Count();
+                        this.SeriesActvity.AddPoint(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.Month), countProject);
 
-                        var countFalse = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && x.GetStatusProject == StatusProject.Закрыт).Count();
-                        this.SeriesFalse.AddPoint(item.ToShortDateString(), countFalse);
+                        var countFalse = listComp.Where(x => x.CompletionDate.Value.Month == item.Month && x.GetStatusProject == StatusProject.Закрыт).Count();
+                        this.SeriesFalse.AddPoint(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.Month), countFalse);
                     }
                 }
-
             }
             catch (Exception ex)
             {

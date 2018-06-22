@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -34,6 +35,7 @@ namespace StankoServiceApp.Windows
         public void FillTaskList()
         {
             var task = App.Service.GetTasks();
+            this.ListTask.Clear();
 
             if (this.IsWorker)
             {
@@ -90,20 +92,14 @@ namespace StankoServiceApp.Windows
                     if (stat[i].CompletionDate == null)
                     {
                         if (DateTime.Now > stat[i].EndDate)
-                        {
                             minus++;
-                        }
                     }
                     else
                     {
                         if (stat[i].CompletionDate <= stat[i].EndDate)
-                        {
                             plus++;
-                        }
                         else
-                        {
                             minus++;
-                        }
                     }
                 }
 
@@ -119,13 +115,13 @@ namespace StankoServiceApp.Windows
             {
                 var lastYear = DateTime.Now.AddYears(-1);
 
-                foreach (var item in EachMonth(lastYear, DateTime.Now))
+                foreach (var item in EachMonth(lastYear.AddMonths(1), DateTime.Now.AddMonths(1)))
                 {
-                    var CountTrue = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && x.GetStatusTask == StatusTask.Выполнена).Count();
-                    this.SeriesActvity.AddPoint(item.ToShortDateString(), CountTrue);
+                    var CountTrue = listComp.Where(x => x.CompletionDate.Value.Month == item.Month && x.GetStatusTask == StatusTask.Выполнена).Count();
+                    this.SeriesActvity.AddPoint(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.Month), CountTrue);
 
-                    var countFalse = listComp.Where(x => x.CompletionDate > item && x.CompletionDate < item.AddMonths(1) && x.GetStatusTask == StatusTask.Отменена).Count();
-                    this.SeriesFalse.AddPoint(item.ToShortDateString(), countFalse);
+                    var countFalse = listComp.Where(x => x.CompletionDate.Value.Month == item.Month && x.GetStatusTask == StatusTask.Отменена).Count();
+                    this.SeriesFalse.AddPoint(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.Month), countFalse);
                 }
             }
         }
@@ -145,6 +141,11 @@ namespace StankoServiceApp.Windows
                 {
                     this.IsWorker = true;
                 }
+            }
+
+            if(App.CurrentUser.RoleId == (int)Role.Менеджер)
+            {
+                this.rpg.IsVisible = false;
             }
 
             this.FillTaskList();

@@ -199,6 +199,9 @@
     <Compile Include="Windows\ShowProjectWindow.xaml.cs">
       <DependentUpon>ShowProjectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ShowSolutionWindow.xaml.cs">
+      <DependentUpon>ShowSolutionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ShowTaskWindow.xaml.cs">
       <DependentUpon>ShowTaskWindow.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ShowProjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ShowSolutionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

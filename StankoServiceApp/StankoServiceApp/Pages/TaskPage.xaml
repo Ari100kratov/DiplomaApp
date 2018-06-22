@@ -73,6 +73,7 @@
                     <dxr:RibbonPageGroup Caption="Обозреватель">
                         <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiShowTask" Content="Открыть" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" Glyph="{dx:DXImage Image=Show_16x16.png}" ItemClick="bbiShowTask_ItemClick"/>
+                        <dxb:BarButtonItem x:Name="bbiSolution" Content="Решение" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" Glyph="{dx:DXImage Image=BOTask_16x16.png}" ItemClick="bbiSolution_ItemClick"/>
                     </dxr:RibbonPageGroup>
 
 

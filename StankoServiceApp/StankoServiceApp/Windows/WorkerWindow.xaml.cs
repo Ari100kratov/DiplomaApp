@@ -147,6 +147,13 @@ namespace StankoServiceApp.Windows
                     this.bbiSend.IsEnabled = true;
                     this.bbiShow.IsEnabled = true;
                 }
+
+                if(this.Task.GetStatusTask == StatusTask.Выполнена || this.Task.GetStatusTask == StatusTask.Отменена)
+                {
+                    this.bbiInWork.IsEnabled = false;
+                    this.bbiSend.IsEnabled = false;
+                    this.bbiSolution.IsEnabled = false;
+                }
             }
         }
 

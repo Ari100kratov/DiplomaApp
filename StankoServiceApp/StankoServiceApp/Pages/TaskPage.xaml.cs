@@ -88,6 +88,7 @@ namespace StankoServiceApp.Pages
         {
             try
             {
+                this.bbiSolution.IsEnabled = false;
                 this.rpgPriority.IsEnabled = false;
                 this.rpgStatus.IsEnabled = false;
                 this.bbiEditTask.IsEnabled = false;
@@ -147,6 +148,7 @@ namespace StankoServiceApp.Pages
                 this.bbiEditTask.IsEnabled = false;
                 this.bbiDeleteTask.IsEnabled = false;
                 this.bbiShowTask.IsEnabled = false;
+                this.bbiSolution.IsEnabled = false;
             }
             else
             {
@@ -155,6 +157,11 @@ namespace StankoServiceApp.Pages
                 this.bbiShowTask.IsEnabled = true;
                 this.rpgStatus.IsEnabled = true;
                 this.rpgPriority.IsEnabled = true;
+
+                if (this.Task.Solution != null)
+                    this.bbiSolution.IsEnabled = true;
+                else
+                    this.bbiSolution.IsEnabled = false;
             }
         }
 
@@ -215,9 +222,6 @@ namespace StankoServiceApp.Pages
         {
             try
             {
-                await App.Service.DeleteTaskAsync(this.Task);
-                this.FillList();
-
                 if (MessageBox.Show($"Вы действительно хотите удалить задачу: {this.Task.TaskName}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 {
                     return;
@@ -233,6 +237,8 @@ namespace StankoServiceApp.Pages
                     Methods.SendMessageFromMainMail("Задача удалена", $"Задача '{this.Task.TaskName}', исполнителем которой вы являлись, была удалена из базы данных\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Worker.User.Email);
                 }
 
+                await App.Service.DeleteTaskAsync(this.Task);
+                this.FillList();
             }
             catch (Exception ex)
             {
@@ -394,6 +400,13 @@ namespace StankoServiceApp.Pages
                 this.column7.Visible = false;
                 this.column8.Visible = false;
             }
+        }
+
+        private void bbiSolution_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            var sol = new ShowSolutionWindow(this.Task);
+            sol.ShowDialog();
+            this.FillList();
         }
     }
 }

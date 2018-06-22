@@ -294,17 +294,6 @@ namespace StankoServiceApp.Windows
                     }
                 }
 
-
-                if ((int)this.ceStatus.EditValue == (int)StatusTask.Выполнена)
-                {
-                    if (this.deCompletionDate.EditValue == null)
-                    {
-                        this.lblError.Text = "Выберите дату для выполненной задачи";
-                        this.lblError.Visibility = Visibility.Visible;
-                        return;
-                    }
-                }
-
                 if (this.IsAdd)
                 {
                     var task = new ServiceReference.Task
