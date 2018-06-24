@@ -103,6 +103,15 @@ namespace StankoServiceApp.Windows
                     return;
                 }
 
+                for (var i = 0; i < this.Task.Childs.Count(); i++)
+                {
+                    if (this.Task.Childs[i].StatusId != (int)StatusTask.Выполнена)
+                    {
+                        MessageBox.Show("Необходимо выполнить все подзадачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+
                 int status = (int)this.cbFilterStatus.EditValue;
                 var editStatus = new EditStatusWindow(this.Task, (StatusTask)status);
                 editStatus.ShowDialog();

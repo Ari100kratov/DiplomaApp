@@ -37,6 +37,8 @@ namespace WcfServiceApp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=169.254.60.7;Initial Catalog=Stankoservice;Integrated Security=False;" +
+            "Persist Security Info=True;User ID=stud;Password=Qwerty123456$")]
         public string Colledge {
             get {
                 return ((string)(this["Colledge"]));

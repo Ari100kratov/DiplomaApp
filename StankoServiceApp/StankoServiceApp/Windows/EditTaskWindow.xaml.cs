@@ -107,9 +107,9 @@ namespace StankoServiceApp.Windows
         private void FillLue()
         {
             if (this.IsDirector)
-                this.lueParentTask.ItemsSource = App.Service.GetTasks();
+                this.lueParentTask.ItemsSource = App.Service.GetTasks().Where(x=>x.Id != this.Task.Id).ToList();
             else
-                this.lueParentTask.ItemsSource = App.Service.GetTasks().Where(x => x.ManagerId == App.CurrentUser.Id).ToList();
+                this.lueParentTask.ItemsSource = App.Service.GetTasks().Where(x => x.ManagerId == App.CurrentUser.Id && x.Id != this.Task.Id).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

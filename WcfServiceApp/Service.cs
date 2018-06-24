@@ -355,7 +355,7 @@ namespace WcfServiceApp
 
             var findTask = Dm.Task.GetList().FirstOrDefault(x => x.Id == task.Id);
 
-            if (findTask.Worker != task.Worker)
+            if (findTask.Worker.Id != task.Worker.Id)
             {
                 task.StatusId = (int)StatusTask.Новая;
             }

@@ -269,12 +269,15 @@ namespace StankoServiceApp.Pages
                     return;
                 }
 
-                for (var i = 0; i < this.Task.Childs.Count(); i++)
+                if (status == StatusTask.Выполнена)
                 {
-                    if (this.Task.Childs[i].StatusId != (int)StatusTask.Выполнена)
+                    for (var i = 0; i < this.Task.Childs.Count(); i++)
                     {
-                        MessageBox.Show("Необходимо выполнить все подзадачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return;
+                        if (this.Task.Childs[i].StatusId != (int)StatusTask.Выполнена)
+                        {
+                            MessageBox.Show("Необходимо выполнить все подзадачи", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
                     }
                 }
 

@@ -27,7 +27,7 @@
                 <TextBlock x:Name="tbDate"/>
             </dxlc:LayoutItem>
             <dxlc:LayoutItem Label="Комментарий:" IsRequired="True">
-                <TextBlock x:Name="tbComment"/>
+                <dxe:MemoEdit IsReadOnly="True" x:Name="tbComment"/>
             </dxlc:LayoutItem>
         </dxlc:LayoutControl>
 
