@@ -117,7 +117,6 @@
                 <dxr:RibbonPage Caption="{x:Null}">
                     <dxr:RibbonPageGroup Caption="Печать">
                         <dxb:BarButtonItem x:Name="bbiPrintCurrent" Content="Текущий" LargeGlyph="{dx:DXImage Image=Print_32x32.png}" Glyph="{dx:DXImage Image=Print_16x16.png}" RibbonStyle="Default" ItemClick="bbiPrintCurrent_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="bbiprintAll" Content="Все" LargeGlyph="{dx:DXImage Image=PrintArea_32x32.png}" Glyph="{dx:DXImage Image=PrintArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Экспорт">
                         <dxb:BarButtonItem x:Name="html" Content="HTML" Glyph="{dx:DXImage Image=ExportToHTML_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportToHTML_32x32.png}" ItemClick="html_ItemClick"/>

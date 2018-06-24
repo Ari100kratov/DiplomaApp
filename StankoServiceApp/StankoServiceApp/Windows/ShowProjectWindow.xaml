@@ -118,9 +118,9 @@
                 <dxg:GridColumn Header="Изменил статус на" FieldName="HistoryProject" SortOrder="Ascending" SortIndex="3" HeaderToolTip="Статус на который изменил" AllowAutoFilter="False" VisibleIndex="2" >
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Image RenderOptions.EdgeMode="Aliased" Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
-                                <TextBlock Margin="5 0 0 0" Text="{Binding RowData.Row.StatusProjectHistory}" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                                <Image RenderOptions.EdgeMode="Aliased" Margin="5 0 5 0" Source="{Binding RowData.Row.StatusIcon}" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding RowData.Row.StatusProjectHistory}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </dxg:GridColumn.CellTemplate>

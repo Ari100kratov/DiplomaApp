@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" x:Class="StankoServiceApp.Windows.DirectorWindow"
+       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="StankoServiceApp.Windows.DirectorWindow"
        dx:ThemeManager.ThemeName="none"
         mc:Ignorable="d"
         Title="Форма управления директора" Height="500" Width="1000" MinWidth="500" MinHeight="500" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" BorderThickness="0" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+   
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>

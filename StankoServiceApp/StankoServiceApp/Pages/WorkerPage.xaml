@@ -6,6 +6,7 @@
       xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums" x:Class="StankoServiceApp.Pages.WorkerPage"
@@ -14,6 +15,17 @@
       d:DesignHeight="700" d:DesignWidth="800"
       Title="WorkerPage" Background="White" Loaded="Page_Loaded" KeepAlive="True" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
+    <Page.Resources>
+        <DataTemplate x:Key="PageHeader">
+            <dxe:TextEdit FontSize="30" Margin="0 0 0 15" Foreground="DodgerBlue" Width="{Binding Path=UsablePageWidth,
+                                          Mode=OneWay}"
+                          HorizontalContentAlignment="Center"
+                          dxp:ExportSettings.TargetType="Text"
+                          Background="White"
+                          EditValue="Отчет по сотрудникам" />
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,11 +42,10 @@
                         <dxb:BarButtonItem x:Name="bbiRefresh" Content="Обновить" Glyph="{dx:DXImage Image=Refresh_16x16.png}" LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" ItemClick="bbiRefresh_ItemClick" RibbonStyle="All"/>
                     </dxr:RibbonPageGroup>
 
-                    <dxr:RibbonPageGroup Caption="Обозреватель">
+                    <dxr:RibbonPageGroup Caption="Обозреватель" ShowCaptionButton="False">
                         <dxb:BarButtonItem Content="Экспорт" x:Name="bbiStandartPrint" RibbonStyle="Default" LargeGlyph="{dx:DXImage Image=Export_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}" ItemClick="bbiStandartPrint_ItemClick"/>
                         <dxb:BarButtonItem x:Name="bbiDownload" Content="Скачать резюме" Glyph="{dx:DXImage Image=ExportFile_16x16.png}" LargeGlyph="{dx:DXImage Image=ExportFile_32x32.png}" RibbonStyle="Default" ItemClick="bbiDownload_ItemClick"/>
-                        <dxb:BarButtonItem x:Name="bbiTasks" Content="Задачи сотрудника" Glyph="{dx:DXImage Image=BOTask_16x16.png}" LargeGlyph="{dx:DXImage Image=BOTask_32x32.png}" RibbonStyle="Default"/>
-                        <dxb:BarButtonItem x:Name="bbiProjects" Content="Проекты сотрудника" Glyph="{dx:DXImage Image=Project_16x16.png}" LargeGlyph="{dx:DXImage Image=Project_32x32.png}" RibbonStyle="Default"/>
+                        <dxb:BarCheckItem x:Name="bbiShowPhoto" Content="Показать фото" Glyph="{dx:DXImage Image=Show_16x16.png}" LargeGlyph="{dx:DXImage Image=Show_32x32.png}" ItemClick="bbiShowPhoto_ItemClick" IsChecked="True"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="Статистика">
                         <dxb:BarButtonItem x:Name="bbiStatFilter" Content="По фильтру" Glyph="{dx:DXImage Image=3DClusteredColumn_16x16.png}" LargeGlyph="{dx:DXImage Image=3DClusteredColumn_32x32.png}" RibbonStyle="Default" ItemClick="bbiStatFilter_ItemClick"/>

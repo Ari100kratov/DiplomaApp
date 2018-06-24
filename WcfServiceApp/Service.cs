@@ -82,8 +82,7 @@ namespace WcfServiceApp
 
         public void DeleteProject(Project project)
         {
-            var histroy = Dm.HistoryProject.GetList().Where(x => x.ProjectId == project.Id).ToList();
-            foreach (var item in histroy)
+            foreach (var item in project.History)
             {
                 Dm.HistoryProject.Delete(item);
             }
@@ -125,7 +124,6 @@ namespace WcfServiceApp
                     worker.PhotoId = null;
                     DataManager.Instance.Worker.Update(worker);
                     DataManager.Instance.File.Delete(deletePhoto);
-
                 }
             }
             else
@@ -172,30 +170,34 @@ namespace WcfServiceApp
         {
             if (worker.Photo != null)
             {
-                Dm.File.Delete(worker.Photo);
+                var photo = worker.Photo;
+                worker.PhotoId = null;
+                Dm.Worker.Update(worker);
+                Dm.File.Delete(photo);
             }
 
             if (worker.Resume != null)
             {
-                Dm.File.Delete(worker.Resume);
-            }
-
-            var listHistoryTask = Dm.HistoryTask.GetList().Where(x => x.UserId == worker.UserId).ToList();
-            var listHistoryProject = Dm.HistoryProject.GetList().Where(x => x.UserId == worker.UserId).ToList();
-
-            foreach (var item in listHistoryProject)
-            {
-                Dm.HistoryProject.Delete(item);
-            }
-
-            foreach (var item in listHistoryTask)
-            {
-                Dm.HistoryTask.Delete(item);
+                var resume = worker.Resume;
+                worker.ResumeId = null;
+                Dm.Worker.Update(worker);
+                Dm.File.Delete(resume);
             }
 
             foreach (var item in worker.Projects)
             {
-                Dm.Project.Delete(item);
+                this.DeleteProject(item);
+            }
+
+            foreach (var item in worker.Tasks)
+            {
+                if (item.StatusId == (int)StatusTask.Выполнена || item.StatusId == (int)StatusTask.Отменена)
+                    this.DeleteTask(item);
+                else
+                {
+                    item.StatusId = (int)StatusTask.Новая;
+                    Dm.Task.Update(item);
+                }
             }
 
             Dm.Worker.Delete(worker);
@@ -231,15 +233,12 @@ namespace WcfServiceApp
 
         public void DeleteTask(Task task)
         {
-            var history = Dm.HistoryTask.GetList().Where(x => x.TaskId == task.Id).ToList();
-            var taskFiles = Dm.TaskFile.GetList().Where(x => x.TaskId == task.Id).ToList();
-
-            foreach (var item in history)
+            foreach (var item in task.History)
             {
                 Dm.HistoryTask.Delete(item);
             }
 
-            foreach (var item in taskFiles)
+            foreach (var item in task.Files)
             {
                 Dm.TaskFile.Delete(item);
                 Dm.File.Delete(item.File);
@@ -352,6 +351,13 @@ namespace WcfServiceApp
                 {
                     Dm.File.Update(item);
                 }
+            }
+
+            var findTask = Dm.Task.GetList().FirstOrDefault(x => x.Id == task.Id);
+
+            if (findTask.Worker != task.Worker)
+            {
+                task.StatusId = (int)StatusTask.Новая;
             }
 
             if ((task.StatusId == (int)StatusTask.Отменена && task.CompletionDate == null) || (task.StatusId == (int)StatusTask.Выполнена && task.CompletionDate == null))

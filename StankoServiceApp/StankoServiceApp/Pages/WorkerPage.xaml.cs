@@ -48,7 +48,6 @@ namespace StankoServiceApp.Pages
 
         private void FillGc()
         {
-            this.gcWorker.BeginDataUpdate();
             if (this.bbiFilterRole.EditValue == null && this.bbiFilterPosition.EditValue == null)
             {
                 this.gcWorker.ItemsSource = this.ListWorkers;
@@ -68,7 +67,6 @@ namespace StankoServiceApp.Pages
             {
                 this.gcWorker.ItemsSource = this.ListWorkers.Where(x => x.PositionId == (int)this.bbiFilterPosition.EditValue && x.User.RoleUser == (Role)this.bbiFilterRole.EditValue).ToList();
             }
-            this.gcWorker.EndDataUpdate();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -87,8 +85,6 @@ namespace StankoServiceApp.Pages
 
                 this.bbiEditWorker.IsEnabled = false;
                 this.bbiDeleteWorker.IsEnabled = false;
-                this.bbiTasks.IsEnabled = false;
-                this.bbiProjects.IsEnabled = false;
                 this.bbiDownload.IsEnabled = false;
 
                 this.FillList();
@@ -121,11 +117,8 @@ namespace StankoServiceApp.Pages
 
                 if (this.Worker == null)
                 {
-
                     this.bbiEditWorker.IsEnabled = false;
                     this.bbiDeleteWorker.IsEnabled = false;
-                    this.bbiTasks.IsEnabled = false;
-                    this.bbiProjects.IsEnabled = false;
                     this.bbiDownload.IsEnabled = false;
                 }
                 else
@@ -133,8 +126,6 @@ namespace StankoServiceApp.Pages
 
                     this.bbiEditWorker.IsEnabled = true;
                     this.bbiDeleteWorker.IsEnabled = true;
-                    this.bbiTasks.IsEnabled = true;
-                    this.bbiProjects.IsEnabled = true;
 
                     if (this.Worker.Resume == null)
                     {
@@ -268,6 +259,7 @@ namespace StankoServiceApp.Pages
             {
                 PrintableControlLink link = new PrintableControlLink((CardView)this.gcWorker.View);
                 var window = new DocumentPreviewWindow();
+                link.PageHeaderTemplate = (DataTemplate)Resources["PageHeader"];
                 window.PreviewControl.DocumentSource = link;
                 link.CreateDocument();
                 window.ShowDialog();
@@ -313,14 +305,47 @@ namespace StankoServiceApp.Pages
 
         private void bbiStatAll_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var statAll = new StatWorkerWindow(this.ListWorkers);
-            statAll.ShowDialog();
+            try
+            {
+                var statAll = new StatWorkerWindow(this.ListWorkers);
+                statAll.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiStatFilter_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var statFilter = new StatWorkerWindow(this.GetDataRowHandles());
-            statFilter.ShowDialog();
+            try
+            {
+                var statFilter = new StatWorkerWindow(this.GetDataRowHandles());
+                statFilter.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bbiShowPhoto_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            try
+            {
+                if (this.bbiShowPhoto.IsChecked == true)
+                {
+                    this.column1.Visible = true;
+                }
+                else
+                {
+                    this.column1.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

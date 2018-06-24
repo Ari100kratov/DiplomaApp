@@ -253,6 +253,7 @@ namespace StankoServiceApp.Windows
                     return;
                 }
 
+                this.cheRole.Visibility = Visibility.Collapsed;
                 this.lgLogin.Visibility = Visibility.Collapsed;
                 this.Title = "Редактирование информации о сотруднике";
                 this.teName.Text = this.Worker.Name;

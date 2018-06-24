@@ -142,44 +142,57 @@ namespace StankoServiceApp.Windows
 
         private void bbiPrintCurrent_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-
-            switch (this.dxTab.SelectedIndex)
+            try
             {
-                case (0):
-                    this.charCommon.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
-                    this.charCommon.ShowRibbonPrintPreviewDialog(this);
-                    break;
-                case (1):
-                    this.chartTerm.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
-                    this.chartTerm.ShowRibbonPrintPreviewDialog(this);
-                    break;
-                case (2):
-                    this.chartActivity.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
-                    this.chartActivity.ShowRibbonPrintPreviewDialog(this);
-                    break;
+                switch (this.dxTab.SelectedIndex)
+                {
+                    case (0):
+                        this.charCommon.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
+                        this.charCommon.ShowRibbonPrintPreviewDialog(this);
+                        break;
+                    case (1):
+                        this.chartTerm.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
+                        this.chartTerm.ShowRibbonPrintPreviewDialog(this);
+                        break;
+                    case (2):
+                        this.chartActivity.PrintOptions.SizeMode = DevExpress.Xpf.Charts.PrintSizeMode.NonProportionalZoom;
+                        this.chartActivity.ShowRibbonPrintPreviewDialog(this);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void html_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "html";
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
-
-                switch (this.dxTab.SelectedIndex)
+                var save = new SaveFileDialog();
+                save.DefaultExt = "html";
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToHtml(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToHtml(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToHtml(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToHtml(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToHtml(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToHtml(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -190,168 +203,217 @@ namespace StankoServiceApp.Windows
 
         private void img_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToImage(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToImage(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToImage(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToImage(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToImage(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToImage(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void mht_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "mht";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "mht";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToMht(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToMht(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToMht(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToMht(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToMht(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToMht(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void pdf_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "pdf";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "pdf";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToPdf(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToPdf(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToPdf(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToPdf(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToPdf(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToPdf(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void rtf_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "rtf";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "rtf";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToRtf(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToRtf(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToRtf(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToRtf(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToRtf(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToRtf(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void xls_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "xls";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "xls";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToXls(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToXls(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToXls(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToXls(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToXls(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToXls(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void xlsx_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "xlsx";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "xlsx";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToXlsx(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToXlsx(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToXlsx(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToXlsx(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToXlsx(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToXlsx(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void xps_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var save = new SaveFileDialog();
-            save.DefaultExt = "xps";
-
-            save.Title = "Как сохранить файл";
-            if (save.ShowDialog() == true)
+            try
             {
+                var save = new SaveFileDialog();
+                save.DefaultExt = "xps";
 
-                switch (this.dxTab.SelectedIndex)
+                save.Title = "Как сохранить файл";
+                if (save.ShowDialog() == true)
                 {
-                    case (0):
-                        this.charCommon.ExportToXps(save.FileName);
-                        break;
-                    case (1):
-                        this.chartTerm.ExportToXps(save.FileName);
-                        break;
-                    case (2):
-                        this.chartActivity.ExportToXps(save.FileName);
-                        break;
+
+                    switch (this.dxTab.SelectedIndex)
+                    {
+                        case (0):
+                            this.charCommon.ExportToXps(save.FileName);
+                            break;
+                        case (1):
+                            this.chartTerm.ExportToXps(save.FileName);
+                            break;
+                        case (2):
+                            this.chartActivity.ExportToXps(save.FileName);
+                            break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

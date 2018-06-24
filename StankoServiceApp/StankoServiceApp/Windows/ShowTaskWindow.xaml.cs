@@ -136,9 +136,16 @@ namespace StankoServiceApp.Windows
 
         private void gcFiles_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)
         {
-            this.tvFiles.BestFitColumn(columnDownload);
-            this.tvFiles.BestFitColumn(columnIcon);
-            this.tvFiles.BestFitColumn(columnDate);
+            try
+            {
+                this.tvFiles.BestFitColumn(columnDownload);
+                this.tvFiles.BestFitColumn(columnIcon);
+                this.tvFiles.BestFitColumn(columnDate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void gcHistory_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)

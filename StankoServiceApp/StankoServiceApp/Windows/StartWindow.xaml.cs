@@ -61,18 +61,24 @@ namespace StankoServiceApp
                 switch (App.CurrentUser.RoleUser)
                 {
                     case (Role.Директор):
+                        this.Hide();
                         var dirWin = new DirectorWindow();
-                        dirWin.Show();
+                        dirWin.ShowDialog();
+                        this.Visibility = Visibility.Visible;
                         break;
 
                     case (Role.Менеджер):
+                        this.Hide();
                         var manWin = new ManagerWindow();
-                        manWin.Show();
+                        manWin.ShowDialog();
+                        this.Visibility = Visibility.Visible;
                         break;
 
                     case (Role.Исполнитель):
+                        this.Hide();
                         var worWin = new WorkerWindow();
-                        worWin.Show();
+                        worWin.ShowDialog();
+                        this.Visibility = Visibility.Visible;
                         break;
                 }
             }

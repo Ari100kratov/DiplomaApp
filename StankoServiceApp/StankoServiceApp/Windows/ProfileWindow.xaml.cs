@@ -36,28 +36,35 @@ namespace StankoServiceApp.Windows
 
         private void sbEditMail_Click(object sender, RoutedEventArgs e)
         {
-            if (this.EditMail == false)
+            try
             {
-                this.teMail.IsEnabled = true;
-                this.teMail.Text = null;
-                this.sbNext.Visibility = Visibility.Visible;
-                this.EditMail = true;
-                this.sbEditMail.Content = "Отменить";
-            }
-            else
-            {
-                this.tbMessage.Visibility = Visibility.Collapsed;
-                this.sbEditMail.Content = "Изменить";
-                this.teMail.Text = App.CurrentUser.Email;
-                this.teMail.IsEnabled = false;
-                this.sbNext.Visibility = Visibility.Collapsed;
-                this.liCode.Visibility = Visibility.Collapsed;
-                this.spButtons.Visibility = Visibility.Collapsed;
-                this.MailIsRight = false;
-                this.EditMail = false;
-            }
+                if (this.EditMail == false)
+                {
+                    this.teMail.IsEnabled = true;
+                    this.teMail.Text = null;
+                    this.sbNext.Visibility = Visibility.Visible;
+                    this.EditMail = true;
+                    this.sbEditMail.Content = "Отменить";
+                }
+                else
+                {
+                    this.tbMessage.Visibility = Visibility.Collapsed;
+                    this.sbEditMail.Content = "Изменить";
+                    this.teMail.Text = App.CurrentUser.Email;
+                    this.teMail.IsEnabled = false;
+                    this.sbNext.Visibility = Visibility.Collapsed;
+                    this.liCode.Visibility = Visibility.Collapsed;
+                    this.spButtons.Visibility = Visibility.Collapsed;
+                    this.MailIsRight = false;
+                    this.EditMail = false;
+                }
 
-            this.SizeToContent = SizeToContent.WidthAndHeight;
+                this.SizeToContent = SizeToContent.WidthAndHeight;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void GenerateConfirmCode()
@@ -142,65 +149,72 @@ namespace StankoServiceApp.Windows
 
         private void sbSave_Click(object sender, RoutedEventArgs e)
         {
-            if (this.EditMail)
+            try
             {
-                if (this.MailIsRight == false)
+                if (this.EditMail)
                 {
-                    this.tbMessageError.Text = "Подтвердите почту";
-                    this.tbMessageError.Background = Brushes.IndianRed;
-                    this.tbMessageError.Foreground = Brushes.White;
-                    this.tbMessageError.Visibility = Visibility.Visible;
-                    return;
+                    if (this.MailIsRight == false)
+                    {
+                        this.tbMessageError.Text = "Подтвердите почту";
+                        this.tbMessageError.Background = Brushes.IndianRed;
+                        this.tbMessageError.Foreground = Brushes.White;
+                        this.tbMessageError.Visibility = Visibility.Visible;
+                        return;
+                    }
                 }
-            }
 
-            if (!string.IsNullOrEmpty(this.pbNewPassword.Password))
+                if (!string.IsNullOrEmpty(this.pbNewPassword.Password))
+                {
+                    this.PasswordEdit = true;
+                    if (this.pbCurrentPassword.Password != App.CurrentUser.Password)
+                    {
+                        this.tbMessageError.Text = "Текущий пароль введен неправильно";
+                        this.tbMessageError.Background = Brushes.IndianRed;
+                        this.tbMessageError.Visibility = Visibility.Visible;
+                        return;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(this.pbNewPassword.Password))
+                    {
+                        this.tbMessageError.Text = "Введите новый пароль";
+                        this.tbMessageError.Background = Brushes.IndianRed;
+                        this.tbMessageError.Visibility = Visibility.Visible;
+                        return;
+                    }
+
+                    if (this.pbRepeatPassword.Password != this.pbNewPassword.Password)
+                    {
+                        this.tbMessageError.Text = "Ошибка подтверждения пароля";
+                        this.tbMessageError.Background = Brushes.IndianRed;
+                        this.tbMessageError.Visibility = Visibility.Visible;
+                        return;
+                    }
+                }
+                else
+                {
+                    this.PasswordEdit = false;
+                }
+
+                if (this.EditMail == true)
+                    this.newMail = this.teMail.Text;
+
+                if (this.PasswordEdit == true)
+                    this.newPass = this.pbNewPassword.Password;
+
+
+                App.Service.EditLogin(App.CurrentUser, this.newMail, this.newPass);
+
+                this.tbMessageError.Text = "Данные успешно сохранены";
+                this.tbMessageError.Background = Brushes.White;
+                this.tbMessageError.Foreground = Brushes.Green;
+                this.tbMessageError.Visibility = Visibility.Visible;
+
+                this.SizeToContent = SizeToContent.WidthAndHeight;
+            }
+            catch (Exception ex)
             {
-                this.PasswordEdit = true;
-                if (this.pbCurrentPassword.Password != App.CurrentUser.Password)
-                {
-                    this.tbMessageError.Text = "Текущий пароль введен неправильно";
-                    this.tbMessageError.Background = Brushes.IndianRed;
-                    this.tbMessageError.Visibility = Visibility.Visible;
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(this.pbNewPassword.Password))
-                {
-                    this.tbMessageError.Text = "Введите новый пароль";
-                    this.tbMessageError.Background = Brushes.IndianRed;
-                    this.tbMessageError.Visibility = Visibility.Visible;
-                    return;
-                }
-
-                if (this.pbRepeatPassword.Password != this.pbNewPassword.Password)
-                {
-                    this.tbMessageError.Text = "Ошибка подтверждения пароля";
-                    this.tbMessageError.Background = Brushes.IndianRed;
-                    this.tbMessageError.Visibility = Visibility.Visible;
-                    return;
-                }
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-            {
-                this.PasswordEdit = false;
-            }
-
-            if (this.EditMail == true)
-                this.newMail = this.teMail.Text;
-
-            if (this.PasswordEdit == true)
-                this.newPass = this.pbNewPassword.Password;
-
-
-            App.Service.EditLogin(App.CurrentUser, this.newMail, this.newPass);
-
-            this.tbMessageError.Text = "Данные успешно сохранены";
-            this.tbMessageError.Background = Brushes.White;
-            this.tbMessageError.Foreground = Brushes.Green;
-            this.tbMessageError.Visibility = Visibility.Visible;
-
-            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         private void sbCancel_Click(object sender, RoutedEventArgs e)
@@ -210,37 +224,58 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (App.CurrentUser.RoleId == (int)Role.Исполнитель)
+            try
             {
-                this.li1.Visibility = Visibility.Collapsed;
-                this.li2.Visibility = Visibility.Collapsed;
-            }
+                if (App.CurrentUser.RoleId == (int)Role.Исполнитель)
+                {
+                    this.li1.Visibility = Visibility.Collapsed;
+                    this.li2.Visibility = Visibility.Collapsed;
+                }
 
-            this.teMail.IsEnabled = false;
-            var worker = App.CurrentUser.Worker;
-            this.tbFIO.Text = $"{worker.Surname} {worker.Name} {worker.Patronymic}";
-            this.tbDateOfBirth.Text = worker.DateOfBirth.ToLongDateString();
-            this.tbPhone.Text = worker.Phone;
-            this.tbDateOfEmploy.Text = worker.DateOfEmploy.ToLongDateString();
-            this.tbPosition.Text = worker.Position.PositionName;
-            this.tbEmail.Text = worker.User.Email;
-            this.imgPhoto.Source = worker.ImgPhoto;
-            this.teMail.Text = worker.User.Email;
+                this.teMail.IsEnabled = false;
+                var worker = App.CurrentUser.Worker;
+                this.tbFIO.Text = $"{worker.Surname} {worker.Name} {worker.Patronymic}";
+                this.tbDateOfBirth.Text = worker.DateOfBirth.ToLongDateString();
+                this.tbPhone.Text = worker.Phone;
+                this.tbDateOfEmploy.Text = worker.DateOfEmploy.ToLongDateString();
+                this.tbPosition.Text = worker.Position.PositionName;
+                this.tbEmail.Text = worker.User.Email;
+                this.imgPhoto.Source = worker.ImgPhoto;
+                this.teMail.Text = worker.User.Email;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void sbStatProject_Click(object sender, RoutedEventArgs e)
         {
-            var project = App.Service.GetProjects().Where(x => x.WorkerId == App.CurrentUser.Worker.Id).ToList();
-            var stat = new StatProjectWindow(project);
-            stat.ShowDialog();
+            try
+            {
+                var project = App.Service.GetProjects().Where(x => x.WorkerId == App.CurrentUser.Worker.Id).ToList();
+                var stat = new StatProjectWindow(project);
+                stat.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void sbStatTask_Click(object sender, RoutedEventArgs e)
         {
-            var worker = new List<Worker>();
-            worker.Add(App.CurrentUser.Worker);
-            var stat = new StatWorkerWindow(worker);
-            stat.ShowDialog();
+            try
+            {
+                var worker = new List<Worker>();
+                worker.Add(App.CurrentUser.Worker);
+                var stat = new StatWorkerWindow(worker);
+                stat.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

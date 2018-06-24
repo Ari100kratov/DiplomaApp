@@ -9,11 +9,23 @@
       xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
       xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
       xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+      xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
       x:Class="StankoServiceApp.ProjectPage"
       dx:ThemeManager.ThemeName="Office2010Blue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1100" Background="White"
       Title="ProjectPage" Loaded="Page_Loaded" KeepAlive="True">
+
+    <Page.Resources>
+        <DataTemplate x:Key="PageHeader">
+            <dxe:TextEdit FontSize="30" Margin="0 0 0 15" Foreground="DodgerBlue" Width="{Binding Path=UsablePageWidth,
+                                          Mode=OneWay}"
+                          HorizontalContentAlignment="Center"
+                          dxp:ExportSettings.TargetType="Text"
+                          Background="White"
+                          EditValue="Отчет по проектам" />
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +33,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <dxg:GridControl AllowInitiallyFocusedRow="False" x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
+        <dxg:GridControl AllowInitiallyFocusedRow="True" x:Name="gcProject" Grid.Row="1" AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" SelectionMode="Row" CurrentItemChanged="gcProject_CurrentItemChanged">
             <dxg:GridControl.View>
                 <dxg:TableView AllowPerPixelScrolling="True" x:Name="tvProjects" ShowTotalSummary="True" AllowEditing="False" ShowAutoFilterRow="True" ShowFilterPanelMode="ShowAlways" ShowSearchPanelMode="Default"/>
             </dxg:GridControl.View>

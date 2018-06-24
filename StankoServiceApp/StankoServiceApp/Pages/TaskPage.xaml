@@ -8,13 +8,23 @@
     xmlns:StankoserviceEnums="clr-namespace:StankoserviceEnums;assembly=StankoserviceEnums"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:StankoServiceApp="clr-namespace:StankoServiceApp" x:Class="StankoServiceApp.Pages.TaskPage"
     dx:ThemeManager.ThemeName="Office2010Blue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000" Background="White"
       Title="TaskPage" Loaded="Page_Loaded" KeepAlive="True" UseLayoutRounding="True">
-
+    <Page.Resources>
+        <DataTemplate x:Key="PageHeader">
+            <dxe:TextEdit FontSize="30" Margin="0 0 0 15" Foreground="DodgerBlue" Width="{Binding Path=UsablePageWidth,
+                                          Mode=OneWay}"
+                          HorizontalContentAlignment="Center"
+                          dxp:ExportSettings.TargetType="Text"
+                          Background="White"
+                          EditValue="Отчет по задачам" />
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

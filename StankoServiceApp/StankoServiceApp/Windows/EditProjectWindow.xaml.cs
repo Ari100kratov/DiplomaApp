@@ -59,6 +59,9 @@ namespace StankoServiceApp.Windows
                 if (this.IsAdd)
                 {
                     this.Title = "Создание нового проекта";
+                    this.ceStatus.EditValue = (int)StatusProject.Подготовка;
+                    this.liStatus.Visibility = Visibility.Collapsed;
+                    this.liCompetionDate.Visibility = Visibility.Collapsed;
                     return;
                 }
 

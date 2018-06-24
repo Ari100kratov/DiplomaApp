@@ -491,6 +491,15 @@ namespace StankoServiceApp.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отчет по проектам.
+        /// </summary>
+        internal static string Project {
+            get {
+                return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap project_BABQS {
@@ -746,6 +755,16 @@ namespace StankoServiceApp.Properties {
         internal static System.Drawing.Bitmap yellow_30 {
             get {
                 object obj = ResourceManager.GetObject("yellow_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap загруженное {
+            get {
+                object obj = ResourceManager.GetObject("загруженное", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

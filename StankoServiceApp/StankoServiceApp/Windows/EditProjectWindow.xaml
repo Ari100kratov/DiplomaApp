@@ -25,14 +25,14 @@
                         <dxlc:LayoutItem Label="Срок до">
                             <dxe:DateEdit x:Name="deEndDate" Mask="D" NullText="Выберите дату завершения"/>
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="Завершен">
+                        <dxlc:LayoutItem Label="Завершен" x:Name="liCompetionDate">
                             <dxe:DateEdit x:Name="deCompletionDate" Mask="D" NullText="Выберите дату фактического окончания" EditValueChanged="deCompletionDate_EditValueChanged"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Тип проекта*" IsRequired="True">
                             <dxe:ComboBoxEdit x:Name="ceTypePeriod" NullText="Выберите тип проекта" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:TypePeriod,UseNumericEnumValue=True}"/>
                         </dxlc:LayoutItem>
 
-                        <dxlc:LayoutItem Label="Статус проекта*" IsRequired="True">
+                        <dxlc:LayoutItem Label="Статус проекта*" IsRequired="True" x:Name="liStatus">
                             <dxe:ComboBoxEdit x:Name="ceStatus" NullText="Выберите текущий статус проекта" ItemsSource="{dxe:EnumItemsSource EnumType=StankoserviceEnums:StatusProject,UseNumericEnumValue=True}" EditValueChanged="ceStatus_EditValueChanged"/>
                         </dxlc:LayoutItem>
 

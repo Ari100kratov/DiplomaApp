@@ -58,8 +58,15 @@ namespace StankoServiceApp.Windows
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
-            var profile = new ProfileWindow();
-            profile.ShowDialog();
+            try
+            {
+                var profile = new ProfileWindow();
+                profile.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

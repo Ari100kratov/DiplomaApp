@@ -277,7 +277,6 @@ namespace StankoServiceApp
             try
             {
                 var statAll = new StatProjectWindow(GetDataRowHandles());
-                
                 statAll.ShowDialog();
             }
             catch (Exception ex)
@@ -340,7 +339,7 @@ namespace StankoServiceApp
         {
             try
             {
-                this.FillList();
+                FillList();
             }
             catch (Exception ex)
             {
@@ -360,7 +359,7 @@ namespace StankoServiceApp
 
                 var editStatus = new EditStatusWindow(this.SelectProject, status);
                 editStatus.ShowDialog();
-                this.FillList();
+                FillList();
             }
             catch (Exception ex)
             {
@@ -415,24 +414,32 @@ namespace StankoServiceApp
 
         private void bbiStandartPrint_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var print = new BeforePrintWindow(this);
-            print.ShowDialog();
-
-            if (this.IsPrint)
+            try
             {
-                if (this.column7.AllowPrinting)
+                var print = new BeforePrintWindow(this);
+                print.ShowDialog();
+
+                if (this.IsPrint)
                 {
-                    this.tvProjects.BestFitColumn(this.column7);
-                    this.column7.Visible = true;
+                    if (this.column7.AllowPrinting)
+                    {
+                        this.tvProjects.BestFitColumn(this.column7);
+                        this.column7.Visible = true;
+                    }
+
+                    PrintableControlLink link = new PrintableControlLink((TableView)this.gcProject.View);
+                    var window = new DocumentPreviewWindow();
+                    link.PageHeaderTemplate = (DataTemplate)Resources["PageHeader"];
+                    window.PreviewControl.DocumentSource = link;
+                    link.CreateDocument();
+                    window.ShowDialog();
+
+                    this.column7.Visible = false;
                 }
-
-                PrintableControlLink link = new PrintableControlLink((TableView)this.gcProject.View);
-                var window = new DocumentPreviewWindow();
-                window.PreviewControl.DocumentSource = link;
-                link.CreateDocument();
-                window.ShowDialog();
-
-                this.column7.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

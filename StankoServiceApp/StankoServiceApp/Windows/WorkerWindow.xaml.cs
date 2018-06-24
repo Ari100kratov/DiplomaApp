@@ -113,12 +113,19 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.bbiTakeTask.IsEnabled = false;
-            this.bbiSolution.IsEnabled = false;
-            this.bbiSend.IsEnabled = false;
-            this.bbiShow.IsEnabled = false;
+            try
+            {
+                this.bbiTakeTask.IsEnabled = false;
+                this.bbiSolution.IsEnabled = false;
+                this.bbiSend.IsEnabled = false;
+                this.bbiShow.IsEnabled = false;
 
-            this.FillList();
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void SelectRow()
@@ -132,20 +139,19 @@ namespace StankoServiceApp.Windows
             }
             else
             {
+                this.bbiShow.IsEnabled = true;
+
                 if (this.Task.Worker == null)
                 {
                     this.bbiTakeTask.IsEnabled = true;
-
                     this.bbiSolution.IsEnabled = false;
                     this.bbiSend.IsEnabled = false;
-                    this.bbiShow.IsEnabled = false;
                 }
                 else
                 {
                     this.bbiTakeTask.IsEnabled = false;
                     this.bbiSolution.IsEnabled = true;
                     this.bbiSend.IsEnabled = true;
-                    this.bbiShow.IsEnabled = true;
                 }
 
                 if(this.Task.GetStatusTask == StatusTask.Выполнена || this.Task.GetStatusTask == StatusTask.Отменена)
@@ -172,37 +178,52 @@ namespace StankoServiceApp.Windows
 
         private void bbiStandartPrint_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var print = new BeforePrintWindow(this);
-            print.ShowDialog();
-
-            if (this.IsPrint)
+            try
             {
-                if (this.column7.AllowPrinting)
+                var print = new BeforePrintWindow(this);
+                print.ShowDialog();
+
+                if (this.IsPrint)
                 {
-                    this.tbTask.BestFitColumn(this.column7);
-                    this.column7.Visible = true;
+                    if (this.column7.AllowPrinting)
+                    {
+                        this.tbTask.BestFitColumn(this.column7);
+                        this.column7.Visible = true;
+                    }
+
+                    if (this.column8.AllowPrinting)
+                    {
+                        this.tbTask.BestFitColumn(this.column8);
+                        this.column8.Visible = true;
+                    }
+
+                    PrintableControlLink link = new PrintableControlLink((TreeListView)this.gcTask.View);
+                    var window = new DocumentPreviewWindow();
+                    link.PageHeaderTemplate = (DataTemplate)Resources["PageHeader"];
+                    window.PreviewControl.DocumentSource = link;
+                    link.CreateDocument();
+                    window.ShowDialog();
+
+                    this.column7.Visible = false;
+                    this.column8.Visible = false;
                 }
-
-                if (this.column8.AllowPrinting)
-                {
-                    this.tbTask.BestFitColumn(this.column8);
-                    this.column8.Visible = true;
-                }
-
-                PrintableControlLink link = new PrintableControlLink((TreeListView)this.gcTask.View);
-                var window = new DocumentPreviewWindow();
-                window.PreviewControl.DocumentSource = link;
-                link.CreateDocument();
-                window.ShowDialog();
-
-                this.column7.Visible = false;
-                this.column8.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void bbiRefresh_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            this.FillList();
+            try
+            {
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiShow_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
@@ -220,49 +241,91 @@ namespace StankoServiceApp.Windows
 
         private void bbiStat_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var worker = new List<Worker>();
-            worker.Add(App.CurrentUser.Worker);
-            var stat = new StatWorkerWindow(worker);
-            stat.ShowDialog();
+            try
+            {
+                var worker = new List<Worker>();
+                worker.Add(App.CurrentUser.Worker);
+                var stat = new StatWorkerWindow(worker);
+                stat.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiProfile_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var prof = new ProfileWindow();
-            prof.ShowDialog();
+            try
+            {
+                var prof = new ProfileWindow();
+                prof.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiSolution_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var sol = new EditSolutionWindow(this.Task);
-            sol.ShowDialog();
+            try
+            {
+                var sol = new EditSolutionWindow(this.Task);
+                sol.ShowDialog();
 
-            this.FillList();
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiTakeTask_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите стать исполнителем выбранной задачи?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            try
             {
-                return;
-            }
+                if (MessageBox.Show("Вы действительно хотите стать исполнителем выбранной задачи?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                {
+                    return;
+                }
 
-            App.Service.TakeTask(this.Task, App.CurrentUser);
-            this.FillList();
+                App.Service.TakeTask(this.Task, App.CurrentUser);
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiInWork_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var edit = new EditStatusWindow(this.Task, StatusTask.Выполняется);
-            edit.ShowDialog();
-            this.FillList();
+            try
+            {
+                var edit = new EditStatusWindow(this.Task, StatusTask.Выполняется);
+                edit.ShowDialog();
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void bbiSend_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            var edit = new EditStatusWindow(this.Task, StatusTask.Подтверждается);
-            edit.ShowDialog();
-            this.FillList();
+            try
+            {
+                var edit = new EditStatusWindow(this.Task, StatusTask.Подтверждается);
+                edit.ShowDialog();
+                this.FillList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

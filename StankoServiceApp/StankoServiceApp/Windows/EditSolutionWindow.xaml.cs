@@ -141,20 +141,27 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.Task.Solution == null)
+            try
             {
-                return;
+                if (this.Task.Solution == null)
+                {
+                    return;
+                }
+
+                this.meComment.Text = this.Task.Solution.Comment;
+                var taskFile = App.Service.GetSolutionFiles().Where(x => x.SolutionId == this.Task.SolutionId).ToList();
+
+                foreach (var item in taskFile)
+                {
+                    this.ListFile.Add(item.File);
+                }
+
+                this.FillFiles();
             }
-
-            this.meComment.Text = this.Task.Solution.Comment;
-            var taskFile = App.Service.GetSolutionFiles().Where(x => x.SolutionId == this.Task.SolutionId).ToList();
-
-            foreach (var item in taskFile)
+            catch (Exception ex)
             {
-                this.ListFile.Add(item.File);
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            this.FillFiles();
         }
 
         private void sbCancel_Click(object sender, RoutedEventArgs e)
@@ -164,38 +171,52 @@ namespace StankoServiceApp.Windows
 
         private void sbSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(this.meComment.Text) || this.ListFile.Count() == 0)
+            try
             {
-                this.lblError.Background = Brushes.IndianRed;
-                this.lblError.Foreground = Brushes.White;
-                this.lblError.Text = "Нечего сохранять!";
+                if (string.IsNullOrWhiteSpace(this.meComment.Text) || this.ListFile.Count() == 0)
+                {
+                    this.lblError.Background = Brushes.IndianRed;
+                    this.lblError.Foreground = Brushes.White;
+                    this.lblError.Text = "Нечего сохранять!";
+                    this.lblError.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                App.Service.EditSolution(this.Task, this.ListFile, this.ListDelete, this.meComment.Text, (bool)this.tsSend.IsChecked);
+
+                if ((bool)this.tsMail.IsChecked)
+                {
+                    Methods.SendMessageFromMainMail("Задача на подтверждении", $"Задача '{this.Task.TaskName}' ожидает вашего подтверждения\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                }
+
+                this.lblError.Background = Brushes.White;
+                this.lblError.Foreground = Brushes.Green;
+                this.lblError.Text = "Данные успешно сохранены!";
                 this.lblError.Visibility = Visibility.Visible;
-                return;
             }
-
-            App.Service.EditSolution(this.Task, this.ListFile, this.ListDelete, this.meComment.Text, (bool)this.tsSend.IsChecked);
-
-            if ((bool)this.tsMail.IsChecked)
+            catch (Exception ex)
             {
-                Methods.SendMessageFromMainMail("Задача на подтверждении", $"Задача '{this.Task.TaskName}' ожидает вашего подтверждения\nЧтобы получить более подробную информацию - зайдите в АИС Станкосервис", this.Task.Manager.Email);
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            this.lblError.Background = Brushes.White;
-            this.lblError.Foreground = Brushes.Green;
-            this.lblError.Text = "Данные успешно сохранены!";
-            this.lblError.Visibility = Visibility.Visible;
         }
 
         private void tsSend_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)this.tsSend.IsChecked == true)
+            try
             {
-                this.liMail.Visibility = Visibility.Visible;
+                if ((bool)this.tsSend.IsChecked == true)
+                {
+                    this.liMail.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.liMail.Visibility = Visibility.Collapsed;
+                    this.tsMail.IsChecked = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.liMail.Visibility = Visibility.Collapsed;
-                this.tsMail.IsChecked = false;
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

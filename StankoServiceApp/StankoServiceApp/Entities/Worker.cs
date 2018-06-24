@@ -79,7 +79,7 @@ namespace StankoServiceApp.ServiceReference
                 {
                     using (var stream = new MemoryStream())
                     {
-                        Properties.Resources.no_photo.Save(stream, Properties.Resources.no_photo.RawFormat);
+                        Properties.Resources.загруженное.Save(stream, Properties.Resources.загруженное.RawFormat);
                         return stream.ToArray();
                     }
                 }

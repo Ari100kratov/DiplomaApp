@@ -26,7 +26,7 @@
             <dxlc:LayoutControl Orientation="Vertical">
 
                 <dxlc:LayoutItem Label="Наименование" IsRequired="True">
-                    <TextBlock x:Name="tbNameTask"/>
+                    <TextBlock x:Name="tbNameTask" MaxWidth="300"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem Label="Проект" IsRequired="True">
@@ -56,7 +56,7 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem Label="Описание" IsRequired="True">
-                    <TextBlock x:Name="tbDescription" />
+                    <dxe:MemoEdit x:Name="tbDescription" IsReadOnly="True"/>
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutControl>

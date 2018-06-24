@@ -33,9 +33,16 @@ namespace StankoServiceApp.Windows
 
         private void gcFiles_ItemsSourceChanged(object sender, DevExpress.Xpf.Grid.ItemsSourceChangedEventArgs e)
         {
-            this.tvFiles.BestFitColumn(columnDownload);
-            this.tvFiles.BestFitColumn(columnIcon);
-            this.tvFiles.BestFitColumn(columnDate);
+            try
+            {
+                this.tvFiles.BestFitColumn(columnDownload);
+                this.tvFiles.BestFitColumn(columnIcon);
+                this.tvFiles.BestFitColumn(columnDate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -73,24 +80,38 @@ namespace StankoServiceApp.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.tbDate.Text = $"{this.Solution.DateTime.ToLongDateString()} {this.Solution.DateTime.ToLongTimeString()}";
-            this.tbComment.Text = this.Solution.Comment;
-            this.cbFilterStatus.EditValue = this.Task.StatusId;
-            this.gcFiles.ItemsSource = this.ListFiles;
+            try
+            {
+                this.tbDate.Text = $"{this.Solution.DateTime.ToLongDateString()} {this.Solution.DateTime.ToLongTimeString()}";
+                this.tbComment.Text = this.Solution.Comment;
+                this.cbFilterStatus.EditValue = this.Task.StatusId;
+                this.gcFiles.ItemsSource = this.ListFiles;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void sbSave_Click(object sender, RoutedEventArgs e)
         {
-            if (this.cbFilterStatus.EditValue == null)
+            try
             {
-                MessageBox.Show("Выберите статус", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                if (this.cbFilterStatus.EditValue == null)
+                {
+                    MessageBox.Show("Выберите статус", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-            int status = (int)this.cbFilterStatus.EditValue;
-            var editStatus = new EditStatusWindow(this.Task, (StatusTask)status);
-            editStatus.ShowDialog();
-            this.cbFilterStatus.EditValue = App.Service.GetTasks().FirstOrDefault(x => x.Id == this.Task.Id).StatusId;
+                int status = (int)this.cbFilterStatus.EditValue;
+                var editStatus = new EditStatusWindow(this.Task, (StatusTask)status);
+                editStatus.ShowDialog();
+                this.cbFilterStatus.EditValue = App.Service.GetTasks().FirstOrDefault(x => x.Id == this.Task.Id).StatusId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

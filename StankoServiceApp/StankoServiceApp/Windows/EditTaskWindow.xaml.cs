@@ -172,22 +172,36 @@ namespace StankoServiceApp.Windows
 
         private void sbDeleteWorker_Click(object sender, RoutedEventArgs e)
         {
-            this.Worker = null;
-            this.FillWorker();
+            try
+            {
+                this.Worker = null;
+                this.FillWorker();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ceStatus_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            if (!this.IsAdd)
+            try
             {
-                if ((int)this.StartStatus == (int)this.ceStatus.EditValue)
+                if (!this.IsAdd)
                 {
-                    this.liComment.Visibility = Visibility.Collapsed;
+                    if ((int)this.StartStatus == (int)this.ceStatus.EditValue)
+                    {
+                        this.liComment.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        this.liComment.Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    this.liComment.Visibility = Visibility.Visible;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникло исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
